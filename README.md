@@ -44,9 +44,9 @@ Once you have signed up for an account, you can log in to eWazobia and start usi
 
 ## Contributors
 
--   Dr. Abubakar Shinkafi: Deputy Director, Entrepreneurship Directorate Federal University Birnin Kebbi. Founder and CEO of eWazobia.
--   Engr. Usman Bello A: Senior Telecoms Engineer at NRC. Co-founder and CTO of Bitkova, and Co-founder and CTO of eWazobia.
--   Abubakar Hashim Muhammad: Co-founder of eWazobia.
+-   Dr. Abubakar Shinkafi - Deputy Director, Entrepreneurship Directorate, Federal University Birnin Kebbi. Founder and CEO of eWazobia. [LinkedIn](https://www.linkedin.com/in/abubakar-shinkafi-phd-118a232b/)
+-   Engr. Usman Bello A - Senior Telecoms Engineer, NRC. Co-founder and CTO of Bitkova, Co-founder and CTO of eWazobia. [LinkedIn](https://www.linkedin.com/in/usmanbelloa/)
+-   Abubakar Hashim Muhammad - Co-founder of eWazobia. [LinkedIn](https://www.linkedin.com/in/abubakar-muhammad-hashim-75a564258/)
 
 ## Contributing
 
