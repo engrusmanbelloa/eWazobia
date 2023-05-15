@@ -7,10 +7,11 @@ import Colors from "../../constants/Colors"
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
-function TabBarIcon(props: {
+interface icon {
     name: React.ComponentProps<typeof FontAwesome5>["name"]
     color: string
-}) {
+}
+function TabBarIcon(props: icon) {
     return <FontAwesome5 size={28} style={{ marginBottom: -3 }} {...props} />
 }
 
