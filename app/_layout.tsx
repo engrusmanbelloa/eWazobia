@@ -14,12 +14,9 @@ export {
     ErrorBoundary,
 } from "expo-router"
 
-// chech if user is logged in render auth screen
-const isUserLoggedIn: boolean = false
-
 export const unstable_settings = {
     // Ensure that reloading on `/modal` keeps a back button present.
-    initialRouteName: isUserLoggedIn ? "(auth)" : "(onboarding)",
+    initialRouteName: "(main)",
 }
 
 export default function RootLayout() {
@@ -58,6 +55,14 @@ function RootLayoutNav() {
                     <Stack.Screen
                         name="modal"
                         options={{ presentation: "modal" }}
+                    />
+                    <Stack.Screen
+                        name="(onboarding)"
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="(main)"
+                        options={{ headerShown: false }}
                     />
                 </Stack>
             </ThemeProvider>
