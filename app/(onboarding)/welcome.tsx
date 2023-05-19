@@ -1,12 +1,11 @@
 import { StyleSheet } from "react-native"
 
-import EditScreenInfo from "../../components/EditScreenInfo"
 import { Text, View } from "../../components/Themed"
 
-export default function TabTwoScreen() {
+export default function Oneboarding() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Settings</Text>
+      <Text>Welcome to eWazobia</Text>
     </View>
   )
 }
@@ -16,14 +15,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+    backgroundColor: "#228B22",
   },
 })
