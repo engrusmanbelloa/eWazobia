@@ -5289,7 +5289,7 @@ expo-modules-core@1.2.7:
     compare-versions "^3.4.0"
     invariant "^2.2.4"
 
-expo-router@^1.5.2:
+expo-router@^1.5.3:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/expo-router/-/expo-router-1.5.3.tgz#bb75600d0d95fce57bdc6b80e0194a90b8d678d3"
   integrity sha512-rZEoRpXjXpfcx549/MI7YRitaBGFOHpIGLO+cb18ecsShl3PzGPIDaBGMnTo0m1h7ip0sAIQg1EFrSAtM4LXLA==

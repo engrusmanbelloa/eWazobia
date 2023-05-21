@@ -54,3 +54,16 @@ export default function OnboardingLayout() {
     </Stack>
   );
 }
+
+
+ <Link href="/home">Go to Home</Link>
+
+      <Button
+        title="Go to Details... again"
+        onPress={() => router.push("/details")}
+      />
+      <Button title="Go back" onPress={() => router.back()} />
+      <Button
+        title="Go back to first screen in stack"
+        onPress={() => navigation.popToTop()}
+      />

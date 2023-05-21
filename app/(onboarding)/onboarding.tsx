@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native"
 
 import { Text, View } from "../../components/Themed"
 
-export default function Welcome() {
+export default function Onboarding() {
   return (
     <View style={styles.container}>
       <Text>onboarding</Text>
