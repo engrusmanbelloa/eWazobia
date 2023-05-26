@@ -1,22 +1,24 @@
 import { StyleSheet, Pressable, View } from "react-native"
 import { NativeBaseProvider, Text, Box } from "native-base"
 import { styled } from "styled-components"
-import { Link, useNavigation, useRootNavigation, useRouter } from "expo-router"
-import Onboarding from "./onboarding"
-
-// import {} from "../../components/Themed"
+import {
+  Link,
+  Stack,
+  useNavigation,
+  useRootNavigation,
+  useRouter,
+} from "expo-router"
 
 export default function Welcome() {
   const navigation = useNavigation()
   const router = useRouter()
 
-  const handleNextPress = () => {
-    navigation.navigate()
-  }
+  const handleNextPress = () => {}
 
   return (
     <NativeBaseProvider>
       <Box style={styles.container}>
+        <Stack.Screen options={{ title: "Welcome" }} />
         <Text>Welcome to eWazobia</Text>
         <Link href="/onboarding" asChild>
           <Pressable>

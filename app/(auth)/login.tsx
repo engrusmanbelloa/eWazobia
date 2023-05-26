@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native"
 import { AuthStore } from "../../store"
-import { Text, View } from "../../components/Themed"
+import { NativeBaseProvider, Text, Box } from "native-base"
 import { Stack, useRouter } from "expo-router"
 
 export default function LoginScreen() {
@@ -19,13 +19,15 @@ export default function LoginScreen() {
   }
   const router = useRouter()
   return (
-    <View style={styles.container}>
-      <Stack.Screen options={{ title: "Login" }} />
-      <Text style={styles.title} onPress={handleLogin}>
-        Login
-      </Text>
-      <Text onPress={handleRegister}>Create Account</Text>
-    </View>
+    <NativeBaseProvider>
+      <Box style={styles.container}>
+        <Stack.Screen options={{ title: "Login" }} />
+        <Text style={styles.title} onPress={handleLogin}>
+          Login
+        </Text>
+        <Text onPress={handleRegister}>Create Account</Text>
+      </Box>
+    </NativeBaseProvider>
   )
 }
 

@@ -1,33 +1,47 @@
 import { useRootNavigationState } from "expo-router"
 import { useRouter, useSegments } from "expo-router"
 import { useEffect } from "react"
-import { AuthStore } from "../store"
 import React from "react"
 import { Text, View } from "react-native"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { AuthStore } from "../store"
 
+interface FirstVisit {
+  isFirstVisit: boolean
+}
 const Index = () => {
   const segments = useSegments()
   const router = useRouter()
-  const { isLoggedIn } = AuthStore.useState((s) => s)
+  const { isLoggedIn, hasEverLoggedIn } = AuthStore.useState((s) => s)
   const navigationState = useRootNavigationState()
 
   useEffect(() => {
     if (!navigationState?.key) return
 
     const inAuthGroup = segments[0] === "(auth)"
-
-    if (
-      // If the user is not signed in and the initial segment is not anything
-      //  segment is not anything in the auth group.
-      !isLoggedIn &&
-      !inAuthGroup
-    ) {
-      // Redirect to the login page.
-      router.replace("/login")
-    } else if (isLoggedIn) {
-      // go to tabs root.
-      router.replace("/(main)")
+    const checkFirstVisit = async () => {
+      try {
+        await AsyncStorage.removeItem("isFirstVisit")
+        const isFirstVisit = await AsyncStorage.getItem("isFirstVisit")
+        console.log("isFirstVisit: ", isFirstVisit)
+        if (isFirstVisit == null) {
+          // redirect to the onboarding page if it's their first visit.
+          await AsyncStorage.setItem("isFirstVisit", "true")
+          const isComeBack = await AsyncStorage.getItem("isFirstVisit")
+          console.log("isComeBack: ", isComeBack)
+          router.replace("/onboarding")
+        } else if (!isLoggedIn && !inAuthGroup) {
+          // If the user is not signed in and the initial segment is not in the auth group,
+          router.replace("/login")
+        } else if (isLoggedIn) {
+          // If the user is signed in, go to the tabs root.
+          router.replace("/(main)")
+        }
+      } catch (error) {
+        console.log("Error: ", error)
+      }
     }
+    checkFirstVisit()
   }, [isLoggedIn, segments, navigationState?.key])
 
   return <View>{!navigationState?.key ? <Text>LOADING...</Text> : <></>}</View>

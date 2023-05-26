@@ -1,29 +1,29 @@
 import { StyleSheet } from "react-native"
-
-import EditScreenInfo from "../../components/EditScreenInfo"
-import { Text, View } from "../../components/Themed"
+import { NativeBaseProvider, Text, Box } from "native-base"
 import { AuthStore } from "../../store"
 import { Stack, useRouter } from "expo-router"
 
 export default function Register() {
   const router = useRouter()
   return (
-    <View style={styles.container}>
-      <Stack.Screen
-        options={{ title: "Create Account", headerLeft: () => <></> }}
-      />
-      <Text style={styles.title}>Register</Text>
-      <Text
-        onPress={() => {
-          AuthStore.update((s) => {
-            s.isLoggedIn = false
-          })
-          router.back()
-        }}
-      >
-        CANCEL
-      </Text>
-    </View>
+    <NativeBaseProvider>
+      <Box style={styles.container}>
+        <Stack.Screen
+          options={{ title: "Register", headerLeft: () => <></> }}
+        />
+        <Text style={styles.title}>Register</Text>
+        <Text
+          onPress={() => {
+            AuthStore.update((s) => {
+              s.isLoggedIn = false
+            })
+            router.back()
+          }}
+        >
+          CANCEL
+        </Text>
+      </Box>
+    </NativeBaseProvider>
   )
 }
 
