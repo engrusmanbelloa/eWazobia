@@ -8,7 +8,7 @@ import {
   ThemeProvider,
 } from "@react-navigation/native"
 
-import Colors from "../../constants/Colors"
+import Colors from "./constants/Colors"
 
 export const unstable_settings = {
   // Ensure that reloading on `/onboarding` keeps a back button present.
