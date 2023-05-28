@@ -1,12 +1,22 @@
 import { StyleSheet } from "react-native"
-
-import { Text, View } from "../../components/Themed"
+// import { Text, View } from "../../components/Themed"
+import { NativeBaseProvider, Text, Box } from "native-base"
+import { Stack, useRouter } from "expo-router"
 
 export default function Onboarding() {
+  const router = useRouter()
+
+  const handleBackt = () => {
+    router.back()
+  }
   return (
-    <View style={styles.container}>
-      <Text>onboarding</Text>
-    </View>
+    <NativeBaseProvider>
+      <Box style={styles.container}>
+        <Stack.Screen options={{ title: "Welcome" }} />
+        <Text>Onboarding</Text>
+        <Text onPress={handleBackt}>back</Text>
+      </Box>
+    </NativeBaseProvider>
   )
 }
 

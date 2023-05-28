@@ -1,6 +1,12 @@
-import { StyleSheet, Pressable, View } from "react-native"
-import { NativeBaseProvider, Text, Box } from "native-base"
-import { styled } from "styled-components"
+import {
+  StyleSheet,
+  Pressable,
+  View,
+  Text,
+  ImageBackground,
+  SafeAreaView,
+} from "react-native"
+
 import {
   Link,
   Stack,
@@ -8,33 +14,38 @@ import {
   useRootNavigation,
   useRouter,
 } from "expo-router"
+import styled from "styled-components/native"
+import { AuthStore } from "../../config/store"
+
+const Container = styled.SafeAreaView`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  background: #228b22;
+`
+
+const BackgroundImg = styled.ImageBackground`
+  flex: 1;
+  z-index: 99;
+`
+// background: linear-gradient(90deg, #228b22 46%, #732995 100%);
 
 export default function Welcome() {
-  const navigation = useNavigation()
   const router = useRouter()
+  const bg = require("../../assets/images/welcome.png")
 
-  const handleNextPress = () => {}
+  const handleNext = () => {
+    router.push("/onboarding")
+  }
 
   return (
-    <NativeBaseProvider>
-      <Box style={styles.container}>
-        <Stack.Screen options={{ title: "Welcome" }} />
-        <Text>Welcome to eWazobia</Text>
-        <Link href="/onboarding" asChild>
-          <Pressable>
-            <Text>next</Text>
-          </Pressable>
-        </Link>
-      </Box>
-    </NativeBaseProvider>
+    <Container>
+      <Stack.Screen options={{ title: "Welcome" }} />
+      <BackgroundImg source={bg} resizeMode="cover">
+        <Text>head</Text>
+      </BackgroundImg>
+      {/* <Text>Welcome to eWazobia</Text> */}
+      {/* <Text onPress={handleNext}>Next</Text> */}
+    </Container>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#228B22",
-  },
-})

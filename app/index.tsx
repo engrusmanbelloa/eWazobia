@@ -4,11 +4,8 @@ import { useEffect } from "react"
 import React from "react"
 import { Text, View } from "react-native"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { AuthStore } from "../store"
+import { AuthStore } from "../config/store"
 
-interface FirstVisit {
-  isFirstVisit: boolean
-}
 const Index = () => {
   const segments = useSegments()
   const router = useRouter()
@@ -23,13 +20,17 @@ const Index = () => {
       try {
         await AsyncStorage.removeItem("isFirstVisit")
         const isFirstVisit = await AsyncStorage.getItem("isFirstVisit")
+
         console.log("isFirstVisit: ", isFirstVisit)
+
         if (isFirstVisit == null) {
           // redirect to the onboarding page if it's their first visit.
           await AsyncStorage.setItem("isFirstVisit", "true")
           const isComeBack = await AsyncStorage.getItem("isFirstVisit")
+
           console.log("isComeBack: ", isComeBack)
-          router.replace("/onboarding")
+
+          router.replace("/welcome")
         } else if (!isLoggedIn && !inAuthGroup) {
           // If the user is not signed in and the initial segment is not in the auth group,
           router.replace("/login")

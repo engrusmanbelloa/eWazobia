@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native"
-import { AuthStore } from "../../store"
+import { AuthStore } from "../../config/store"
 import { NativeBaseProvider, Text, Box } from "native-base"
 import { Stack, useRouter } from "expo-router"
 

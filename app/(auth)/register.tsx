@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native"
 import { NativeBaseProvider, Text, Box } from "native-base"
-import { AuthStore } from "../../store"
+import { AuthStore } from "../../config/store"
 import { Stack, useRouter } from "expo-router"
 
 export default function Register() {
