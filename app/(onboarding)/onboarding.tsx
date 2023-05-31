@@ -12,7 +12,7 @@ const Container = styled(SafeAreaView)`
 const Title = styled(Text)`
   color: #fff;
   position: absolute;
-  top: 50px;
+  top: 60px;
   left: 30px;
   font-size: 30px;
   font-weight: 700;
@@ -20,7 +20,7 @@ const Title = styled(Text)`
 `
 const SubHeading = styled(Text)`
   color: #fff;
-  margin-top: 110px;
+  margin-top: 130px;
   left: 30px;
   font-size: 25px;
   font-weight: 300;
@@ -44,13 +44,13 @@ const Li = styled(Text)`
 const Circle = styled(Box)`
   height: 45px;
   width: 45px;
-  top: 30px;
+  top: 70px;
   left: 25px;
   border: 1px solid #fff;
   border-radius: 50px;
 `
 const Getstarted = styled(Pressable)`
-  bottom: 50px;
+  top: -20px;
   width: 40%;
   height: 40px;
   margin: 0 auto;
@@ -62,7 +62,7 @@ const Getstarted = styled(Pressable)`
 `
 
 const MemberBox = styled(Text)`
-  bottom: 30px;
+  top: 10px;
   margin: 0 auto;
   color: #fff;
   font-size: 16px;
@@ -85,7 +85,6 @@ const SignUp = styled(Link)`
 
 export default function Onboarding() {
   const list = [
-    "Unlock the power of digital Payments, where Payments meet convenience.",
     "Explore hundreds of shops around you for all your needs and make seamless payments with eNaira.",
     "Get recomendations based on your search and preferences.",
     "Are you a business owner? Go digital with your business by creating your own shop on eWazobia.",
@@ -118,7 +117,7 @@ export default function Onboarding() {
           <SignUp href="/register">Get started</SignUp>
         </Getstarted>
         <MemberBox>
-          Already a member?&nbsp;&nbsp;
+          Already a member?&nbsp;
           <SignIn href="/login">Sign in</SignIn>
         </MemberBox>
       </Container>
