@@ -1,25 +1,29 @@
-import { StyleSheet, View, ImageBackground } from "react-native"
 import { Link, Stack, useRouter } from "expo-router"
 import styled from "styled-components/native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { NativeBaseProvider, Text, Box, Pressable, Image } from "native-base"
-import { AuthStore } from "../../config/store"
+import { Dimensions } from "react-native"
+
+const { width, height } = Dimensions.get("window")
 
 const Container = styled(SafeAreaView)`
   flex: 1;
+  background: #228b22;
+  padding-bottom: 0;
 `
 const BackgroundImg = styled.ImageBackground`
   flex: 1;
-  align-items: center;
+  resize-mode: cover;
   justify-content: center;
-  padding: 0 5px;
+  align-items: center;
+  background: #228b22;
 `
 const LogoWhite = styled(Image)`
   width: 50%;
   height: 30px;
   position: absolute;
   top: 15px;
-  left: 5px;
+  left: 30px;
 `
 const Next = styled(Pressable)`
   width: 100px;
@@ -34,7 +38,7 @@ const Title = styled(Text)`
   color: #fff;
   position: absolute;
   top: 150px;
-  left: 40px;
+  left: 50px;
   font-size: 80px;
   font-weight: 700;
   line-height: 80px;
@@ -43,7 +47,7 @@ const Slogan = styled(Text)`
   color: #fff;
   position: absolute;
   top: 230px;
-  right: 10px;
+  right: 20px;
   width: 200px;
   font-size: 15px;
   font-weight: 500;
@@ -74,7 +78,7 @@ const ActivePlaces = styled(Text)`
 
 const NairaImg = styled(Image)`
   width: 50%;
-  height: 25%;
+  height: 26%;
   position: absolute;
   bottom: 15px;
   right: 5px;
@@ -96,7 +100,7 @@ export default function Welcome() {
     <NativeBaseProvider>
       <Container>
         <Stack.Screen options={{ title: "Welcome" }} />
-        <BackgroundImg source={bg} resizeMode="cover">
+        <BackgroundImg source={bg}>
           <LogoWhite source={logo} alt="Alternate Text" />
           <Title>eWazobia</Title>
           <Slogan>
