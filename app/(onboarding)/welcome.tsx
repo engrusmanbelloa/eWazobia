@@ -2,9 +2,6 @@ import { Link, Stack, useRouter } from "expo-router"
 import styled from "styled-components/native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { NativeBaseProvider, Text, Box, Pressable, Image } from "native-base"
-import { Dimensions } from "react-native"
-
-const { width, height } = Dimensions.get("window")
 
 const Container = styled(SafeAreaView)`
   flex: 1;

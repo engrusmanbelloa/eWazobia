@@ -45,12 +45,12 @@ const Circle = styled(Box)`
   height: 45px;
   width: 45px;
   top: 30px;
-  left: 35px;
+  left: 25px;
   border: 1px solid #fff;
   border-radius: 50px;
 `
 const Getstarted = styled(Pressable)`
-  bottom: 70px;
+  bottom: 50px;
   width: 40%;
   height: 40px;
   margin: 0 auto;
@@ -62,9 +62,8 @@ const Getstarted = styled(Pressable)`
 `
 
 const MemberBox = styled(Text)`
-  bottom: 40px;
-  width: 60%;
-  left: 25%;
+  bottom: 30px;
+  margin: 0 auto;
   color: #fff;
   font-size: 16px;
   line-height: 16px;
