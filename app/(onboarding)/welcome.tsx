@@ -11,6 +11,7 @@ const Container = styled(SafeAreaView)`
 const BackgroundImg = styled.ImageBackground`
   flex: 1;
   resize-mode: cover;
+  width: 100%;
   justify-content: center;
   align-items: center;
   background: #228b22;

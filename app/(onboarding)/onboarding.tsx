@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import { NativeBaseProvider, Text, Box, Pressable, HStack } from "native-base"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { AuthStore } from "../../config/store"
+import Button from "../components/Button"
 
 const Container = styled(SafeAreaView)`
   flex: 1;
@@ -49,21 +50,14 @@ const Circle = styled(Box)`
   border: 1px solid #fff;
   border-radius: 50px;
 `
-const Getstarted = styled(Pressable)`
-  top: -20px;
-  width: 40%;
-  height: 40px;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #fff;
-  border-radius: 10px;
-  background: transparent;
+
+const Getstarted = styled(Box)`
+  bottom: 15px;
 `
 
 const MemberBox = styled(Text)`
-  top: 10px;
-  margin: 0 auto;
+  bottom: 0px;
+  left: 25%;
   color: #fff;
   font-size: 16px;
   line-height: 16px;
@@ -76,11 +70,6 @@ const SignIn = styled(Link)`
   font-size: 16px;
   font-weight: 600;
   text-decoration: underline;
-`
-const SignUp = styled(Link)`
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
 `
 
 export default function Onboarding() {
@@ -113,8 +102,8 @@ export default function Onboarding() {
         </List>
         <Circle></Circle>
         <Circle></Circle>
-        <Getstarted isHovered>
-          <SignUp href="/register">Get started</SignUp>
+        <Getstarted>
+          <Button />
         </Getstarted>
         <MemberBox>
           Already a member?&nbsp;
