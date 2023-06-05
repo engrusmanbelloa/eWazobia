@@ -36,8 +36,8 @@ const Title = styled(Text)`
   color: #fff;
   position: absolute;
   top: 150px;
-  left: 50px;
-  font-size: 80px;
+  right: 20px;
+  font-size: 50px;
   font-weight: 700;
   line-height: 80px;
 `
@@ -52,26 +52,26 @@ const Slogan = styled(Text)`
   line-height: 20px;
 `
 
-const Naira = styled(Text)`
-  color: #fff;
-  position: absolute;
-  bottom: 230px;
-  left: 100px;
-  font-size: 60px;
-  font-weight: 700;
-  line-height: 80px;
-  margin-bottom: 10px;
-`
+// const Naira = styled(Text)`
+//   color: #fff;
+//   position: absolute;
+//   bottom: 230px;
+//   left: 100px;
+//   font-size: 60px;
+//   font-weight: 700;
+//   line-height: 80px;
+//   margin-bottom: 10px;
+// `
 
 const ActivePlaces = styled(Text)`
   color: #fff;
   position: absolute;
-  bottom: 140px;
+  bottom: 170px;
   left: 30px;
   width: 130px;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 500;
-  line-height: 20px;
+  line-height: 25px;
 `
 
 const NairaImg = styled(Image)`
@@ -104,8 +104,8 @@ export default function Welcome() {
           <Slogan>
             Your one stop faster, secured payments starts with eWazobia.
           </Slogan>
-          <Naira>eNaira</Naira>
-          <ActivePlaces>Currently active in 50+ universities</ActivePlaces>
+          {/* <Naira>eNaira</Naira> */}
+          <ActivePlaces>Currently active in 50+ Universities</ActivePlaces>
           <NairaImg source={naira} alt="Alternate Text" />
           <Next onPress={handleNext}></Next>
         </BackgroundImg>

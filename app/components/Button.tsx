@@ -20,9 +20,10 @@ const SignUp = styled(Link)`
   font-weight: 600;
 `
 const Button = (props: any) => {
+  const { title } = props
   return (
     <Getstarted isHovered>
-      <SignUp href="/register">Get started</SignUp>
+      <SignUp href="/register">{title}</SignUp>
     </Getstarted>
   )
 }
