@@ -55,7 +55,7 @@ const Getstarted = styled(Box)`
   bottom: 15px;
 `
 
-const MemberBox = styled(Text)`
+const SignInBox = styled(Text)`
   bottom: 0px;
   left: 25%;
   color: #fff;
@@ -105,10 +105,10 @@ export default function Onboarding() {
         <Getstarted>
           <Button title="Get started" />
         </Getstarted>
-        <MemberBox>
+        <SignInBox>
           Already a member?&nbsp;
           <SignIn href="/login">Sign in</SignIn>
-        </MemberBox>
+        </SignInBox>
       </Container>
     </NativeBaseProvider>
   )
