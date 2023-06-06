@@ -1,11 +1,6 @@
 import { useState, ChangeEvent } from "react"
 import { AuthStore } from "../../config/store"
-import {
-  KeyboardAvoidingView,
-  Platform,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from "react-native"
+import { KeyboardAvoidingView } from "react-native"
 import {
   NativeBaseProvider,
   Text,
@@ -153,7 +148,7 @@ const Hrule = styled(Box)`
   height: 0.5px;
 `
 const Continue = styled(Text)`
-  bottom: 10%;
+  bottom: 15%;
   width: 40%;
   text-align: center;
   font-size: 16px;
