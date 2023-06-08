@@ -162,7 +162,7 @@ const SocialLogins = styled(HStack)`
   justify-content: space-around;
 `
 const SignUpBox = styled(Text)`
-  bottom: 10%;
+  bottom: 8%;
   color: #000;
   font-size: 16px;
   line-height: 16px;

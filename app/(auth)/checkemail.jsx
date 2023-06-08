@@ -17,7 +17,6 @@ import { Stack, useRouter, Link } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
-import OtpPage from "../components/Otp"
 
 const Container = styled(SafeAreaView)`
   flex: 1;
@@ -67,7 +66,7 @@ const LoginInput = styled(Input)`
   font-size: 12px;
   color: gray;
 `
-const SignUp = styled(Text)`
+const Login = styled(Text)`
   color: #fff;
   font-size: 20px;
   font-weight: 600;
@@ -96,46 +95,6 @@ const TermsLink = styled(Link)`
   color: #0e32b4;
   font-size: 14px;
   font-weight: 600;
-`
-const ModalBox = styled(Modal)`
-  background: red;
-  width: 100%;
-  height: 80%;
-  top: 25%;
-  border-radius: 15px;
-`
-const ModalContent = styled(VStack)`
-  background: #fff;
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  bottom: 0%;
-`
-const ModalStack = styled(VStack)`
-  justify-content: center;
-  align-items: center;
-  top: 80px;
-`
-const ModalTex = styled(Text)`
-  top: 25px;
-  left: 25px;
-  margin-bottom: 20%;
-  font-size: 25px;
-  font-weight: 600;
-  line-height: 25px;
-`
-const ModalInfo = styled(Text)`
-  color: #000;
-  top: 40%;
-  left: 5px;
-  font-size: 14px;
-  line-height: 25px;
-  letter-spacing: 1px;
-`
-
-const ModalCancel = styled(Text)`
-  top: 50%;
-  color: #0e32b4;
 `
 const ContinueStack = styled(VStack)`
   width: 100%;
@@ -173,7 +132,7 @@ const SignInBox = styled(Text)`
   background: transparent;
 `
 
-const SignIn = styled(Link)`
+const SignUp = styled(Link)`
   color: #0e32b4;
   font-size: 14px;
   font-weight: 600;
@@ -182,17 +141,12 @@ const SignIn = styled(Link)`
 export default function LoginScreen() {
   const router = useRouter()
   const [check, setCheck] = useState(false)
-  const [isModalVisible, setIsModalVisible] = useState(false)
 
   const handleRegister = () => {
     AuthStore.update((s) => {
       s.isLoggedIn = true
     })
-    // router.replace("/(main)")
-  }
-
-  const showModal = () => {
-    setIsModalVisible(true)
+    router.replace("/(main)")
   }
 
   return (
@@ -215,8 +169,8 @@ export default function LoginScreen() {
                 }
                 placeholder="Email or Phone"
               />
-              <CreateBtn onPress={() => setIsModalVisible(true)}>
-                <SignUp>Create account</SignUp>
+              <CreateBtn onPress={handleRegister}>
+                <Login>Create account</Login>
               </CreateBtn>
               <TermStack>
                 <Ionicons
@@ -233,24 +187,6 @@ export default function LoginScreen() {
                 </Terms>
               </TermStack>
             </LoginStack>
-            <ModalBox
-              isOpen={isModalVisible}
-              onClose={() => setIsModalVisible(false)}
-            >
-              <ModalContent>
-                <ModalTex>Enter OTP</ModalTex>
-                <ModalStack>
-                  <OtpPage />
-                  <ModalInfo>
-                    Didn't recieve the code?&nbsp;
-                    <TermsLink href="/register">Resend</TermsLink>
-                  </ModalInfo>
-                  <ModalCancel onPress={() => setIsModalVisible(false)}>
-                    Back to Sign up
-                  </ModalCancel>
-                </ModalStack>
-              </ModalContent>
-            </ModalBox>
             <ContinueStack>
               <Hrule />
               <Continue>Or continue with</Continue>
@@ -261,7 +197,7 @@ export default function LoginScreen() {
             </ContinueStack>
             <SignInBox>
               Already have an account?&nbsp;
-              <SignIn href="/login">Sign in</SignIn>
+              <SignUp href="/login">Sign in</SignUp>
             </SignInBox>
           </Main>
         </Box>
