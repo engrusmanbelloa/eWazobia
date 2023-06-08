@@ -44,24 +44,13 @@ const Title = styled(Text)`
 const Slogan = styled(Text)`
   color: #fff;
   position: absolute;
-  top: 230px;
-  right: 20px;
+  top: 200px;
+  right: 10px;
   width: 200px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
-  line-height: 20px;
+  line-height: 25px;
 `
-
-// const Naira = styled(Text)`
-//   color: #fff;
-//   position: absolute;
-//   bottom: 230px;
-//   left: 100px;
-//   font-size: 60px;
-//   font-weight: 700;
-//   line-height: 80px;
-//   margin-bottom: 10px;
-// `
 
 const ActivePlaces = styled(Text)`
   color: #fff;
@@ -100,11 +89,9 @@ export default function Welcome() {
         <Stack.Screen options={{ title: "Welcome" }} />
         <BackgroundImg source={bg}>
           <LogoWhite source={logo} alt="Alternate Text" />
-          <Title>eWazobia</Title>
           <Slogan>
             Your one stop faster, secured payments starts with eWazobia.
           </Slogan>
-          {/* <Naira>eNaira</Naira> */}
           <ActivePlaces>Currently active in 50+ Universities</ActivePlaces>
           <NairaImg source={naira} alt="Alternate Text" />
           <Next onPress={handleNext}></Next>

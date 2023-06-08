@@ -88,14 +88,13 @@ const TermStack = styled(HStack)`
 `
 const Terms = styled(Text)`
   color: #000;
-  left: 5px;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 25px;
   letter-spacing: 1px;
 `
 const TermsLink = styled(Link)`
   color: #0e32b4;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 600;
 `
 const ModalBox = styled(Modal)`
@@ -231,7 +230,7 @@ export default function LoginScreen() {
                 <Terms>
                   I agreed with the&nbsp;
                   <TermsLink href="/register">
-                    Terms of & privacy policy
+                    Terms of use & privacy policy
                   </TermsLink>
                 </Terms>
               </TermStack>

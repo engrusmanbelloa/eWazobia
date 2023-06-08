@@ -39,7 +39,7 @@ const Title = styled(Text)`
   position: absolute;
   top: 100px;
   left: 15px;
-  width: 45%;
+  width: 50%;
   font-size: 40px;
   font-weight: 700;
   line-height: 50px;
@@ -72,7 +72,7 @@ const LoginInput = styled(Input)`
 `
 const ForgetPassword = styled(Text)`
   bottom: 0%;
-  left: 60%;
+  left: 50%;
   font-size: 16px;
   line-height: 16px;
   letter-spacing: 1px;
@@ -86,8 +86,8 @@ const ForgetPwd = styled(Link)`
 `
 const Login = styled(Text)`
   color: #fff;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 500;
 `
 const LoginBtn = styled(Button)`
   top: 5%;

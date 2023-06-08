@@ -40,7 +40,7 @@ const Title = styled(Text)`
   position: absolute;
   top: 100px;
   left: 15px;
-  width: 45%;
+  width: 50%;
   font-size: 40px;
   font-weight: 700;
   line-height: 50px;
@@ -67,44 +67,6 @@ const LoginInput = styled(Input)`
   left: 5px;
   font-size: 12px;
   color: gray;
-`
-const ModalBox = styled(Modal)`
-  background: red;
-  width: 100%;
-  height: 45%;
-  top: 60%;
-  border-radius: 15px;
-`
-const ModalLogin = styled(VStack)`
-  background: #fff;
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  bottom: 0%;
-`
-const ModalStack = styled(VStack)`
-  justify-content: center;
-  align-items: center;
-`
-const ModalTex = styled(Text)`
-  top: 25px;
-  left: 25px;
-  margin-bottom: 20%;
-  font-size: 25px;
-  font-weight: 600;
-  line-height: 25px;
-`
-const ModalInfo = styled(Text)`
-  top: 25px;
-  margin-bottom: 40px;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 25px;
-`
-
-const ModalCancel = styled(Text)`
-  top: 5px;
-  color: #0e32b4;
 `
 
 export default function LoginScreen() {
