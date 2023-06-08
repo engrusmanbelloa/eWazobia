@@ -1,5 +1,5 @@
 import styled from "styled-components/native"
-import { useState, ChangeEvent } from "react"
+import { useState, useRef, ChangeEvent } from "react"
 import { AuthStore } from "../../config/store"
 import {
   NativeBaseProvider,
@@ -37,12 +37,14 @@ const SubmitButtonText = styled(Text)`
 
 const OtpPage = () => {
   const [otp, setOtp] = useState<string[]>(Array(6).fill(""))
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
   const handleOtpChange = (index: number, value: string) => {
     if (value.length <= 1) {
       const newOtp = [...otp]
       newOtp[index] = value
       setOtp(newOtp)
+      handleInputChange(index, value) // Shift focus to the next input
     }
   }
 
@@ -51,6 +53,15 @@ const OtpPage = () => {
       const newOtp = [...otp]
       newOtp[index - 1] = ""
       setOtp(newOtp)
+      handleInputChange(index - 1, "") // Shift focus to the previous input
+    }
+  }
+
+  const handleInputChange = (index: number, value: string) => {
+    if (value.length > 0 && index < otp.length - 1) {
+      inputRefs.current[index + 1]?.focus()
+    } else if (value.length === 0 && index > 0) {
+      inputRefs.current[index - 1]?.focus()
     }
   }
 
@@ -64,10 +75,11 @@ const OtpPage = () => {
               value={value}
               maxLength={1}
               keyboardType="numeric"
-              onChangeText={(text) => handleOtpChange(index, text)}
-              onKeyPress={({ nativeEvent }) =>
+              onChangeText={(text: string) => handleOtpChange(index, text)}
+              onKeyPress={({ nativeEvent }: { nativeEvent: { key: string } }) =>
                 handleOtpKeyPress(index, nativeEvent.key)
               }
+              ref={(ref: any) => (inputRefs.current[index] = ref)}
             />
           </Box>
         ))}
