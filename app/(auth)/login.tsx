@@ -221,10 +221,16 @@ export default function LoginScreen() {
           <Main>
             <LoginStack space="2">
               <LoginInput
+                type="email"
+                isRequired
                 variant="rounded"
                 InputLeftElement={
                   <LeftIcon>
-                    <Ionicons name="person" size={25} color="#228b22" />
+                    <Ionicons
+                      name="mail-open-outline"
+                      size={25}
+                      color="#228b22"
+                    />
                   </LeftIcon>
                 }
                 placeholder="Email or Phone"

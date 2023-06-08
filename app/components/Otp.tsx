@@ -22,19 +22,6 @@ const OtpInput = styled(Input)`
   font-size: 20px;
 `
 
-const SubmitButton = styled(Button)`
-  top: 10%;
-  width: 75%;
-  height: 40px;
-  background: #228b22;
-  border-radius: 50px;
-`
-
-const SubmitButtonText = styled(Text)`
-  color: #fff;
-  font-size: 20px;
-`
-
 const OtpPage = () => {
   const [otp, setOtp] = useState<string[]>(Array(6).fill(""))
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
@@ -84,9 +71,6 @@ const OtpPage = () => {
           </Box>
         ))}
       </OtpContainer>
-      <SubmitButton>
-        <SubmitButtonText>Submit</SubmitButtonText>
-      </SubmitButton>
     </>
   )
 }

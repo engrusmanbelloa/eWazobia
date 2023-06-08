@@ -18,6 +18,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
 import OtpPage from "../components/Otp"
+import Submit from "../components/Submit"
 
 const Container = styled(SafeAreaView)`
   flex: 1;
@@ -177,6 +178,7 @@ const SignIn = styled(Link)`
   color: #0e32b4;
   font-size: 14px;
   font-weight: 600;
+  text-decoration: underline;
 `
 
 export default function LoginScreen() {
@@ -185,14 +187,11 @@ export default function LoginScreen() {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   const handleRegister = () => {
-    AuthStore.update((s) => {
-      s.isLoggedIn = true
-    })
+    // AuthStore.update((s) => {
+    //   s.isLoggedIn = true
+    // })
     // router.replace("/(main)")
-  }
-
-  const showModal = () => {
-    setIsModalVisible(true)
+    router.push("/createpswd")
   }
 
   return (
@@ -210,7 +209,11 @@ export default function LoginScreen() {
                 variant="rounded"
                 InputLeftElement={
                   <LeftIcon>
-                    <Ionicons name="person" size={25} color="#228b22" />
+                    <Ionicons
+                      name="mail-open-outline"
+                      size={25}
+                      color="#228b22"
+                    />
                   </LeftIcon>
                 }
                 placeholder="Email or Phone"
@@ -241,6 +244,9 @@ export default function LoginScreen() {
                 <ModalTex>Enter OTP</ModalTex>
                 <ModalStack>
                   <OtpPage />
+                  <Box w={"75%"}>
+                    <Submit handlePress={handleRegister} submit="Submit" />
+                  </Box>
                   <ModalInfo>
                     Didn't recieve the code?&nbsp;
                     <TermsLink href="/register">Resend</TermsLink>
