@@ -5,7 +5,6 @@ import {
   NativeBaseProvider,
   Text,
   Box,
-  Heading,
   Pressable,
   Input,
   VStack,

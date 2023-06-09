@@ -131,17 +131,19 @@ export default function LoginScreen() {
                 }
                 placeholder="Confirm password"
               />
-              <Submit handlePress={create} submit="Create" />
-              <ModalComponent
-                handlePress={login}
-                isModalVisible={showSuccess}
-                setIsModalVisible={setShowSuccess}
-                title="Success"
-                intro="You have successfully signed up!"
-                infoLink=""
-                submit="Login"
-              />
             </LoginStack>
+            <Box w={"90%"} bottom={"20%"}>
+              <Submit handlePress={create} submit="Create" />
+            </Box>
+            <ModalComponent
+              handlePress={login}
+              isModalVisible={showSuccess}
+              setIsModalVisible={setShowSuccess}
+              title="Success"
+              intro="You have successfully signed up!"
+              infoLink=""
+              submit="Login"
+            />
           </Main>
         </Box>
       </Container>
