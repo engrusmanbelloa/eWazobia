@@ -67,9 +67,14 @@ interface ModalComponentProps {
   isModalVisible: boolean
   setIsModalVisible: (visible: boolean) => void
   showOtpPage?: boolean
+  showIcon?: boolean
+  iconName?: any
+  iconSize?: number
+  showBtn?: boolean
   title: string
   intro?: string
-  handlePress: () => void
+  handlePress?: () => void
+  handleIcon?: () => void
   info?: string
   infoLink?: string
   infoLinkText?: string
@@ -83,9 +88,14 @@ export default function ModalComponent(props: ModalComponentProps) {
     isModalVisible,
     setIsModalVisible,
     showOtpPage,
+    showIcon,
+    iconName,
+    iconSize,
+    showBtn,
     title,
     intro,
     handlePress,
+    handleIcon,
     info,
     infoLink,
     infoLinkText,
@@ -95,9 +105,10 @@ export default function ModalComponent(props: ModalComponentProps) {
   // const title = "Success"
   // const info = "Didn't recieve the code?"
   // const infoLinkText = "Resend"
-  //   const modalX = "Back to Sign up"
-  //   const infoLink = "/register"
+  // const modalX = "Back to Sign up"
+  // const infoLink = "/register"
   // const intro = " Congratulations You have successfully signed up!"
+  // const iconName = "ios-finger-print"
 
   return (
     <>
@@ -108,8 +119,17 @@ export default function ModalComponent(props: ModalComponentProps) {
         <ModalContent>
           <ModalTex>{title}</ModalTex>
           <ModalStack>
+            {showIcon && (
+              <Ionicons
+                onPress={handleIcon}
+                name={iconName}
+                size={iconSize}
+                color="#228b22"
+              />
+            )}
             {showOtpPage && <OtpPage />}
             <ModalIntro>{intro}</ModalIntro>
+
             <Box w={"75%"}>
               <Submit handlePress={handlePress} submit={submit} />
             </Box>

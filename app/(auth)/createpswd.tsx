@@ -71,6 +71,7 @@ export default function LoginScreen() {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [showSuccess, setShowSuccess] = useState(false)
+  const showBtn = true
 
   const create = () => {
     if (password !== "") {
@@ -137,10 +138,11 @@ export default function LoginScreen() {
             </Box>
             <ModalComponent
               handlePress={login}
+              showBtn={showBtn}
               isModalVisible={showSuccess}
               setIsModalVisible={setShowSuccess}
               title="Success"
-              intro="You have successfully signed up!"
+              intro="Password created successfully"
               infoLink=""
               submit="Login"
             />

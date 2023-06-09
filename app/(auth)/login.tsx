@@ -17,6 +17,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
 import * as LocalAuthentication from "expo-local-authentication"
+import ModalComponent from "../components/ModalComponent"
 
 const Container = styled(SafeAreaView)`
   flex: 1;
@@ -179,6 +180,9 @@ export default function LoginScreen() {
   const [show, setShow] = useState(false)
   const [password, setPassword] = useState("")
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const iconName = "ios-finger-print"
+  const showIcon = true
+  const iconSize = 60
 
   const login = () => {
     if (password !== "") {
@@ -205,6 +209,8 @@ export default function LoginScreen() {
     })
     router.push("/register")
   }
+
+  const handleIcon = () => {}
 
   return (
     <NativeBaseProvider>
