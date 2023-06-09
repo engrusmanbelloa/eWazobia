@@ -11,7 +11,6 @@ import {
 import { Stack, useRouter, Link } from "expo-router"
 
 const SubmitButton = styled(Button)`
-  top: 10%;
   width: 100%;
   height: 40px;
   background: #228b22;

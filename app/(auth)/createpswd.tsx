@@ -5,13 +5,9 @@ import {
   NativeBaseProvider,
   Text,
   Box,
-  Heading,
   Pressable,
   Input,
   VStack,
-  HStack,
-  Button,
-  Modal,
 } from "native-base"
 import { Stack, useRouter, Link } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
@@ -74,14 +70,12 @@ export default function LoginScreen() {
   const [show, setShow] = useState(false)
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
-  const [isModalVisible, setIsModalVisible] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
 
   const create = () => {
     if (password !== "") {
       AuthStore.update((s) => {
         setShowSuccess(true)
-        setIsModalVisible(true)
         // router.replace("/(main)")
       })
       // Login logic when password is entered
@@ -93,19 +87,6 @@ export default function LoginScreen() {
   const login = () => {
     setShowSuccess(false)
     router.push("/login")
-  }
-
-  const handleRegister = () => {
-    setIsModalVisible(true)
-  }
-  // Function to handle opening the modal
-  const openModal = () => {
-    setIsModalVisible(true)
-  }
-
-  // Function to handle closing the modal
-  const closeModal = () => {
-    setIsModalVisible(false)
   }
   return (
     <NativeBaseProvider>
@@ -153,8 +134,8 @@ export default function LoginScreen() {
               <Submit handlePress={create} submit="Create" />
               <ModalComponent
                 handlePress={login}
-                isModalVisible={isModalVisible}
-                setIsModalVisible={setIsModalVisible}
+                isModalVisible={showSuccess}
+                setIsModalVisible={setShowSuccess}
                 title="Success"
                 intro="You have successfully signed up!"
                 infoLink=""

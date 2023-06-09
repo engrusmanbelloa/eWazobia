@@ -95,7 +95,6 @@ const LoginBtn = styled(Button)`
   background: #228b22;
   border-radius: 50px;
 `
-
 const ModalBox = styled(Modal)`
   background: red;
   width: 100%;
@@ -129,7 +128,6 @@ const ModalInfo = styled(Text)`
   font-weight: 600;
   line-height: 25px;
 `
-
 const ModalCancel = styled(Text)`
   top: 5px;
   color: #0e32b4;
@@ -164,15 +162,15 @@ const SocialLogins = styled(HStack)`
 const SignUpBox = styled(Text)`
   bottom: 8%;
   color: #000;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 600;
   line-height: 16px;
   letter-spacing: 1px;
   background: transparent;
 `
-
 const SignUp = styled(Link)`
   color: #0e32b4;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   text-decoration: underline;
 `

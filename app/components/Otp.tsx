@@ -1,20 +1,14 @@
 import styled from "styled-components/native"
 import { useState, useRef, ChangeEvent } from "react"
 import { AuthStore } from "../../config/store"
-import {
-  NativeBaseProvider,
-  HStack,
-  Text,
-  Box,
-  Input,
-  Button,
-} from "native-base"
+import { Text, Box, Input } from "native-base"
 import { Stack, useRouter, Link } from "expo-router"
 
 const OtpContainer = styled(Box)`
   flex-direction: row;
 `
 const OtpInput = styled(Input)`
+  top: 0;
   width: 40px;
   height: 40px;
   border-radius: 5px;
@@ -57,7 +51,7 @@ const OtpPage = () => {
       <Text mt={1}>Enter the 6 digit sent to example@gmail.com</Text>
       <OtpContainer>
         {otp.map((value, index) => (
-          <Box w={10} height={10} m={1} key={index}>
+          <Box w={10} height={1} m={1} key={index}>
             <OtpInput
               value={value}
               maxLength={1}
