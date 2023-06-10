@@ -9,7 +9,9 @@ import { AuthStore } from "../config/store"
 const Index = () => {
   const segments = useSegments()
   const router = useRouter()
-  const { isLoggedIn, hasEverLoggedIn } = AuthStore.useState((s) => s)
+  const { isLoggedIn, hasEverLoggedIn, hasDoneKYC } = AuthStore.useState(
+    (s) => s
+  )
   const navigationState = useRootNavigationState()
 
   useEffect(() => {
@@ -22,19 +24,20 @@ const Index = () => {
         const isFirstVisit = await AsyncStorage.getItem("isFirstVisit")
 
         console.log("isFirstVisit: ", isFirstVisit)
-
         if (isFirstVisit == null) {
           // redirect to the onboarding page if it's their first visit.
           await AsyncStorage.setItem("isFirstVisit", "true")
           const isComeBack = await AsyncStorage.getItem("isFirstVisit")
-
           console.log("isComeBack: ", isComeBack)
 
           router.replace("/welcome")
         } else if (!isLoggedIn && !inAuthGroup) {
           // If the user is not signed in and the initial segment is not in the auth group,
           router.replace("/login")
-        } else if (isLoggedIn) {
+        } else if (isLoggedIn && !hasDoneKYC) {
+          // If the user is signed in, but has not done kyc go to the tabs root.
+          router.replace("/(kyc)")
+        } else if (isLoggedIn && hasDoneKYC) {
           // If the user is signed in, go to the tabs root.
           router.replace("/(main)")
         }

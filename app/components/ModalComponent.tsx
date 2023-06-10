@@ -129,7 +129,6 @@ export default function ModalComponent(props: ModalComponentProps) {
             )}
             {showOtpPage && <OtpPage />}
             <ModalIntro>{intro}</ModalIntro>
-
             <Box w={"75%"}>
               <Submit handlePress={handlePress} submit={submit} />
             </Box>

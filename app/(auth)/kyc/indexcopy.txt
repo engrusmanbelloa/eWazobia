@@ -1,0 +1,216 @@
+import React, { useState } from "react"
+import { Ionicons } from "@expo/vector-icons"
+import {
+  KeyboardAvoidingView,
+  View,
+  Button,
+  Text,
+  Input,
+  Container,
+  Content,
+  Header,
+  Title,
+  Body,
+  Form,
+  Item,
+  Label,
+} from "native-base"
+import styled from "styled-components/native"
+
+// Define the styled components
+const InfoScreenContainer = styled(Container)`
+  padding: 16px;
+`
+
+const InfoScreenText = styled(Text)`
+  font-size: 16px;
+  margin-bottom: 16px;
+`
+
+const BVNScreenContainer = styled(Container)`
+  padding: 16px;
+`
+
+const IDUploadScreenContainer = styled(Container)`
+  padding: 16px;
+`
+
+const FaceVerificationScreenContainer = styled(Container)`
+  padding: 16px;
+`
+
+// Define the KYCProcess component
+const KYCProcess = () => {
+  const [step, setStep] = useState(1)
+  const [basicInfo, setBasicInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+  })
+  const [bvn, setBVN] = useState("")
+  const [idImage, setIDImage] = useState(null)
+  const [faceImage, setFaceImage] = useState(null)
+
+  const handleNextStep = () => {
+    setStep((prevStep) => prevStep + 1)
+  }
+
+  const handlePreviousStep = () => {
+    setStep((prevStep) => prevStep - 1)
+  }
+
+  const handleBasicInfoSubmit = () => {
+    // Handle basic info form submission
+    console.log("Basic Info:", basicInfo)
+    handleNextStep()
+  }
+
+  const handleBVNSubmit = () => {
+    // Handle BVN form submission
+    console.log("BVN:", bvn)
+    handleNextStep()
+  }
+
+  const handleIDUploadSubmit = () => {
+    // Handle ID upload form submission
+    console.log("ID Image:", idImage)
+    handleNextStep()
+  }
+
+  const handleFaceVerificationSubmit = () => {
+    // Handle face verification form submission
+    console.log("Face Image:", faceImage)
+    handleNextStep()
+  }
+
+  const renderStepContent = () => {
+    switch (step) {
+      case 1:
+        return (
+          <InfoScreenContainer>
+            <InfoScreenText>
+              Step 1: Enter Your Basic Information
+            </InfoScreenText>
+            <Form>
+              <Item stackedLabel>
+                <Label>First Name</Label>
+                <Input
+                  value={basicInfo.firstName}
+                  onChangeText={(text) =>
+                    setBasicInfo((prevInfo) => ({
+                      ...prevInfo,
+                      firstName: text,
+                    }))
+                  }
+                />
+              </Item>
+              <Item stackedLabel>
+                <Label>Last Name</Label>
+                <Input
+                  value={basicInfo.lastName}
+                  onChangeText={(text) =>
+                    setBasicInfo((prevInfo) => ({
+                      ...prevInfo,
+                      lastName: text,
+                    }))
+                  }
+                />
+              </Item>
+              <Item stackedLabel>
+                <Label>Email</Label>
+                <Input
+                  value={basicInfo.email}
+                  onChangeText={(text) =>
+                    setBasicInfo((prevInfo) => ({ ...prevInfo, email: text }))
+                  }
+                />
+              </Item>
+              <Item stackedLabel>
+                <Label>Phone</Label>
+                <Input
+                  value={basicInfo.phone}
+                  onChangeText={(text) =>
+                    setBasicInfo((prevInfo) => ({ ...prevInfo, phone: text }))
+                  }
+                />
+              </Item>
+              <Button onPress={handleBasicInfoSubmit}>
+                <Text>Next</Text>
+              </Button>
+            </Form>
+          </InfoScreenContainer>
+        )
+      case 2:
+        return (
+          <BVNScreenContainer>
+            <InfoScreenText>Step 2: Enter Your BVN</InfoScreenText>
+            <Form>
+              <Item stackedLabel>
+                <Label>BVN</Label>
+                <Input value={bvn} onChangeText={setBVN} />
+              </Item>
+              <Button onPress={handleBVNSubmit}>
+                <Text>Next</Text>
+              </Button>
+            </Form>
+          </BVNScreenContainer>
+        )
+      case 3:
+        return (
+          <IDUploadScreenContainer>
+            <InfoScreenText>Step 3: Upload Your ID</InfoScreenText>
+            {/* Implement ID image upload functionality */}
+            <Button onPress={handleIDUploadSubmit}>
+              <Text>Next</Text>
+            </Button>
+          </IDUploadScreenContainer>
+        )
+      case 4:
+        return (
+          <FaceVerificationScreenContainer>
+            <InfoScreenText>Step 4: Verify Your Face</InfoScreenText>
+            {/* Implement face verification functionality */}
+            <Button onPress={handleFaceVerificationSubmit}>
+              <Text>Next</Text>
+            </Button>
+          </FaceVerificationScreenContainer>
+        )
+      default:
+        return null
+    }
+  }
+
+  return (
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+      <Container>
+        <Header>
+          <Body>
+            <Title>KYC Process</Title>
+          </Body>
+        </Header>
+        <Content>{renderStepContent()}</Content>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            padding: 16,
+          }}
+        >
+          {step > 1 && (
+            <Button onPress={handlePreviousStep}>
+              <Text>Previous</Text>
+            </Button>
+          )}
+          {step < 4 && (
+            <Button onPress={handleNextStep}>
+              <Text>Next</Text>
+            </Button>
+          )}
+        </View>
+      </Container>
+    </KeyboardAvoidingView>
+  )
+}
+
+export default KYCProcess

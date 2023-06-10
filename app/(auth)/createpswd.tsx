@@ -87,6 +87,9 @@ export default function LoginScreen() {
 
   const login = () => {
     setShowSuccess(false)
+    AuthStore.update((s) => {
+      s.hasAccount = true
+    })
     router.push("/login")
   }
   return (

@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react"
+import { useState, useEffect, ChangeEvent } from "react"
 import { AuthStore } from "../../config/store"
 import { KeyboardAvoidingView } from "react-native"
 import {
@@ -12,12 +12,17 @@ import {
   Button,
   Modal,
 } from "native-base"
-import { Stack, useRouter, Link } from "expo-router"
+import {
+  Stack,
+  useRouter,
+  useSegments,
+  Link,
+  useRootNavigationState,
+} from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
 import * as LocalAuthentication from "expo-local-authentication"
-import ModalComponent from "../components/ModalComponent"
 
 const Container = styled(SafeAreaView)`
   flex: 1;
@@ -180,15 +185,12 @@ export default function LoginScreen() {
   const [show, setShow] = useState(false)
   const [password, setPassword] = useState("")
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const iconName = "ios-finger-print"
-  const showIcon = true
-  const iconSize = 60
 
   const login = () => {
     if (password !== "") {
       AuthStore.update((s) => {
         s.isLoggedIn = true
-        router.replace("/(main)")
+        router.push("/kyc")
       })
       // Login logic when password is entered
     } else {
@@ -275,10 +277,7 @@ export default function LoginScreen() {
                 <ModalStack>
                   <Ionicons name="ios-finger-print" size={50} color="#228b22" />
                   <ModalInfo>Touch the fingerprint sensor</ModalInfo>
-                  <ModalCancel
-                    onPress={() => setIsModalVisible(false)}
-                    variant="ghost"
-                  >
+                  <ModalCancel onPress={() => setIsModalVisible(false)}>
                     Cancel
                   </ModalCancel>
                 </ModalStack>
@@ -297,7 +296,6 @@ export default function LoginScreen() {
               <SignUp href="/register">Sign up</SignUp>
             </SignUpBox>
           </Main>
-          {/* <Text onPress={handleRegister}>Create Account</Text>  */}
         </Box>
       </Container>
     </NativeBaseProvider>
