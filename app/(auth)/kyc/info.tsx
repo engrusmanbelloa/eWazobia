@@ -6,18 +6,14 @@ import SelectDropdown from "react-native-select-dropdown"
 import RNPickerSelect from "react-native-picker-select"
 import {
   KeyboardAvoidingView,
-  View,
   Button,
   Text,
   Input,
-  Container,
   Stack,
   FormControl,
   HStack,
   Box,
   VStack,
-  Radio,
-  Center,
   Select,
 } from "native-base"
 import styled from "styled-components/native"
@@ -30,7 +26,6 @@ const InfoScreenContainer = styled(Box)`
   top: 5px;
   padding: 10px;
 `
-
 const InfoText = styled(Text)`
   font-size: 25px;
   font-weight: 600;
@@ -44,9 +39,11 @@ const NamesInput = styled(Input)`
 `
 const Dob = styled(Button)`
   background: #fff;
-  border: 0.5px solid #228b22;
+  border: 0.5px solid #808080;
 `
-const Gender = styled(Select)``
+const Gender = styled(Select)`
+  height: 40px;
+`
 interface InfoProps {
   handleInfoSubmit?: () => void
 }
@@ -55,20 +52,20 @@ export default function InfoScreen(props: InfoProps) {
   const [step, setStep] = useState(1)
   const [dob, setDOB] = useState<Date | undefined>(undefined)
   const [showDatePicker, setShowDatePicker] = useState(false)
-  const [selectedGender, setSelectedGender] = useState("")
   const [nationality, setNationality] = useState("")
   const [nationalities, setNationalities] = useState([])
   const [state, setState] = useState("")
   const [states, setStates] = useState([])
   const [city, setCity] = useState("")
   const [cities, setCities] = useState([])
-  const [zipCode, setZipCode] = useState("")
 
   const [basicInfo, setBasicInfo] = useState({
     firstName: "",
     lastName: "",
-    dob: "",
     gender: "",
+    address: "",
+    home: "",
+    nationality: "",
     zipCode: "",
   })
 
@@ -78,15 +75,6 @@ export default function InfoScreen(props: InfoProps) {
     setDOB(currentDate)
   }
 
-  const handleGenderChange = (value: string) => {
-    setSelectedGender(value)
-  }
-
-  const handleNationality = (selectedOption: any) => {
-    setNationality(selectedOption)
-    console.log("Selected nationality:", selectedOption)
-    // Perform any necessary actions based on the selected nationality
-  }
   // Fetch the list of nationalities from the REST Countries API
   useEffect(() => {
     fetch(
@@ -99,7 +87,6 @@ export default function InfoScreen(props: InfoProps) {
           value: country.geonameId,
         }))
         setNationalities(fetchedNationalities)
-        console.log("Countries from Geonames API:", nationalities)
       })
       .catch((error) => {
         console.log("Error fetching nationalities:", error)
@@ -150,6 +137,7 @@ export default function InfoScreen(props: InfoProps) {
     <InfoScreenContainer>
       <InfoText>Step 1: Basic Info</InfoText>
       <FormControl>
+        {/* // Names Input Fields */}
         <HStack justifyContent={"center"}>
           <Stack m={1} mt={5} w={"45%"}>
             <NamesInput
@@ -170,13 +158,16 @@ export default function InfoScreen(props: InfoProps) {
             />
           </Stack>
         </HStack>
+        {/* // gender selection and dob */}
         <HStack justifyContent={"center"}>
           <Stack m={1} mt={5} w={"45%"}>
             <Gender
-              selectedValue={selectedGender}
+              selectedValue={basicInfo.gender}
               accessibilityLabel="Gender"
               placeholder="Gender"
-              onValueChange={handleGenderChange}
+              onValueChange={(text: string) =>
+                setBasicInfo((prevInfo) => ({ ...prevInfo, gender: text }))
+              }
             >
               <Gender.Item label="Male" value="male" />
               <Gender.Item label="Female" value="female" />
@@ -199,36 +190,36 @@ export default function InfoScreen(props: InfoProps) {
             )}
           </Stack>
         </HStack>
+        {/* // addresses of customer */}
         <VStack justifyContent={"center"}>
           <Stack m={"auto"} mt={5} w={"92%"}>
             <NamesInput
               variant="underlined"
               placeholder="Residential address"
-              value={basicInfo.lastName}
+              value={basicInfo.address}
               onChangeText={(text: string) =>
-                setBasicInfo((prevInfo) => ({ ...prevInfo, lastName: text }))
+                setBasicInfo((prevInfo) => ({ ...prevInfo, address: text }))
               }
             />
           </Stack>
           <Stack m={"auto"} mt={5} w={"92%"}>
             <NamesInput
               variant="underlined"
-              placeholder="Residential address"
-              value={basicInfo.lastName}
+              placeholder="Home address"
+              value={basicInfo.home}
               onChangeText={(text: string) =>
-                setBasicInfo((prevInfo) => ({ ...prevInfo, lastName: text }))
+                setBasicInfo((prevInfo) => ({ ...prevInfo, home: text }))
               }
             />
           </Stack>
         </VStack>
+        {/* // nationality stack */}
         <HStack top={5} justifyContent={"center"}>
           <Stack m={1} mt={5} w={"45%"}>
             <RNPickerSelect
               placeholder={{ label: "Nationality", value: null }}
               items={nationalities}
-              onValueChange={(selectedOption) =>
-                handleNationality(selectedOption)
-              }
+              onValueChange={(value) => setNationality(value)}
               value={nationality}
             />
           </Stack>
@@ -242,6 +233,7 @@ export default function InfoScreen(props: InfoProps) {
             />
           </Stack>
         </HStack>
+        {/* // zip code stack */}
         <HStack top={5} justifyContent={"center"}>
           <Stack m={1} mt={5} w={"45%"}>
             <RNPickerSelect
@@ -255,13 +247,14 @@ export default function InfoScreen(props: InfoProps) {
           <Stack m={1} mt={5} w={"45%"}>
             <NamesInput
               placeholder="Zip code"
-              value={zipCode}
-              onChangeText={(text: string) =>
+              value={basicInfo.zipCode}
+              onChangeText={(text: any) =>
                 setBasicInfo((prevInfo) => ({ ...prevInfo, zipCode: text }))
               }
             />
           </Stack>
         </HStack>
+        {/* // next step */}
         <HStack top={50} justifyContent={"center"}>
           <Stack w={"95%"}>
             <Submit handlePress={props.handleInfoSubmit} submit="Next" />

@@ -29,6 +29,7 @@ const Head = styled(Box)`
   width: 100%;
   margin-bottom: 10px;
   height: 50px;
+  top: 5px;
   flex-direction: row;
   align-items: center;
 `
