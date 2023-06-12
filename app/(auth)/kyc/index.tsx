@@ -2,15 +2,17 @@ import React, { useState, useEffect } from "react"
 import { Ionicons } from "@expo/vector-icons"
 import { useRootNavigationState } from "expo-router"
 import { useRouter, useSegments } from "expo-router"
+import { SafeAreaView } from "react-native-safe-area-context"
 import {
   KeyboardAvoidingView,
   NativeBaseProvider,
   View,
   Button,
   Text,
-  Container,
   Heading,
   Box,
+  VStack,
+  Pressable,
 } from "native-base"
 import styled from "styled-components/native"
 import { AuthStore } from "../../../config/store"
@@ -19,9 +21,38 @@ import BvnScreen from "./bvn"
 import IdUploadScreen from "./idupload"
 import FaceverifyScreen from "./faceverify"
 // Define the styled components
-
+const Container = styled(SafeAreaView)`
+  flex: 1;
+  background: #228b22;
+`
+const Head = styled(Box)`
+  width: 100%;
+  margin-bottom: 10px;
+  height: 50px;
+  flex-direction: row;
+  align-items: center;
+`
+const Circle = styled(Pressable)`
+  height: 45px;
+  width: 45px;
+  top: 0px;
+  left: 15px;
+  justify-content: center;
+  align-items: center;
+  background: #228b22
+  border: 1px solid #FFF;
+  border-radius: 50px;
+`
+const Main = styled(KeyboardAvoidingView)`
+  background: #fff;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: 1%;
+`
 // Define the KYCProcess component
-const KYCProcess = () => {
+export default function KYCProcess() {
   const [step, setStep] = useState(1)
   const [basicInfo, setBasicInfo] = useState({
     firstName: "",
@@ -32,6 +63,7 @@ const KYCProcess = () => {
   const [bvn, setBVN] = useState("")
   const [idImage, setIDImage] = useState(null)
   const [faceImage, setFaceImage] = useState(null)
+  const router = useRouter()
 
   const handleNextStep = () => {
     setStep((prevStep) => prevStep + 1)
@@ -82,34 +114,33 @@ const KYCProcess = () => {
 
   return (
     <NativeBaseProvider>
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
-        <Container>
-          <Box>
-            <Heading>KYC Process</Heading>
-          </Box>
-          <Box>{renderStepContent()}</Box>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              padding: 16,
-            }}
-          >
-            {step > 1 && (
-              <Button onPress={handlePreviousStep}>
-                <Text>Previous</Text>
-              </Button>
-            )}
-            {step < 4 && (
+      <Container>
+        <VStack>
+          <Head>
+            <Circle onPress={() => router.back()}>
+              <Ionicons name="chevron-back-sharp" size={34} color="#fff" />
+            </Circle>
+            <Heading color={"#fff"} ml={"34%"}>
+              KYC
+            </Heading>
+          </Head>
+          <Main>
+            {renderStepContent()}
+            <View>
+              {step > 1 && (
+                <Button onPress={handlePreviousStep}>
+                  <Text>Previous</Text>
+                </Button>
+              )}
+              {/* {step < 4 && (
               <Button onPress={handleNextStep}>
                 <Text>Next</Text>
               </Button>
-            )}
-          </View>
-        </Container>
-      </KeyboardAvoidingView>
+            )} */}
+            </View>
+          </Main>
+        </VStack>
+      </Container>
     </NativeBaseProvider>
   )
 }
-
-export default KYCProcess
