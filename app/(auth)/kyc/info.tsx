@@ -20,7 +20,7 @@ import styled from "styled-components/native"
 import Submit from "../../components/Submit"
 
 // Define the styled components
-const InfoScreenContainer = styled(Box)`
+const InfoScreenContainer = styled(KeyboardAvoidingView)`
   flex: 1;
   width: 100%;
   top: 5px;

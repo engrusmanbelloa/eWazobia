@@ -1,23 +1,40 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Ionicons } from "@expo/vector-icons"
+import DatePicker from "react-native-datepicker"
+import DateTimePicker from "@react-native-community/datetimepicker"
+import SelectDropdown from "react-native-select-dropdown"
+import RNPickerSelect from "react-native-picker-select"
 import {
   KeyboardAvoidingView,
-  View,
   Button,
   Text,
   Input,
-  Container,
   Stack,
   FormControl,
+  HStack,
+  Box,
+  VStack,
+  Select,
 } from "native-base"
 import styled from "styled-components/native"
+import Submit from "../../components/Submit"
 
-const BVNScreenContainer = styled(Container)`
-  padding: 16px;
+const BVNScreenContainer = styled(KeyboardAvoidingView)`
+  flex: 1;
+  width: 100%;
+  top: 5px;
+  padding: 10px;
 `
-const InfoScreenText = styled(Text)`
-  font-size: 16px;
-  margin-bottom: 16px;
+const NamesInput = styled(Input)`
+  width: 95px;
+  left: 5px;
+`
+const InfoText = styled(Text)`
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 25px;
+  top: 30px;
+  margin-bottom: 40px;
 `
 interface BvnProps {
   handleBVNSubmit?: () => void
@@ -25,17 +42,21 @@ interface BvnProps {
 
 export default function BvnScreen(props: BvnProps) {
   const [bvn, setBVN] = useState("")
+
   return (
     <BVNScreenContainer>
-      <InfoScreenText>Step 2: Enter Your BVN</InfoScreenText>
+      <InfoText>Step 2: Enter Your BVN</InfoText>
       <FormControl>
-        <Stack>
-          <FormControl.Label>BVN</FormControl.Label>
-          <Input value={bvn} onChangeText={setBVN} />
-        </Stack>
-        <Button onPress={props.handleBVNSubmit}>
-          <Text>Next</Text>
-        </Button>
+        <HStack bottom={"20%"} justifyContent={"center"}>
+          <Stack top={"40%"} w={"90%"}>
+            <NamesInput value={bvn} placeholder="BVN" onChangeText={setBVN} />
+          </Stack>
+        </HStack>
+        <HStack top={"50%"} justifyContent={"center"}>
+          <Stack w={"90%"}>
+            <Submit handlePress={props.handleBVNSubmit} submit="Next" />
+          </Stack>
+        </HStack>
       </FormControl>
     </BVNScreenContainer>
   )

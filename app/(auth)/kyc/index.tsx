@@ -13,6 +13,8 @@ import {
   Box,
   VStack,
   Pressable,
+  HStack,
+  Stack,
 } from "native-base"
 import styled from "styled-components/native"
 import { AuthStore } from "../../../config/store"
@@ -20,6 +22,7 @@ import InfoScreen from "./info"
 import BvnScreen from "./bvn"
 import IdUploadScreen from "./idupload"
 import FaceverifyScreen from "./faceverify"
+import Submit from "../../components/Submit"
 // Define the styled components
 const Container = styled(SafeAreaView)`
   flex: 1;
@@ -71,7 +74,7 @@ export default function KYCProcess() {
   }
 
   const handlePreviousStep = () => {
-    setStep((prevStep) => prevStep - 1)
+    setStep((prevStep) => (prevStep > 1 ? prevStep - 1 : prevStep))
   }
 
   const handleInfoSubmit = () => {
@@ -118,28 +121,14 @@ export default function KYCProcess() {
       <Container>
         <VStack>
           <Head>
-            <Circle onPress={() => router.back()}>
+            <Circle onPress={handlePreviousStep}>
               <Ionicons name="chevron-back-sharp" size={34} color="#fff" />
             </Circle>
             <Heading color={"#fff"} ml={"34%"}>
               KYC
             </Heading>
           </Head>
-          <Main>
-            {renderStepContent()}
-            <View>
-              {step > 1 && (
-                <Button onPress={handlePreviousStep}>
-                  <Text>Previous</Text>
-                </Button>
-              )}
-              {/* {step < 4 && (
-              <Button onPress={handleNextStep}>
-                <Text>Next</Text>
-              </Button>
-            )} */}
-            </View>
-          </Main>
+          <Main>{renderStepContent()}</Main>
         </VStack>
       </Container>
     </NativeBaseProvider>

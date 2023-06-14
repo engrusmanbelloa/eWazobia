@@ -12,13 +12,7 @@ import {
   Button,
   Modal,
 } from "native-base"
-import {
-  Stack,
-  useRouter,
-  useSegments,
-  Link,
-  useRootNavigationState,
-} from "expo-router"
+import { Stack, useRouter, Link } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
