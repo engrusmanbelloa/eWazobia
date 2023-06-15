@@ -19,7 +19,7 @@ import {
 import styled from "styled-components/native"
 import { AuthStore } from "../../../config/store"
 import InfoScreen from "./info"
-import BvnScreen from "./bvn"
+import BvnScreen from "./verifyId"
 import IdUploadScreen from "./idupload"
 import FaceverifyScreen from "./faceverify"
 import Submit from "../../components/Submit"
