@@ -179,14 +179,20 @@ export default function LoginScreen() {
   const [show, setShow] = useState(false)
   const [password, setPassword] = useState("")
   const [isModalVisible, setIsModalVisible] = useState(false)
-
+  const { isLoggedIn, hasEverLoggedIn, hasDoneKYC } = AuthStore.useState(
+    (s) => s
+  )
   const login = () => {
+    // Login logic when password is entered
     if (password !== "") {
-      AuthStore.update((s) => {
-        s.isLoggedIn = true
-        router.push("/kyc")
-      })
-      // Login logic when password is entered
+      if (!hasDoneKYC) {
+        router.replace("/(main)")
+      } else {
+        AuthStore.update((s) => {
+          s.isLoggedIn = true
+          router.push("/kyc")
+        })
+      }
     } else {
       showModal()
       // Login with biometric logic when password is empty
