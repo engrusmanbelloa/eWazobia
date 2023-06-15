@@ -4,8 +4,14 @@ import DatePicker from "react-native-datepicker"
 import DateTimePicker from "@react-native-community/datetimepicker"
 import SelectDropdown from "react-native-select-dropdown"
 import RNPickerSelect from "react-native-picker-select"
-import { View, TouchableOpacity, Platform } from "react-native"
-import { Camera, CameraType } from "expo-camera"
+
+import { View, TouchableOpacity } from "react-native"
+import {
+  Camera,
+  CameraType,
+  CameraCapturedPicture,
+  CameraPictureOptions,
+} from "expo-camera"
 import {
   KeyboardAvoidingView,
   Button,
@@ -19,6 +25,7 @@ import {
   Select,
   Pressable,
   Modal,
+  Image,
 } from "native-base"
 import styled from "styled-components/native"
 import Submit from "../../components/Submit"
@@ -94,6 +101,14 @@ const Circle = styled(TouchableOpacity)`
   border: 3px solid #FFF;
   border-radius: 50px;
 `
+const Img = styled(Image)`
+  position: relative;
+  top: -15px;
+  left: -20px;
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+`
 
 interface BvnProps {
   handleBVNSubmit?: () => void
@@ -110,6 +125,7 @@ export default function BvnScreen(props: BvnProps) {
   const [hasPermission, setHasPermission] = useState(false)
   const cameraRef = useRef<Camera>(null)
   const [showModal, setShowModal] = useState(false)
+  const [capturedImage, setCapturedImage] = useState<string | null>(null)
 
   // Function to handle BVN verification
   const verifyBVN = async () => {
@@ -177,9 +193,14 @@ export default function BvnScreen(props: BvnProps) {
   // take photo of the user
   const handleCameraCapture = async () => {
     if (cameraRef.current) {
-      const photo = await cameraRef.current.takePictureAsync()
+      const pictureOptions: CameraPictureOptions = {
+        quality: 1,
+      }
+      const photo = await cameraRef.current.takePictureAsync(pictureOptions)
       setShowModal(false)
       setIsCameraActive(false)
+      setCapturedImage(photo.uri)
+
       // Compare the captured photo with the image from the BVN API
       // Set faceMatched based on the comparison result
     }
@@ -237,7 +258,17 @@ export default function BvnScreen(props: BvnProps) {
                 </Modal>
               ) : (
                 <Stack position={"absolute"} left={"40%"} top={-40}>
-                  <Ionicons name="camera" size={70} color={"#fff"} />
+                  {capturedImage ? (
+                    <Img
+                      source={{
+                        uri: capturedImage,
+                      }}
+                      alt="Alternate Text"
+                      size="xl"
+                    />
+                  ) : (
+                    <Ionicons name="camera" size={60} color={"#fff"} />
+                  )}
                 </Stack>
               )}
               {faceMatched && (
@@ -249,7 +280,7 @@ export default function BvnScreen(props: BvnProps) {
         {/* Connect eNaira wallet */}
         <BvnStack>
           <Stack w={"95%"}>
-            <CardText>Connect your eNaira</CardText>
+            <CardText>eNaira wallet connect </CardText>
             <NamesInput
               InputRightElement={
                 !faceMatched && (

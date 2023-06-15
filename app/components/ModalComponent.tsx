@@ -80,6 +80,7 @@ interface ModalComponentProps {
   infoLinkText?: string
   modalX?: string
   submit?: string
+  children?: React.ReactNode
 }
 
 export default function ModalComponent(props: ModalComponentProps) {
@@ -101,6 +102,7 @@ export default function ModalComponent(props: ModalComponentProps) {
     infoLinkText,
     modalX,
     submit,
+    children,
   } = props
   // const title = "Success"
   // const info = "Didn't recieve the code?"
@@ -119,6 +121,7 @@ export default function ModalComponent(props: ModalComponentProps) {
         <ModalContent>
           <ModalTex>{title}</ModalTex>
           <ModalStack>
+            {children}
             {showIcon && (
               <Ionicons
                 onPress={handleIcon}

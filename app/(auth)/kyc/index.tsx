@@ -21,8 +21,8 @@ import { AuthStore } from "../../../config/store"
 import InfoScreen from "./info"
 import BvnScreen from "./verifyId"
 import IdUploadScreen from "./idupload"
-import FaceverifyScreen from "./faceverify"
 import Submit from "../../components/Submit"
+import ModalComponent from "../../components/ModalComponent"
 // Define the styled components
 const Container = styled(SafeAreaView)`
   flex: 1;
@@ -58,6 +58,7 @@ const Main = styled(KeyboardAvoidingView)`
 // Define the KYCProcess component
 export default function KYCProcess() {
   const [step, setStep] = useState(1)
+  const [showSuccess, setShowSuccess] = useState(false)
   const [basicInfo, setBasicInfo] = useState({
     firstName: "",
     lastName: "",
@@ -66,11 +67,12 @@ export default function KYCProcess() {
   })
   const [bvn, setBVN] = useState("")
   const [idImage, setIDImage] = useState(null)
-  const [faceImage, setFaceImage] = useState(null)
+
   const router = useRouter()
+  const showBtn = false
 
   const handleNextStep = () => {
-    setStep((prevStep) => prevStep + 1)
+    setStep((prevStep) => (prevStep < 2 ? prevStep + 1 : prevStep))
   }
 
   const handlePreviousStep = () => {
@@ -85,7 +87,7 @@ export default function KYCProcess() {
 
   const handleBVNSubmit = () => {
     // Handle BVN form submission
-    console.log("BVN:", bvn)
+    setShowSuccess(true)
     handleNextStep()
   }
 
@@ -95,10 +97,13 @@ export default function KYCProcess() {
     handleNextStep()
   }
 
-  const handleFaceVerify = () => {
-    // Handle face verification form submission
-    console.log("Face Image:", faceImage)
-    handleNextStep()
+  const login = () => {
+    setShowSuccess(false)
+    AuthStore.update((s) => {
+      s.hasAccount = true
+      s.hasDoneKYC = true
+    })
+    router.push("/login")
   }
 
   const renderStepContent = () => {
@@ -107,10 +112,6 @@ export default function KYCProcess() {
         return <InfoScreen handleInfoSubmit={handleInfoSubmit} />
       case 2:
         return <BvnScreen handleBVNSubmit={handleBVNSubmit} />
-      case 3:
-        return <IdUploadScreen handleIDUpload={handleIDUpload} />
-      case 4:
-        return <FaceverifyScreen handleFaceVerify={handleFaceVerify} />
       default:
         return null
     }
@@ -129,6 +130,18 @@ export default function KYCProcess() {
             </Heading>
           </Head>
           <Main>{renderStepContent()}</Main>
+          <ModalComponent
+            handlePress={login}
+            showBtn={showBtn}
+            isModalVisible={showSuccess}
+            setIsModalVisible={setShowSuccess}
+            title="Set Biometric"
+            info="Touch the fingerprint sensor"
+            infoLink=""
+            submit="Login"
+          >
+            <Ionicons name="ios-finger-print" size={50} color="#228b22" />
+          </ModalComponent>
         </VStack>
       </Container>
     </NativeBaseProvider>
