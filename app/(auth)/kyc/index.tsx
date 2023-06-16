@@ -26,7 +26,7 @@ import ModalComponent from "../../components/ModalComponent"
 // Define the styled components
 const Container = styled(SafeAreaView)`
   flex: 1;
-  background: #228b22;
+  background: #00aa00;
 `
 const Head = styled(Box)`
   width: 100%;
@@ -140,7 +140,7 @@ export default function KYCProcess() {
             infoLink=""
             submit="Login"
           >
-            <Ionicons name="ios-finger-print" size={50} color="#228b22" />
+            <Ionicons name="ios-finger-print" size={50} color="#00AA00" />
           </ModalComponent>
         </VStack>
       </Container>

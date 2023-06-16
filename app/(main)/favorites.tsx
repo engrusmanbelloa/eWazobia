@@ -1,6 +1,4 @@
 import { StyleSheet } from "react-native"
-
-import EditScreenInfo from "../../components/EditScreenInfo"
 import { Text, View } from "../../components/Themed"
 
 export default function TabTwoScreen() {
@@ -16,6 +14,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#228b22",
   },
   title: {
     fontSize: 20,

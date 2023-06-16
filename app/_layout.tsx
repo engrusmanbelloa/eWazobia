@@ -1,14 +1,10 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome"
-import { NativeBaseProvider, Text, Box } from "native-base"
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native"
 import { useFonts } from "expo-font"
 import { SplashScreen, Stack } from "expo-router"
-import { useEffect } from "react"
-import { useColorScheme } from "react-native"
+import { useEffect, useContext } from "react"
+import { ThemeProvider, ThemeContext } from "../constants/ThemesState"
+import { modes, themes } from "../constants/Themes"
+import styled, { ThemeProvider as StyledThemeProvider } from "styled-components"
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -16,6 +12,15 @@ export {
 } from "expo-router"
 
 export default function RootLayout() {
+  const { mode, setMode, theme, setTheme } = useContext(ThemeContext)
+  const toggleMode = () => {
+    const newMode = mode === "light" ? "dark" : "light"
+    setMode(newMode)
+  }
+  const selectTheme = (selectedTheme: string) => {
+    setTheme(selectedTheme)
+  }
+
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     ...FontAwesome.font,
@@ -27,8 +32,10 @@ export default function RootLayout() {
   }, [error])
 
   return (
-    <>
-      <Stack screenOptions={{ headerShown: false }} />
-    </>
+    <ThemeProvider>
+      <StyledThemeProvider theme={{ mode: mode, themes }}>
+        <Stack screenOptions={{ headerShown: false }} />
+      </StyledThemeProvider>
+    </ThemeProvider>
   )
 }

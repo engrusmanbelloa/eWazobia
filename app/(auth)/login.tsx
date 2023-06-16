@@ -179,13 +179,11 @@ export default function LoginScreen() {
   const [show, setShow] = useState(false)
   const [password, setPassword] = useState("")
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const { isLoggedIn, hasEverLoggedIn, hasDoneKYC } = AuthStore.useState(
-    (s) => s
-  )
+  const { isLoggedIn, hasDoneKYC } = AuthStore.useState((s) => s)
   const login = () => {
     // Login logic when password is entered
     if (password !== "") {
-      if (!hasDoneKYC) {
+      if (hasDoneKYC) {
         router.replace("/(main)")
       } else {
         AuthStore.update((s) => {
