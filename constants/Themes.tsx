@@ -1,6 +1,20 @@
 // themes.ts
 
-export const modes = {
+interface ModeTheme {
+  [key: string]: {
+    backgroundColor: string
+    textColor: string
+  }
+}
+
+interface Themes {
+  [key: string]: {
+    primaryColor: string
+    secondaryColor: string
+  }
+}
+
+export const modeTheme: ModeTheme = {
   dark: {
     backgroundColor: "#000000",
     textColor: "#FFFFFF",
@@ -11,7 +25,7 @@ export const modes = {
   },
 }
 
-export const themes = {
+export const themes: Themes = {
   green: {
     primaryColor: "#228b22",
     secondaryColor: "#00AA00",

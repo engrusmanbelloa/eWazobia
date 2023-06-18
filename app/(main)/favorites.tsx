@@ -1,9 +1,15 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet, StatusBar } from "react-native"
 import { Text, View } from "../../components/Themed"
+import { ThemeContext } from "../../constants/ThemeContext"
+import { useState, useContext, useEffect, ChangeEvent } from "react"
 
 export default function TabTwoScreen() {
+  const { mode, theme } = useContext(ThemeContext)
   return (
     <View style={styles.container}>
+      <StatusBar
+        barStyle={mode === "light" ? "dark-content" : "light-content"}
+      />
       <Text style={styles.title}>Favorites</Text>
     </View>
   )

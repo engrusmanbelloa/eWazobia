@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react"
-import { modes, themes } from "./Themes"
+import { modeTheme, themes } from "./Themes"
 
 interface ThemeContextProps {
   mode: string
