@@ -6,7 +6,6 @@ import {
   StatusBar,
   View,
   StyleSheet,
-  SafeAreaView,
 } from "react-native"
 import { ThemeContext } from "../../constants/ThemeContext"
 import {
@@ -21,11 +20,10 @@ import {
   Modal,
 } from "native-base"
 import { Stack, useRouter, Link } from "expo-router"
-// import { SafeAreaView } from "react-native-safe-area-context"
+import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
-import * as LocalAuthentication from "expo-local-authentication"
-import AppBar from "../components/home/AppBar"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 import { modeTheme, themes } from "../../constants/Themes"
 
 interface ThemeProps {
@@ -61,14 +59,36 @@ export default function MainScreen() {
   console.log("initial mode: ", mode)
   console.log("initial theme: ", theme)
 
-  const toggleMode = () => {
+  const toggleMode = async () => {
     const newMode = mode === "light" ? "dark" : "light"
     setMode(newMode)
+    await AsyncStorage.setItem("mode", newMode)
   }
 
-  const selectTheme = (selectedTheme: string) => {
+  const selectTheme = async (selectedTheme: string) => {
     setTheme(selectedTheme)
+    await AsyncStorage.setItem("theme", selectedTheme)
   }
+
+  useEffect(() => {
+    const loadPersistedData = async () => {
+      try {
+        const persistedMode = await AsyncStorage.getItem("mode")
+        const persistedTheme = await AsyncStorage.getItem("theme")
+
+        if (persistedMode) {
+          setMode(persistedMode)
+        }
+        if (persistedTheme) {
+          setTheme(persistedTheme)
+        }
+      } catch (error) {
+        console.log("Error loading persisted data:", error)
+      }
+    }
+
+    loadPersistedData()
+  }, [])
 
   return (
     <NativeBaseProvider>
@@ -77,7 +97,6 @@ export default function MainScreen() {
         <ToggleButton onPress={toggleMode}>
           <AppText theme={{ theme: themes[theme] }}>Toggle Mode</AppText>
         </ToggleButton>
-
         <View>
           {Object.keys(themes).map((themeKey) => (
             <ColorButton key={themeKey} onPress={() => selectTheme(themeKey)}>
@@ -89,55 +108,3 @@ export default function MainScreen() {
     </NativeBaseProvider>
   )
 }
-
-// <NativeBaseProvider>
-//   <Container>
-//     <TouchableOpacity onPress={toggleMode}>
-//       <StyledText>Toggle Mode</StyledText>
-//     </TouchableOpacity>
-
-//     {Object.keys(themes).map((themeKey) => (
-//       <TouchableOpacity
-//         key={themeKey}
-//         onPress={() => selectTheme(themeKey)}
-//       >
-//         <StyledText>{themeKey}</StyledText>
-//       </TouchableOpacity>
-//     ))}
-//   </Container>
-// </NativeBaseProvider>
-{
-  /* <SafeAreaView style={Styles.container}>
-        <Text style={Styles.text}>App Content</Text>
-        <TouchableOpacity onPress={toggleMode}>
-          <Text style={Styles.text}>Toggle Mode</Text>
-        </TouchableOpacity>
-
-        <View>
-          {Object.keys(themes).map((themeKey) => (
-            <TouchableOpacity
-              key={themeKey}
-              onPress={() => selectTheme(themeKey)}
-            >
-              <Text style={Styles.text}>{themeKey}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-      </SafeAreaView> */
-}
-
-// const Styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: "center",
-//     alignItems: "center",
-//     backgroundColor: modeTheme[mode].backgroundColor,
-//   },
-//   text: {
-//     color: themes[theme].secondaryColor,
-//   },
-// })
-
-// const StyledText = styled(Text)`
-//   color: ${(props: any) => props.theme.themes[theme].secondaryColor};
-// `

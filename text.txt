@@ -1,0 +1,51 @@
+// <NativeBaseProvider>
+//   <Container>
+//     <TouchableOpacity onPress={toggleMode}>
+//       <StyledText>Toggle Mode</StyledText>
+//     </TouchableOpacity>
+
+//     {Object.keys(themes).map((themeKey) => (
+//       <TouchableOpacity
+//         key={themeKey}
+//         onPress={() => selectTheme(themeKey)}
+//       >
+//         <StyledText>{themeKey}</StyledText>
+//       </TouchableOpacity>
+//     ))}
+//   </Container>
+// </NativeBaseProvider>
+{
+  /* <SafeAreaView style={Styles.container}>
+        <Text style={Styles.text}>App Content</Text>
+        <TouchableOpacity onPress={toggleMode}>
+          <Text style={Styles.text}>Toggle Mode</Text>
+        </TouchableOpacity>
+
+        <View>
+          {Object.keys(themes).map((themeKey) => (
+            <TouchableOpacity
+              key={themeKey}
+              onPress={() => selectTheme(themeKey)}
+            >
+              <Text style={Styles.text}>{themeKey}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </SafeAreaView> */
+}
+
+// const Styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: "center",
+//     alignItems: "center",
+//     backgroundColor: modeTheme[mode].backgroundColor,
+//   },
+//   text: {
+//     color: themes[theme].secondaryColor,
+//   },
+// })
+
+// const StyledText = styled(Text)`
+//   color: ${(props: any) => props.theme.themes[theme].secondaryColor};
+// `

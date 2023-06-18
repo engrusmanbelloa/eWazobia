@@ -3,7 +3,7 @@ import { Link, Tabs } from "expo-router"
 import { Pressable, useColorScheme } from "react-native"
 import { ThemeContext } from "../../constants/ThemeContext"
 import { modeTheme, themes } from "../../constants/Themes"
-import { useState, useContext, useEffect, ChangeEvent } from "react"
+import { useContext } from "react"
 
 interface icon {
   name: React.ComponentProps<typeof FontAwesome5>["name"]
@@ -14,7 +14,6 @@ function TabBarIcon(props: icon) {
 }
 
 export default function MainTabLayout() {
-  const colorScheme = useColorScheme()
   const { mode, theme } = useContext(ThemeContext)
 
   return (
@@ -22,7 +21,7 @@ export default function MainTabLayout() {
       screenOptions={{
         tabBarActiveTintColor: themes[theme].primaryColor,
         tabBarStyle: {
-          backgroundColor: mode === "dark" ? "black" : "white",
+          backgroundColor: modeTheme[mode].backgroundColor,
         },
       }}
     >
@@ -39,7 +38,7 @@ export default function MainTabLayout() {
           //         <FontAwesome5
           //           name="info-circle"
           //           size={25}
-          //           color={Colors[colorScheme ?? "light"].text}
+          //           color={themes[theme].primaryColor}
           //           style={{
           //             marginRight: 15,
           //             opacity: pressed ? 0.5 : 1,
@@ -55,6 +54,7 @@ export default function MainTabLayout() {
         name="favorites"
         options={{
           title: "Favorites",
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="star" color={color} />,
         }}
       />
@@ -62,6 +62,7 @@ export default function MainTabLayout() {
         name="pay"
         options={{
           title: "Pay",
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="circle" color={color} />,
         }}
       />
@@ -69,6 +70,7 @@ export default function MainTabLayout() {
         name="wallets"
         options={{
           title: "Wallets",
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="wallet" color={color} />,
         }}
       />
@@ -76,6 +78,7 @@ export default function MainTabLayout() {
         name="more"
         options={{
           title: "More",
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="bars" color={color} />,
         }}
       />
