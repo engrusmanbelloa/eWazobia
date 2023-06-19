@@ -25,6 +25,7 @@ import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { modeTheme, themes } from "../../constants/Themes"
+import AppBar from "../components/home/AppBar"
 
 interface ThemeProps {
   mode: {
@@ -38,26 +39,31 @@ interface ThemeProps {
 
 const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
   flex: 1;
-  justify-content: center;
-  align-items: center;
   background-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.mode.backgroundColor};
 `
-
+const TopContainer = styled(VStack)<{ theme: ThemeProps }>`
+  background-color: ${({ theme, mode }: { theme: ThemeProps; mode: string }) =>
+    mode === "light" ? theme.theme.primaryColor : "#000"};
+  background-color: ${({ theme }: { theme: ThemeProps }) =>
+    theme.theme.primaryColor};
+  height: 60%;
+  width: 100%;
+  top: 0;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  z-index: 99;
+`
 const AppText = styled.Text<{ theme: ThemeProps }>`
   color: ${({ theme }: { theme: ThemeProps }) => theme.theme.secondaryColor};
 `
-
 const ToggleButton = styled.TouchableOpacity``
-
 const ColorButton = styled.TouchableOpacity`
   margin-top: 10px;
 `
 
 export default function MainScreen() {
   const { mode, setMode, theme, setTheme } = useContext(ThemeContext)
-  console.log("initial mode: ", mode)
-  console.log("initial theme: ", theme)
 
   const toggleMode = async () => {
     const newMode = mode === "light" ? "dark" : "light"
@@ -93,7 +99,16 @@ export default function MainScreen() {
   return (
     <NativeBaseProvider>
       <Container theme={{ mode: modeTheme[mode] }}>
-        <AppText theme={{ theme: themes[theme] }}>App Content</AppText>
+        <StatusBar
+          barStyle={mode === "light" ? "light-content" : "light-content"}
+          backgroundColor={
+            mode === "light" ? themes[theme].secondaryColor : "#000"
+          }
+        />
+        <TopContainer theme={{ theme: themes[theme] }}>
+          <AppBar />
+        </TopContainer>
+        {/* <AppText theme={{ theme: themes[theme] }}>App Content</AppText> */}
         <ToggleButton onPress={toggleMode}>
           <AppText theme={{ theme: themes[theme] }}>Toggle Mode</AppText>
         </ToggleButton>
