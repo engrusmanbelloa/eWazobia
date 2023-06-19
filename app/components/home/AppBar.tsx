@@ -64,7 +64,7 @@ export default function AppBar() {
     <NativeBaseProvider>
       <Container>
         <Avatar
-          size="md"
+          size={10}
           source={{
             uri: avater,
           }}
@@ -73,14 +73,27 @@ export default function AppBar() {
         </Avatar>
         <Input
           placeholder="Search"
+          placeholderTextColor={"#fff"}
+          bg={"transparent"}
           variant="filled"
-          width="60%"
+          width="65%"
+          h={8}
           borderRadius="20"
           py="1"
           px="2"
           ml={2}
           mr={2}
-          InputRightElement={<Ionicons name="ios-search" size={25} />}
+          _focus={{
+            borderColor: "#fff",
+            fontSize: 16,
+            color: "#fff",
+          }}
+          InputLeftElement={
+            <Ionicons name="ios-search" color={"#fff"} size={25} />
+          }
+          InputRightElement={
+            <Ionicons name="mic-outline" color={"#fff"} size={25} />
+          }
         />
         <Ionicons name="cart-outline" color={"#fff"} size={35} />
         <Ionicons name="notifications-outline" color={"#fff"} size={35} />
