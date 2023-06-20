@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, ChangeEvent } from "react"
+import { useState, useContext, useRef, useEffect, ChangeEvent } from "react"
 import { AuthStore } from "../../config/store"
 import {
   KeyboardAvoidingView,
@@ -6,6 +6,8 @@ import {
   StatusBar,
   View,
   StyleSheet,
+  Button,
+  DrawerLayoutAndroid,
 } from "react-native"
 import { ThemeContext } from "../../constants/ThemeContext"
 import {
@@ -16,7 +18,6 @@ import {
   Input,
   VStack,
   HStack,
-  Button,
   Modal,
 } from "native-base"
 import { Stack, useRouter, Link } from "expo-router"
@@ -64,6 +65,21 @@ const ColorButton = styled.TouchableOpacity`
 
 export default function MainScreen() {
   const { mode, setMode, theme, setTheme } = useContext(ThemeContext)
+  const drawer = useRef<DrawerLayoutAndroid>(null)
+
+  const handleDrawer = () => {
+    drawer.current?.openDrawer()
+  }
+
+  const drawerView = () => (
+    <View style={[styles.container, styles.navigationContainer]}>
+      <Text style={styles.paragraph}>I'm in the Drawer!</Text>
+      <Button
+        title="Close drawer"
+        onPress={() => drawer.current?.closeDrawer()}
+      />
+    </View>
+  )
 
   const toggleMode = async () => {
     const newMode = mode === "light" ? "dark" : "light"
@@ -98,28 +114,54 @@ export default function MainScreen() {
 
   return (
     <NativeBaseProvider>
-      <Container theme={{ mode: modeTheme[mode] }}>
-        <StatusBar
-          barStyle={mode === "light" ? "light-content" : "light-content"}
-          backgroundColor={
-            mode === "light" ? themes[theme].secondaryColor : "#000"
-          }
-        />
-        <TopContainer theme={{ theme: themes[theme] }}>
-          <AppBar />
-        </TopContainer>
-        {/* <AppText theme={{ theme: themes[theme] }}>App Content</AppText> */}
-        <ToggleButton onPress={toggleMode}>
-          <AppText theme={{ theme: themes[theme] }}>Toggle Mode</AppText>
-        </ToggleButton>
-        <View>
-          {Object.keys(themes).map((themeKey) => (
-            <ColorButton key={themeKey} onPress={() => selectTheme(themeKey)}>
-              <AppText theme={{ theme: themes[themeKey] }}>{themeKey}</AppText>
-            </ColorButton>
-          ))}
-        </View>
-      </Container>
+      <DrawerLayoutAndroid
+        ref={drawer}
+        drawerWidth={350}
+        drawerPosition={"left"}
+        renderNavigationView={drawerView}
+      >
+        <Container theme={{ mode: modeTheme[mode] }}>
+          <StatusBar
+            barStyle={mode === "light" ? "light-content" : "light-content"}
+            backgroundColor={
+              mode === "light" ? themes[theme].secondaryColor : "#000"
+            }
+          />
+          <TopContainer theme={{ theme: themes[theme] }}>
+            <AppBar handleDrawer={handleDrawer} />
+          </TopContainer>
+          {/* <AppText theme={{ theme: themes[theme] }}>App Content</AppText> */}
+          <ToggleButton onPress={toggleMode}>
+            <AppText theme={{ theme: themes[theme] }}>Toggle Mode</AppText>
+          </ToggleButton>
+          <View>
+            {Object.keys(themes).map((themeKey) => (
+              <ColorButton key={themeKey} onPress={() => selectTheme(themeKey)}>
+                <AppText theme={{ theme: themes[themeKey] }}>
+                  {themeKey}
+                </AppText>
+              </ColorButton>
+            ))}
+          </View>
+        </Container>
+      </DrawerLayoutAndroid>
     </NativeBaseProvider>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 16,
+  },
+  navigationContainer: {
+    backgroundColor: "#764",
+  },
+  paragraph: {
+    padding: 16,
+    fontSize: 15,
+    textAlign: "center",
+  },
+})

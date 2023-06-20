@@ -6,7 +6,6 @@ import {
   View,
   StyleSheet,
 } from "react-native"
-
 import {
   NativeBaseProvider,
   Text,
@@ -27,6 +26,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import { modeTheme, themes } from "../../../constants/Themes"
 import { ThemeContext } from "../../../constants/ThemeContext"
 import { AuthStore } from "../../../config/store"
+import DrawerScreen from "../home/Drawer"
 
 interface ThemeProps {
   mode: {
@@ -46,34 +46,29 @@ const Container = styled(HStack)<{ theme: ThemeProps }>`
   position: absolute;
   padding: 0 5px;
 `
-const AppText = styled.Text<{ theme: ThemeProps }>`
-  color: ${({ theme }: { theme: ThemeProps }) => theme.theme.secondaryColor};
-`
-
-const ToggleButton = styled.TouchableOpacity``
-
-const ColorButton = styled.TouchableOpacity`
-  margin-top: 10px;
-`
-
-export default function AppBar() {
+export default function AppBar(props: any) {
   const { mode, theme } = useContext(ThemeContext)
+  const { handleDrawer } = props
   const avater =
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
   return (
     <NativeBaseProvider>
       <Container>
-        <Avatar
-          size={10}
-          source={{
-            uri: avater,
-          }}
-        >
-          AJ
-        </Avatar>
+        <TouchableOpacity onPress={handleDrawer}>
+          <Avatar
+            size={10}
+            source={{
+              uri: avater,
+            }}
+          >
+            AJ
+          </Avatar>
+        </TouchableOpacity>
+
         <Input
           placeholder="Search"
           placeholderTextColor={"#fff"}
+          fontSize={16}
           bg={"transparent"}
           variant="filled"
           width="65%"
