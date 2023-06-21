@@ -1,5 +1,4 @@
 import { useState, useContext, useRef, useEffect, ChangeEvent } from "react"
-import { AuthStore } from "../../config/store"
 import {
   KeyboardAvoidingView,
   TouchableOpacity,
@@ -9,24 +8,17 @@ import {
   Button,
   DrawerLayoutAndroid,
 } from "react-native"
-import { ThemeContext } from "../../constants/ThemeContext"
-import {
-  NativeBaseProvider,
-  Text,
-  Box,
-  Pressable,
-  Input,
-  VStack,
-  HStack,
-  Modal,
-} from "native-base"
+import { NativeBaseProvider, Text, VStack } from "native-base"
 import { Stack, useRouter, Link } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { AuthStore } from "../../config/store"
 import { modeTheme, themes } from "../../constants/Themes"
+import { ThemeContext } from "../../constants/ThemeContext"
 import AppBar from "../components/home/AppBar"
+import DrawerTopNav from "../components/home/DrawerTopNav"
 
 interface ThemeProps {
   mode: {
@@ -44,8 +36,6 @@ const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
     theme.mode.backgroundColor};
 `
 const TopContainer = styled(VStack)<{ theme: ThemeProps }>`
-  background-color: ${({ theme, mode }: { theme: ThemeProps; mode: string }) =>
-    mode === "light" ? theme.theme.primaryColor : "#000"};
   background-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.theme.primaryColor};
   height: 60%;
@@ -55,6 +45,15 @@ const TopContainer = styled(VStack)<{ theme: ThemeProps }>`
   border-bottom-right-radius: 15px;
   z-index: 99;
 `
+const DrawerViewContainer = styled(VStack)`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background-color: ${({ theme }: { theme: ThemeProps }) =>
+    theme.theme.primaryColor};
+`
+const DrawerNavContainer = styled(VStack)``
 const AppText = styled.Text<{ theme: ThemeProps }>`
   color: ${({ theme }: { theme: ThemeProps }) => theme.theme.secondaryColor};
 `
@@ -71,14 +70,14 @@ export default function MainScreen() {
     drawer.current?.openDrawer()
   }
 
+  const handlecloseDrawer = () => {
+    drawer.current?.closeDrawer()
+  }
+
   const drawerView = () => (
-    <View style={[styles.container, styles.navigationContainer]}>
-      <Text style={styles.paragraph}>I'm in the Drawer!</Text>
-      <Button
-        title="Close drawer"
-        onPress={() => drawer.current?.closeDrawer()}
-      />
-    </View>
+    <DrawerViewContainer theme={{ theme: themes[theme] }}>
+      <DrawerTopNav handlecloseDrawer={handlecloseDrawer} />
+    </DrawerViewContainer>
   )
 
   const toggleMode = async () => {
@@ -108,7 +107,6 @@ export default function MainScreen() {
         console.log("Error loading persisted data:", error)
       }
     }
-
     loadPersistedData()
   }, [])
 
@@ -150,12 +148,6 @@ export default function MainScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 16,
-  },
   navigationContainer: {
     backgroundColor: "#764",
   },
