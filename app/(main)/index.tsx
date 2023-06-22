@@ -49,9 +49,9 @@ const DrawerViewContainer = styled(VStack)`
   flex: 1;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: 10px;
   background-color: ${({ theme }: { theme: ThemeProps }) =>
-    theme.theme.primaryColor};
+    theme.theme.secondaryColor};
 `
 const DrawerNavContainer = styled(VStack)``
 const AppText = styled.Text<{ theme: ThemeProps }>`
@@ -73,12 +73,6 @@ export default function MainScreen() {
   const handlecloseDrawer = () => {
     drawer.current?.closeDrawer()
   }
-
-  const drawerView = () => (
-    <DrawerViewContainer theme={{ theme: themes[theme] }}>
-      <DrawerTopNav handlecloseDrawer={handlecloseDrawer} />
-    </DrawerViewContainer>
-  )
 
   const toggleMode = async () => {
     const newMode = mode === "light" ? "dark" : "light"
@@ -110,11 +104,17 @@ export default function MainScreen() {
     loadPersistedData()
   }, [])
 
+  const drawerView = () => (
+    <DrawerViewContainer theme={{ theme: themes[theme] }}>
+      <DrawerTopNav handlecloseDrawer={handlecloseDrawer} />
+    </DrawerViewContainer>
+  )
+
   return (
     <NativeBaseProvider>
       <DrawerLayoutAndroid
         ref={drawer}
-        drawerWidth={350}
+        drawerWidth={300}
         drawerPosition={"left"}
         renderNavigationView={drawerView}
       >
@@ -146,14 +146,3 @@ export default function MainScreen() {
     </NativeBaseProvider>
   )
 }
-
-const styles = StyleSheet.create({
-  navigationContainer: {
-    backgroundColor: "#764",
-  },
-  paragraph: {
-    padding: 16,
-    fontSize: 15,
-    textAlign: "center",
-  },
-})
