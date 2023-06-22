@@ -39,13 +39,16 @@ export const themes: Themes = {
   blue: {
     primaryColor: "#0000FF",
     secondaryColor: "#0000AA",
+    drawerColor: "#0047ab",
   },
   red: {
     primaryColor: "#FF0000",
     secondaryColor: "#AA0000",
+    drawerColor: "#009000",
   },
   orange: {
     primaryColor: "#FFA500",
     secondaryColor: "#FF8000",
+    drawerColor: "#009000",
   },
 }

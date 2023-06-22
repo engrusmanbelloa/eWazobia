@@ -33,9 +33,9 @@ interface ThemeProps {
 const Container = styled(HStack)<{ theme: ThemeProps }>`
   align-items: center;
   justify-content: space-between;
-  height: 12%;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 30px;
+  padding-bottom: 10px;
   border-bottom-width: 1px;
   border-bottom-color: #fff;
 `

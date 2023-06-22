@@ -8,7 +8,7 @@ import {
   Button,
   DrawerLayoutAndroid,
 } from "react-native"
-import { NativeBaseProvider, Text, VStack } from "native-base"
+import { NativeBaseProvider, Text, VStack, Box } from "native-base"
 import { Stack, useRouter, Link } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
@@ -19,6 +19,7 @@ import { modeTheme, themes } from "../../constants/Themes"
 import { ThemeContext } from "../../constants/ThemeContext"
 import AppBar from "../components/home/AppBar"
 import DrawerTopNav from "../components/home/DrawerTopNav"
+import DrawerQickNav from "../components/home/DrawerQuickNav"
 
 interface ThemeProps {
   mode: {
@@ -108,6 +109,8 @@ export default function MainScreen() {
   const drawerView = () => (
     <DrawerViewContainer theme={{ theme: themes[theme] }}>
       <DrawerTopNav handlecloseDrawer={handlecloseDrawer} />
+
+      <DrawerQickNav />
     </DrawerViewContainer>
   )
 

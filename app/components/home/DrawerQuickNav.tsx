@@ -41,9 +41,7 @@ const Container = styled(HStack)<{ theme: ThemeProps }>`
   justify-content: space-between;
   height: 12%;
   width: 100%;
-  padding-top: 20px;
-  border-bottom-width: 1px;
-  border-bottom-color: #fff;
+  bottom: 80%;
 `
 const IdBox = styled(Stack)<{ theme: ThemeProps }>`
   padding: 0 10px;
@@ -85,21 +83,7 @@ export default function DrawerQickNav(props: any) {
   return (
     <NativeBaseProvider>
       <Container theme={{ mode: modeTheme[mode] }}>
-        <Avatar
-          ml={0}
-          size={10}
-          source={{
-            uri: avater,
-          }}
-        />
-        <IdBox>
-          <IdText theme={{ mode: modeTheme[mode] }}>ID: 12345678</IdText>
-          <UserTxt theme={{ mode: modeTheme[mode] }}>engrusmanbelloa</UserTxt>
-        </IdBox>
-        <VerifyBox>
-          <Verify theme={{ mode: modeTheme[mode] }}>Verified</Verify>
-          <Ionicons name="checkmark" size={20} color={"#228b22"} />
-        </VerifyBox>
+        <Text>i am guick nav</Text>
       </Container>
     </NativeBaseProvider>
   )
