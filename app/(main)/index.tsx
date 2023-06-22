@@ -27,6 +27,7 @@ interface ThemeProps {
   theme: {
     primaryColor: string
     secondaryColor: string
+    drawerColor: string
   }
 }
 
@@ -51,7 +52,7 @@ const DrawerViewContainer = styled(VStack)`
   justify-content: center;
   padding: 10px;
   background-color: ${({ theme }: { theme: ThemeProps }) =>
-    theme.theme.secondaryColor};
+    theme.theme.drawerColor};
 `
 const DrawerNavContainer = styled(VStack)``
 const AppText = styled.Text<{ theme: ThemeProps }>`

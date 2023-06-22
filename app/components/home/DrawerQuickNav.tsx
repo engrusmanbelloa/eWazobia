@@ -1,5 +1,11 @@
 import { useState, useContext, useEffect, ChangeEvent } from "react"
-import { TouchableOpacity } from "react-native"
+import {
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  StatusBar,
+  View,
+  StyleSheet,
+} from "react-native"
 import {
   NativeBaseProvider,
   Text,
@@ -70,7 +76,7 @@ const Verify = styled(Text)<{ theme: ThemeProps }>`
   margin-right: 5px;
 `
 
-export default function DrawerTopNav(props: any) {
+export default function DrawerQickNav(props: any) {
   const { handlecloseDrawer } = props
   const { mode, theme } = useContext(ThemeContext)
   const avater =

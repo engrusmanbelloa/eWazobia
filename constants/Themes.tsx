@@ -13,6 +13,7 @@ interface Themes {
     primaryColor: string
     secondaryColor: string
     linkColor?: string
+    drawerColor?: string
   }
 }
 
@@ -32,6 +33,7 @@ export const themes: Themes = {
   green: {
     primaryColor: "#228b22",
     secondaryColor: "#00AA00",
+    drawerColor: "#009000",
     linkColor: "#0e32b4",
   },
   blue: {
