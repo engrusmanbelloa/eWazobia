@@ -1,18 +1,6 @@
 import { useState, useContext, useEffect, ChangeEvent } from "react"
 import { TouchableOpacity } from "react-native"
-import {
-  NativeBaseProvider,
-  Text,
-  Box,
-  Pressable,
-  Input,
-  Stack,
-  VStack,
-  HStack,
-  Button,
-  Modal,
-  Avatar,
-} from "native-base"
+import { NativeBaseProvider, Text, Stack, HStack, Avatar } from "native-base"
 import styled from "styled-components/native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { Ionicons } from "@expo/vector-icons"

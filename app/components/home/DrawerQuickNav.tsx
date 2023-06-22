@@ -21,7 +21,12 @@ import {
 } from "native-base"
 import styled from "styled-components/native"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { Ionicons, FontAwesome, Feather } from "@expo/vector-icons"
+import {
+  Ionicons,
+  FontAwesome,
+  MaterialCommunityIcons,
+  Feather,
+} from "@expo/vector-icons"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { modeTheme, themes } from "../../../constants/Themes"
 import { ThemeContext } from "../../../constants/ThemeContext"
@@ -39,12 +44,13 @@ interface ThemeProps {
 
 const Container = styled(Stack)<{ theme: ThemeProps }>`
   width: 100%;
-  bottom: 60%;
-  padding: 5px 20px;
+  bottom: 0%;
+  padding: 5px 10px;
 `
 const SendContainer = styled(HStack)`
   align-items: center;
   width: 100%;
+  top: 10%;
 `
 const NavText = styled(Text)<{ theme: ThemeProps }>`
   color: #fff;
@@ -54,8 +60,8 @@ const NavText = styled(Text)<{ theme: ThemeProps }>`
 const AppearanceStack = styled(HStack)`
   justify-content: space-between;
   align-items: center;
-  width: 80%;
-  margin-top: 40px;
+  width: 70%;
+  margin-top: 60px;
 `
 const Appearance = styled(Text)`
   font-size: 16px;
@@ -65,7 +71,7 @@ const Appearance = styled(Text)`
 const ThemesStack = styled(HStack)`
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 88%;
   margin-top: 30px;
 `
 const ThemesTxt = styled(Text)`
@@ -74,21 +80,14 @@ const ThemesTxt = styled(Text)`
   color: #fff;
   margin-right: 20px;
 `
+const ThemesBtn = styled.TouchableOpacity`
+  margin-top: 10px;
+`
 const FundStack = styled(HStack)`
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 70%;
   margin-top: 25px;
-`
-const ToggleButton = styled.TouchableOpacity``
-const ColorButton = styled.TouchableOpacity`
-  margin-top: 10px;
-`
-const AppText = styled.Text<{ theme: ThemeProps }>`
-  color: ${({ theme }: { theme: ThemeProps }) => theme.theme.secondaryColor};
-`
-const ToggleBox = styled(Stack)<{ theme: ThemeProps }>`
-  color: ${({ theme }: { theme: ThemeProps }) => theme.theme.secondaryColor};
 `
 
 export default function DrawerQickNav(props: any) {
@@ -130,21 +129,25 @@ export default function DrawerQickNav(props: any) {
     <NativeBaseProvider>
       <Container theme={{ mode: modeTheme[mode] }}>
         <SendContainer>
+          <VStack mr={55} alignItems={"center"}>
+            <MaterialCommunityIcons
+              name="currency-ngn"
+              size={30}
+              color={"#fff"}
+            />
+            <NavText>Rewards</NavText>
+          </VStack>
           <VStack mr={55}>
             <FontAwesome name="send-o" size={30} color={"#fff"} />
             <NavText>Send</NavText>
           </VStack>
-          <VStack mr={55} alignItems={"center"}>
+          <VStack alignItems={"center"}>
             <Ionicons
               name="shield-checkmark-outline"
               size={30}
               color={"#fff"}
             />
             <NavText>Security</NavText>
-          </VStack>
-          <VStack alignItems={"center"}>
-            <Ionicons name="notifications-outline" size={30} color={"#fff"} />
-            <NavText>Rewards</NavText>
           </VStack>
         </SendContainer>
         <AppearanceStack>
@@ -162,9 +165,9 @@ export default function DrawerQickNav(props: any) {
           <ThemesTxt>Themes</ThemesTxt>
           <HStack w={"80%"} justifyContent={"space-between"}>
             {Object.keys(themes).map((themeKey) => (
-              <ColorButton key={themeKey} onPress={() => selectTheme(themeKey)}>
+              <ThemesBtn key={themeKey} onPress={() => selectTheme(themeKey)}>
                 <Ionicons name="ios-toggle" color={themeKey} size={40} />
-              </ColorButton>
+              </ThemesBtn>
             ))}
           </HStack>
         </ThemesStack>
@@ -175,7 +178,7 @@ export default function DrawerQickNav(props: any) {
           </Box>
         </FundStack>
         <FundStack>
-          <Appearance>Fund</Appearance>
+          <Appearance>Referal</Appearance>
           <Box left={20}>
             <Ionicons name="arrow-forward-outline" color={"#fff"} size={20} />
           </Box>

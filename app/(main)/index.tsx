@@ -8,7 +8,7 @@ import {
   Button,
   DrawerLayoutAndroid,
 } from "react-native"
-import { NativeBaseProvider, Text, VStack, Box } from "native-base"
+import { NativeBaseProvider, VStack, ScrollView } from "native-base"
 import { Stack, useRouter, Link } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
@@ -55,13 +55,8 @@ const DrawerViewContainer = styled(VStack)`
   background-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.theme.drawerColor};
 `
-const DrawerNavContainer = styled(VStack)``
-const AppText = styled.Text<{ theme: ThemeProps }>`
-  color: ${({ theme }: { theme: ThemeProps }) => theme.theme.secondaryColor};
-`
-const ToggleButton = styled.TouchableOpacity``
-const ColorButton = styled.TouchableOpacity`
-  margin-top: 10px;
+const DrawerNavContainer = styled(ScrollView)`
+  flex: 1;
 `
 
 export default function MainScreen() {
@@ -74,17 +69,6 @@ export default function MainScreen() {
 
   const handlecloseDrawer = () => {
     drawer.current?.closeDrawer()
-  }
-
-  const toggleMode = async () => {
-    const newMode = mode === "light" ? "dark" : "light"
-    setMode(newMode)
-    await AsyncStorage.setItem("mode", newMode)
-  }
-
-  const selectTheme = async (selectedTheme: string) => {
-    setTheme(selectedTheme)
-    await AsyncStorage.setItem("theme", selectedTheme)
   }
 
   useEffect(() => {
@@ -108,8 +92,10 @@ export default function MainScreen() {
 
   const drawerView = () => (
     <DrawerViewContainer theme={{ theme: themes[theme] }}>
-      <DrawerTopNav handlecloseDrawer={handlecloseDrawer} />
-      <DrawerQickNav />
+      <DrawerNavContainer>
+        <DrawerTopNav handlecloseDrawer={handlecloseDrawer} />
+        <DrawerQickNav />
+      </DrawerNavContainer>
     </DrawerViewContainer>
   )
 
