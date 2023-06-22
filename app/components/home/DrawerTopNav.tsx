@@ -34,7 +34,7 @@ const Container = styled(HStack)<{ theme: ThemeProps }>`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding-top: 30px;
+  padding-top: 40px;
   padding-bottom: 10px;
   border-bottom-width: 1px;
   border-bottom-color: #fff;

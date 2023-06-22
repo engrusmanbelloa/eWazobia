@@ -21,7 +21,7 @@ import {
 } from "native-base"
 import styled from "styled-components/native"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { Ionicons, FontAwesome } from "@expo/vector-icons"
+import { Ionicons, FontAwesome, Feather } from "@expo/vector-icons"
 import { modeTheme, themes } from "../../../constants/Themes"
 import { ThemeContext } from "../../../constants/ThemeContext"
 
@@ -37,16 +37,47 @@ interface ThemeProps {
 }
 
 const Container = styled(Stack)<{ theme: ThemeProps }>`
-  align-items: center;
-  justify-content: space-around;
   width: 100%;
-  bottom: 70%;
+  bottom: 60%;
+  padding: 5px 20px;
+`
+const SendContainer = styled(HStack)`
+  align-items: center;
+  width: 100%;
 `
 const NavText = styled(Text)<{ theme: ThemeProps }>`
   color: #fff;
   font-size: 14px;
   font-weight: 400;
-  margin-right: 5px;
+`
+const AppearanceStack = styled(HStack)`
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin-top: 40px;
+`
+const Appearance = styled(Text)`
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+`
+const ThemesStack = styled(HStack)`
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 30px;
+`
+const ThemesTxt = styled(Text)`
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  margin-right: 20px;
+`
+const FundStack = styled(HStack)`
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin-top: 25px;
 `
 
 export default function DrawerQickNav(props: any) {
@@ -57,16 +88,12 @@ export default function DrawerQickNav(props: any) {
   return (
     <NativeBaseProvider>
       <Container theme={{ mode: modeTheme[mode] }}>
-        <HStack
-          alignItems={"center"}
-          w={"100%"}
-          justifyContent={"space-around"}
-        >
-          <VStack alignItems={"center"}>
+        <SendContainer>
+          <VStack mr={55}>
             <FontAwesome name="send-o" size={30} color={"#fff"} />
             <NavText>Send</NavText>
           </VStack>
-          <VStack alignItems={"center"}>
+          <VStack mr={55} alignItems={"center"}>
             <Ionicons
               name="shield-checkmark-outline"
               size={30}
@@ -76,10 +103,66 @@ export default function DrawerQickNav(props: any) {
           </VStack>
           <VStack alignItems={"center"}>
             <Ionicons name="notifications-outline" size={30} color={"#fff"} />
-            <NavText>Notifications</NavText>
+            <NavText>Rewards</NavText>
           </VStack>
-        </HStack>
-        <Text>Appearance</Text>
+        </SendContainer>
+        <AppearanceStack>
+          <Appearance>Appearance</Appearance>
+          <Box left={20}>
+            <Ionicons name="ios-toggle" color={"#fff"} size={40} />
+          </Box>
+        </AppearanceStack>
+        <ThemesStack>
+          <ThemesTxt>Themes</ThemesTxt>
+          <HStack w={"80%"} justifyContent={"space-between"}>
+            <Ionicons name="ios-toggle" color={"#00AA00"} size={40} />
+            <Ionicons name="ios-toggle" color={"#0000FF"} size={40} />
+            <Ionicons name="ios-toggle" color={"#FF0000"} size={40} />
+            <Ionicons name="ios-toggle" color={"#FFA500"} size={40} />
+          </HStack>
+        </ThemesStack>
+        <FundStack>
+          <Appearance>Become marchant</Appearance>
+          <Box left={20}>
+            <Ionicons name="arrow-forward-outline" color={"#fff"} size={20} />
+          </Box>
+        </FundStack>
+        <FundStack>
+          <Appearance>Fund</Appearance>
+          <Box left={20}>
+            <Ionicons name="arrow-forward-outline" color={"#fff"} size={20} />
+          </Box>
+        </FundStack>
+        <FundStack>
+          <Appearance>Feedback</Appearance>
+          <Box left={20}>
+            <Ionicons name="arrow-forward-outline" color={"#fff"} size={20} />
+          </Box>
+        </FundStack>
+        <FundStack>
+          <Appearance>Help</Appearance>
+          <Box left={20}>
+            <Ionicons name="arrow-forward-outline" color={"#fff"} size={20} />
+          </Box>
+        </FundStack>
+        <FundStack>
+          <Appearance>Rate Us</Appearance>
+          <Box left={20}>
+            <Ionicons name="arrow-forward-outline" color={"#fff"} size={20} />
+          </Box>
+        </FundStack>
+        <FundStack>
+          <Appearance>Deactivate Account</Appearance>
+          <Box left={20}>
+            <Ionicons name="arrow-forward-outline" color={"#fff"} size={20} />
+          </Box>
+        </FundStack>
+        <FundStack>
+          <Appearance>Logout</Appearance>
+          <Box left={20}>
+            <Ionicons name="log-out-outline" color={"#fff"} size={20} />
+          </Box>
+        </FundStack>
       </Container>
     </NativeBaseProvider>
   )

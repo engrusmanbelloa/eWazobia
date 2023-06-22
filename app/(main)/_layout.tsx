@@ -1,4 +1,4 @@
-import { FontAwesome5 } from "@expo/vector-icons"
+import { FontAwesome5, Ionicons } from "@expo/vector-icons"
 import { Link, Tabs } from "expo-router"
 import { Pressable, useColorScheme } from "react-native"
 import { ThemeContext } from "../../constants/ThemeContext"
@@ -10,7 +10,7 @@ interface icon {
   color: string
 }
 function TabBarIcon(props: icon) {
-  return <FontAwesome5 size={28} style={{ marginBottom: -3 }} {...props} />
+  return <Ionicons size={28} style={{ marginBottom: -3 }} {...props} />
 }
 
 export default function MainTabLayout() {
@@ -63,7 +63,9 @@ export default function MainTabLayout() {
         options={{
           title: "Pay",
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon name="circle" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="scan-circle" color={color} />
+          ),
         }}
       />
       <Tabs.Screen
@@ -79,7 +81,9 @@ export default function MainTabLayout() {
         options={{
           title: "More",
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon name="bars" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="menu-outline" color={color} />
+          ),
         }}
       />
     </Tabs>
