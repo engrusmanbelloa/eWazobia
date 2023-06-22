@@ -109,7 +109,6 @@ export default function MainScreen() {
   const drawerView = () => (
     <DrawerViewContainer theme={{ theme: themes[theme] }}>
       <DrawerTopNav handlecloseDrawer={handlecloseDrawer} />
-
       <DrawerQickNav />
     </DrawerViewContainer>
   )
@@ -132,19 +131,6 @@ export default function MainScreen() {
           <TopContainer theme={{ theme: themes[theme] }}>
             <AppBar handleDrawer={handleDrawer} />
           </TopContainer>
-          {/* <AppText theme={{ theme: themes[theme] }}>App Content</AppText> */}
-          <ToggleButton onPress={toggleMode}>
-            <AppText theme={{ theme: themes[theme] }}>Toggle Mode</AppText>
-          </ToggleButton>
-          <View>
-            {Object.keys(themes).map((themeKey) => (
-              <ColorButton key={themeKey} onPress={() => selectTheme(themeKey)}>
-                <AppText theme={{ theme: themes[themeKey] }}>
-                  {themeKey}
-                </AppText>
-              </ColorButton>
-            ))}
-          </View>
         </Container>
       </DrawerLayoutAndroid>
     </NativeBaseProvider>

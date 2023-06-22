@@ -22,6 +22,7 @@ import {
 import styled from "styled-components/native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { Ionicons, FontAwesome, Feather } from "@expo/vector-icons"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 import { modeTheme, themes } from "../../../constants/Themes"
 import { ThemeContext } from "../../../constants/ThemeContext"
 
@@ -79,11 +80,51 @@ const FundStack = styled(HStack)`
   width: 80%;
   margin-top: 25px;
 `
+const ToggleButton = styled.TouchableOpacity``
+const ColorButton = styled.TouchableOpacity`
+  margin-top: 10px;
+`
+const AppText = styled.Text<{ theme: ThemeProps }>`
+  color: ${({ theme }: { theme: ThemeProps }) => theme.theme.secondaryColor};
+`
+const ToggleBox = styled(Stack)<{ theme: ThemeProps }>`
+  color: ${({ theme }: { theme: ThemeProps }) => theme.theme.secondaryColor};
+`
 
 export default function DrawerQickNav(props: any) {
-  const { mode, theme } = useContext(ThemeContext)
+  const { mode, setMode, theme, setTheme } = useContext(ThemeContext)
   const avater =
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+
+  const toggleMode = async () => {
+    const newMode = mode === "light" ? "dark" : "light"
+    setMode(newMode)
+    await AsyncStorage.setItem("mode", newMode)
+  }
+
+  const selectTheme = async (selectedTheme: string) => {
+    setTheme(selectedTheme)
+    await AsyncStorage.setItem("theme", selectedTheme)
+  }
+
+  useEffect(() => {
+    const loadPersistedData = async () => {
+      try {
+        const persistedMode = await AsyncStorage.getItem("mode")
+        const persistedTheme = await AsyncStorage.getItem("theme")
+
+        if (persistedMode) {
+          setMode(persistedMode)
+        }
+        if (persistedTheme) {
+          setTheme(persistedTheme)
+        }
+      } catch (error) {
+        console.log("Error loading persisted data:", error)
+      }
+    }
+    loadPersistedData()
+  }, [])
 
   return (
     <NativeBaseProvider>
@@ -109,16 +150,22 @@ export default function DrawerQickNav(props: any) {
         <AppearanceStack>
           <Appearance>Appearance</Appearance>
           <Box left={20}>
-            <Ionicons name="ios-toggle" color={"#fff"} size={40} />
+            <Ionicons
+              onPress={toggleMode}
+              name="ios-toggle"
+              color={modeTheme[mode].backgroundColor}
+              size={40}
+            />
           </Box>
         </AppearanceStack>
         <ThemesStack>
           <ThemesTxt>Themes</ThemesTxt>
           <HStack w={"80%"} justifyContent={"space-between"}>
-            <Ionicons name="ios-toggle" color={"#00AA00"} size={40} />
-            <Ionicons name="ios-toggle" color={"#0000FF"} size={40} />
-            <Ionicons name="ios-toggle" color={"#FF0000"} size={40} />
-            <Ionicons name="ios-toggle" color={"#FFA500"} size={40} />
+            {Object.keys(themes).map((themeKey) => (
+              <ColorButton key={themeKey} onPress={() => selectTheme(themeKey)}>
+                <Ionicons name="ios-toggle" color={themeKey} size={40} />
+              </ColorButton>
+            ))}
           </HStack>
         </ThemesStack>
         <FundStack>

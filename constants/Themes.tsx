@@ -44,11 +44,11 @@ export const themes: Themes = {
   red: {
     primaryColor: "#FF0000",
     secondaryColor: "#AA0000",
-    drawerColor: "#009000",
+    drawerColor: "#dd3519",
   },
   orange: {
     primaryColor: "#FFA500",
     secondaryColor: "#FF8000",
-    drawerColor: "#009000",
+    drawerColor: "#f89c13",
   },
 }
