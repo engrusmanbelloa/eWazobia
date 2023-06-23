@@ -1,23 +1,12 @@
 import { useState, useContext, useEffect, ChangeEvent } from "react"
-import {
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  StatusBar,
-  View,
-  StyleSheet,
-} from "react-native"
+import { KeyboardAvoidingView, TouchableOpacity } from "react-native"
 import {
   NativeBaseProvider,
   Text,
   Box,
-  Pressable,
-  Input,
   Stack,
   VStack,
   HStack,
-  Button,
-  Modal,
-  Avatar,
 } from "native-base"
 import styled from "styled-components/native"
 import { SafeAreaView } from "react-native-safe-area-context"
@@ -87,7 +76,7 @@ const FundStack = styled(HStack)`
   justify-content: space-between;
   align-items: center;
   width: 70%;
-  margin-top: 25px;
+  margin-top: 30px;
 `
 
 export default function DrawerQickNav(props: any) {

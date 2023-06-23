@@ -6,18 +6,7 @@ import {
   View,
   StyleSheet,
 } from "react-native"
-import {
-  NativeBaseProvider,
-  Text,
-  Box,
-  Pressable,
-  Input,
-  VStack,
-  HStack,
-  Button,
-  Modal,
-  Avatar,
-} from "native-base"
+import { NativeBaseProvider, Input, HStack, Avatar } from "native-base"
 import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
 
@@ -34,10 +23,9 @@ interface ThemeProps {
 const Container = styled(HStack)<{ theme: ThemeProps }>`
   align-items: center;
   justify-content: space-between;
-  height: 15%;
   width: 100%;
   position: absolute;
-  padding: 0 5px;
+  padding: 5px;
 `
 export default function AppBar(props: any) {
   const { handleDrawer } = props

@@ -20,6 +20,7 @@ import { ThemeContext } from "../../constants/ThemeContext"
 import AppBar from "../components/home/AppBar"
 import DrawerTopNav from "../components/home/DrawerTopNav"
 import DrawerQickNav from "../components/home/DrawerQuickNav"
+import Wallets from "../components/home/Wallets"
 
 interface ThemeProps {
   mode: {
@@ -116,6 +117,7 @@ export default function MainScreen() {
           />
           <TopContainer theme={{ theme: themes[theme] }}>
             <AppBar handleDrawer={handleDrawer} />
+            <Wallets />
           </TopContainer>
         </Container>
       </DrawerLayoutAndroid>
