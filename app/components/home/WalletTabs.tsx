@@ -1,132 +1,91 @@
-import * as React from "react"
+import React, { useState } from "react"
 import {
-  View,
-  StyleSheet,
-  Dimensions,
-  StatusBar,
-  TouchableOpacity,
   Animated,
-  Pressable,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  StatusBar,
 } from "react-native"
 import { TabView, SceneMap } from "react-native-tab-view"
-import { useState } from "react"
-import { NativeBaseProvider, Box, Text, Center } from "native-base"
-import Constants from "expo-constants"
 
 const FirstRoute = () => (
-  <Center flex={1} my="4">
-    This is Tab 1
-  </Center>
+  <View style={[styles.container, { backgroundColor: "#ff4081" }]} />
 )
-
 const SecondRoute = () => (
-  <Center flex={1} my="4">
-    This is Tab 2
-  </Center>
+  <View style={[styles.container, { backgroundColor: "#673ab7" }]} />
 )
-
 const ThirdRoute = () => (
-  <Center flex={1} my="4">
-    This is Tab 3
-  </Center>
+  <View style={[styles.container, { backgroundColor: "#026ab7" }]} />
 )
 
-const FourthRoute = () => (
-  <Center flex={1} my="4">
-    This is Tab 4{" "}
-  </Center>
-)
-
-const initialLayout = {
-  width: Dimensions.get("window").width,
-}
-const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
-  third: ThirdRoute,
-  fourth: FourthRoute,
-})
-
-function Example() {
+export default function WalletTabs() {
   const [index, setIndex] = useState(0)
   const [routes] = useState([
-    {
-      key: "first",
-      title: "Tab 1",
-    },
-    {
-      key: "second",
-      title: "Tab 2",
-    },
-    {
-      key: "third",
-      title: "Tab 3",
-    },
-    {
-      key: "fourth",
-      title: "Tab 4",
-    },
+    { key: "first", title: "First" },
+    { key: "second", title: "Second" },
+    { key: "third", title: "Third" },
   ])
+
+  const handleIndexChange = (index: number) => setIndex(index)
 
   const renderTabBar = (props: any) => {
     const inputRange = props.navigationState.routes.map(
       (x: any, i: number) => i
     )
+
     return (
-      <Box flexDirection="row">
+      <View style={styles.tabBar}>
         {props.navigationState.routes.map((route: any, i: number) => {
           const opacity = props.position.interpolate({
             inputRange,
-            outputRange: inputRange.map((inputIndex: number) =>
+            outputRange: inputRange.map((inputIndex: any) =>
               inputIndex === i ? 1 : 0.5
             ),
           })
-          return (
-            <Box
-              borderBottomWidth="3"
-              borderColor={"#765"}
-              flex={1}
-              alignItems="center"
-              p="3"
-            >
-              <Pressable
-                onPress={() => {
-                  console.log(i)
-                  setIndex(i)
-                }}
-              >
-                <Animated.Text>{route.title}</Animated.Text>
-              </Pressable>
-            </Box>
-          )
+
+          ;<TouchableOpacity style={styles.tabItem} onPress={() => setIndex(i)}>
+            <Animated.Text style={{ opacity }}></Animated.Text>
+          </TouchableOpacity>
         })}
-      </Box>
+      </View>
     )
   }
 
+  const renderScene = SceneMap({
+    first: FirstRoute,
+    second: SecondRoute,
+    third: ThirdRoute,
+  })
+
   return (
     <TabView
-      navigationState={{
-        index,
-        routes,
-      }}
+      navigationState={{ index, routes }}
       renderScene={renderScene}
       renderTabBar={renderTabBar}
-      onIndexChange={setIndex}
-      initialLayout={initialLayout}
-      style={{
-        marginTop: StatusBar.currentHeight,
-      }}
+      onIndexChange={handleIndexChange}
     />
   )
 }
 
-export default () => {
-  return (
-    <NativeBaseProvider>
-      <Center flex={1} px="3">
-        <Example />
-      </Center>
-    </NativeBaseProvider>
-  )
-}
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: "200px",
+    width: "200px",
+    left: "25%",
+  },
+  tabBar: {
+    flexDirection: "row",
+    paddingTop: StatusBar.currentHeight,
+    justifyContent: "center",
+  },
+  tabItem: {
+    alignItems: "center",
+    width: "10px",
+    height: "10px",
+    backgroundColor: "#675438",
+    margin: "2px",
+    top: "0px",
+  },
+})

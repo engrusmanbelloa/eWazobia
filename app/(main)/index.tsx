@@ -41,7 +41,7 @@ const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
 const TopContainer = styled(VStack)<{ theme: ThemeProps }>`
   background-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.theme.primaryColor};
-  height: 60%;
+  height: 50%;
   width: 100%;
   top: 0;
   border-bottom-left-radius: 15px;
