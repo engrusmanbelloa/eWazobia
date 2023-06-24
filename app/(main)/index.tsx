@@ -8,7 +8,7 @@ import {
   Button,
   DrawerLayoutAndroid,
 } from "react-native"
-import { NativeBaseProvider, VStack, ScrollView } from "native-base"
+import { NativeBaseProvider, VStack, ScrollView, Text } from "native-base"
 import { Stack, useRouter, Link } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
@@ -21,6 +21,7 @@ import AppBar from "../components/home/AppBar"
 import DrawerTopNav from "../components/home/DrawerTopNav"
 import DrawerQickNav from "../components/home/DrawerQuickNav"
 import Wallets from "../components/home/Wallets"
+import WalletsTabs from "../components/home/WalletTabs"
 
 interface ThemeProps {
   mode: {
@@ -119,6 +120,7 @@ export default function MainScreen() {
             <AppBar handleDrawer={handleDrawer} />
             <Wallets />
           </TopContainer>
+          <Text>this is the 4th item</Text>
         </Container>
       </DrawerLayoutAndroid>
     </NativeBaseProvider>

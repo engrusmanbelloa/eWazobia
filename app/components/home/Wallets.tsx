@@ -30,6 +30,7 @@ import {
   Feather,
 } from "@expo/vector-icons"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { TabView, SceneMap } from "react-native-tab-view"
 import { modeTheme, themes } from "../../../constants/Themes"
 import { ThemeContext } from "../../../constants/ThemeContext"
 import WalletsTabs from "../home/WalletTabs"
@@ -52,10 +53,8 @@ const boxShadowStyle = {
 }
 
 const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
-  bottom: 115px;
-`
-const WalletsStack = styled(ZStack)<{ theme: ThemeProps }>`
   flex: 1;
+  top: 0px;
   align-items: center;
   justify-content: center;
 `
@@ -69,15 +68,80 @@ const OuterBox = styled(Box)<{ theme: ThemeProps }>`
   border-radius: 150px;
   width: 300px;
   height: 300px;
+  bottom: 30px;
+`
+const TabsBar = styled.View<{ theme: ThemeProps }>`
+  flex-direction: row;
+`
+const TabItem = styled.TouchableOpacity<{ theme: ThemeProps }>`
+  align-items: center;
+  height: 10px;
+  width: 10px;
+  border-radius: 5px;
+  background-color: #675438;
+  margin: 2px;
+  top: 0px;
 `
 
 export default function Wallets() {
   const { mode, setMode, theme, setTheme } = useContext(ThemeContext)
+  const [index, setIndex] = useState(0)
+  const [routes] = useState([
+    { key: "first", title: "First" },
+    { key: "second", title: "Second" },
+    { key: "third", title: "Third" },
+  ])
+
+  const FirstRoute = () => (
+    <OuterBox style={{ backgroundColor: "#ff4081" }}></OuterBox>
+  )
+
+  const SecondRoute = () => (
+    <OuterBox style={{ backgroundColor: "#673ab7" }}></OuterBox>
+  )
+
+  const ThirdRoute = () => (
+    <OuterBox style={{ backgroundColor: "#026ab7" }}></OuterBox>
+  )
+
+  const handleIndexChange = (index: number) => setIndex(index)
+
+  const renderTabBar = (props: any) => {
+    const inputRange = props.navigationState.routes.map(
+      (x: any, i: number) => i
+    )
+
+    return (
+      <TabsBar>
+        {props.navigationState.routes.map((route: any, i: number) => {
+          const opacity = props.position.interpolate({
+            inputRange,
+            outputRange: inputRange.map((inputIndex: number) =>
+              inputIndex === i ? 1 : 0.5
+            ),
+          })
+
+          return (
+            <TabItem key={route.key} onPress={() => setIndex(i)}>
+              <Animated.Text style={{ opacity }}></Animated.Text>
+            </TabItem>
+          )
+        })}
+      </TabsBar>
+    )
+  }
+  const renderScene = SceneMap({
+    first: FirstRoute,
+    second: SecondRoute,
+    third: ThirdRoute,
+  })
+
   return (
-    <Container>
-      <WalletsStack theme={{ mode: modeTheme[mode] }}>
-        <OuterBox></OuterBox>
-      </WalletsStack>
-    </Container>
+    <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      renderTabBar={renderTabBar}
+      onIndexChange={handleIndexChange}
+    />
   )
 }
