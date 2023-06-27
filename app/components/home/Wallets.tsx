@@ -64,31 +64,60 @@ const OuterBox = styled(Box)<{ theme: ThemeProps }>`
   border-right-color: #fff;
   border-left-color: #fff;
   border-top-color: #fff;
-  border-radius: 125px;
-  width: 250px;
-  height: 250px;
-  bottom: 60px;
+  border-radius: 150px;
+  width: 300px;
+  height: 300px;
+  bottom: 40px;
 `
 
 const InnerBox = styled(Box)<{ theme: ThemeProps }>`
-  border-radius: 120px;
-  width: 240px;
-  height: 240px;
+  border-radius: 145px;
+  align-items: center;
+  width: 290px;
+  height: 290px;
   top: -10px;
 `
 const TabsBar = styled.View<{ theme: ThemeProps }>`
   flex-direction: row;
   justify-content: center;
-  top: 205px;
+  top: 75%;
   z-index: 1;
 `
 const TabItem = styled.TouchableOpacity<{ theme: ThemeProps }>`
-  align-items: center;
   height: 14px;
   width: 14px;
   border-radius: 7px;
-  background-color: #675438;
-  margin: 2px;
+  background-color: #fff;
+  margin-right: 10px;
+`
+const BalHead = styled(Text)`
+  color: #fff;
+  top: 20%;
+  font-size: 18px;
+  font-weight: 400;
+`
+const BalStack = styled(HStack)`
+  top: 30%;
+`
+const Balance = styled(Text)`
+  color: #fff;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 25px;
+  margin-right: 5px;
+`
+const BalDecimal = styled(Text)`
+  color: #fff;
+  font-size: 10px;
+  font-weight: 500;
+`
+const WalletBtn = styled.TouchableOpacity`
+  top: 35%;
+  align-items: center;
+  border: 1px solid #fff;
+  border-radius: 50px;
+  height: 40px;
+  width: 60%;
 `
 
 export default function Wallets() {
@@ -100,11 +129,47 @@ export default function Wallets() {
     { key: "third", title: "Third" },
   ])
 
-  const FirstRoute = () => <InnerBox></InnerBox>
+  const FirstRoute = () => (
+    <InnerBox>
+      <BalHead>eNaira balance</BalHead>
+      <BalStack>
+        <MaterialCommunityIcons name="currency-ngn" size={20} color="#fff" />
+        <Balance>1,000,000,000.</Balance>
+        <BalDecimal>00</BalDecimal>
+      </BalStack>
+      <WalletBtn>
+        <BalHead>Your eNaira wallet</BalHead>
+      </WalletBtn>
+    </InnerBox>
+  )
 
-  const SecondRoute = () => <InnerBox></InnerBox>
+  const SecondRoute = () => (
+    <InnerBox>
+      <BalHead>eEsusu balance</BalHead>
+      <BalStack>
+        <MaterialCommunityIcons name="currency-ngn" size={20} color="#fff" />
+        <Balance>1,000,000,000.</Balance>
+        <BalDecimal>00</BalDecimal>
+      </BalStack>
+      <WalletBtn>
+        <BalHead>Your fixed esusu</BalHead>
+      </WalletBtn>
+    </InnerBox>
+  )
 
-  const ThirdRoute = () => <InnerBox></InnerBox>
+  const ThirdRoute = () => (
+    <InnerBox>
+      <BalHead>eEsusu balance</BalHead>
+      <BalStack>
+        <MaterialCommunityIcons name="currency-ngn" size={20} color="#fff" />
+        <Balance>1,000,000,000.</Balance>
+        <BalDecimal>00</BalDecimal>
+      </BalStack>
+      <WalletBtn>
+        <BalHead>Your flexible esusu</BalHead>
+      </WalletBtn>
+    </InnerBox>
+  )
 
   const handleIndexChange = (index: number) => setIndex(index)
 
