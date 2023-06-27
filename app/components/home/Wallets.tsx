@@ -54,7 +54,6 @@ const boxShadowStyle = {
 
 const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
   flex: 1;
-  top: 0px;
   align-items: center;
   justify-content: center;
 `
@@ -65,22 +64,31 @@ const OuterBox = styled(Box)<{ theme: ThemeProps }>`
   border-right-color: #fff;
   border-left-color: #fff;
   border-top-color: #fff;
-  border-radius: 150px;
-  width: 300px;
-  height: 300px;
-  bottom: 30px;
+  border-radius: 125px;
+  width: 250px;
+  height: 250px;
+  bottom: 60px;
+`
+
+const InnerBox = styled(Box)<{ theme: ThemeProps }>`
+  border-radius: 120px;
+  width: 240px;
+  height: 240px;
+  top: -10px;
 `
 const TabsBar = styled.View<{ theme: ThemeProps }>`
   flex-direction: row;
+  justify-content: center;
+  top: 205px;
+  z-index: 1;
 `
 const TabItem = styled.TouchableOpacity<{ theme: ThemeProps }>`
   align-items: center;
-  height: 10px;
-  width: 10px;
-  border-radius: 5px;
+  height: 14px;
+  width: 14px;
+  border-radius: 7px;
   background-color: #675438;
   margin: 2px;
-  top: 0px;
 `
 
 export default function Wallets() {
@@ -92,17 +100,11 @@ export default function Wallets() {
     { key: "third", title: "Third" },
   ])
 
-  const FirstRoute = () => (
-    <OuterBox style={{ backgroundColor: "#ff4081" }}></OuterBox>
-  )
+  const FirstRoute = () => <InnerBox></InnerBox>
 
-  const SecondRoute = () => (
-    <OuterBox style={{ backgroundColor: "#673ab7" }}></OuterBox>
-  )
+  const SecondRoute = () => <InnerBox></InnerBox>
 
-  const ThirdRoute = () => (
-    <OuterBox style={{ backgroundColor: "#026ab7" }}></OuterBox>
-  )
+  const ThirdRoute = () => <InnerBox></InnerBox>
 
   const handleIndexChange = (index: number) => setIndex(index)
 
@@ -137,11 +139,15 @@ export default function Wallets() {
   })
 
   return (
-    <TabView
-      navigationState={{ index, routes }}
-      renderScene={renderScene}
-      renderTabBar={renderTabBar}
-      onIndexChange={handleIndexChange}
-    />
+    <Container>
+      <OuterBox>
+        <TabView
+          navigationState={{ index, routes }}
+          renderScene={renderScene}
+          renderTabBar={renderTabBar}
+          onIndexChange={handleIndexChange}
+        />
+      </OuterBox>
+    </Container>
   )
 }
