@@ -65,24 +65,22 @@ export default function DrawerTopNav(props: any) {
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
 
   return (
-    <NativeBaseProvider>
-      <Container theme={{ mode: modeTheme[mode] }}>
-        <Avatar
-          ml={0}
-          size={10}
-          source={{
-            uri: avater,
-          }}
-        />
-        <IdBox>
-          <IdText theme={{ mode: modeTheme[mode] }}>ID: 12345678</IdText>
-          <UserTxt theme={{ mode: modeTheme[mode] }}>engrusmanbelloa</UserTxt>
-        </IdBox>
-        <VerifyBox>
-          <Verify theme={{ mode: modeTheme[mode] }}>Verified</Verify>
-          <Ionicons name="checkmark" size={20} color={"#228b22"} />
-        </VerifyBox>
-      </Container>
-    </NativeBaseProvider>
+    <Container theme={{ mode: modeTheme[mode] }}>
+      <Avatar
+        ml={0}
+        size={10}
+        source={{
+          uri: avater,
+        }}
+      />
+      <IdBox>
+        <IdText theme={{ mode: modeTheme[mode] }}>ID: 12345678</IdText>
+        <UserTxt theme={{ mode: modeTheme[mode] }}>engrusmanbelloa</UserTxt>
+      </IdBox>
+      <VerifyBox>
+        <Verify theme={{ mode: modeTheme[mode] }}>Verified</Verify>
+        <Ionicons name="checkmark" size={20} color={"#228b22"} />
+      </VerifyBox>
+    </Container>
   )
 }

@@ -8,7 +8,7 @@ import {
   Button,
   DrawerLayoutAndroid,
 } from "react-native"
-import { NativeBaseProvider, VStack, ScrollView, Text } from "native-base"
+import { NativeBaseProvider, VStack, ScrollView, Box } from "native-base"
 import { Stack, useRouter, Link } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
@@ -21,7 +21,7 @@ import AppBar from "../components/home/AppBar"
 import DrawerTopNav from "../components/home/DrawerTopNav"
 import DrawerQickNav from "../components/home/DrawerQuickNav"
 import Wallets from "../components/home/Wallets"
-import WalletsTabs from "../components/home/WalletTabs"
+import HomeQuickTx from "../components/home/HomeQuickTx"
 
 interface ThemeProps {
   mode: {
@@ -47,7 +47,6 @@ const TopContainer = styled(VStack)<{ theme: ThemeProps }>`
   top: 0;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  z-index: 99;
 `
 const DrawerViewContainer = styled(VStack)`
   flex: 1;
@@ -59,6 +58,11 @@ const DrawerViewContainer = styled(VStack)`
 `
 const DrawerNavContainer = styled(ScrollView)`
   flex: 1;
+`
+
+const MiddleContainer = styled(Box)<{ theme: ThemeProps }>`
+  background-color: ${({ theme }: { theme: ThemeProps }) =>
+    theme.mode.backgroundColor};
 `
 
 export default function MainScreen() {
@@ -120,7 +124,9 @@ export default function MainScreen() {
             <AppBar handleDrawer={handleDrawer} />
             <Wallets />
           </TopContainer>
-          <Text>this is the 4th item</Text>
+          <MiddleContainer>
+            <HomeQuickTx />
+          </MiddleContainer>
         </Container>
       </DrawerLayoutAndroid>
     </NativeBaseProvider>

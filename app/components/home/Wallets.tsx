@@ -33,7 +33,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import { TabView, SceneMap } from "react-native-tab-view"
 import { modeTheme, themes } from "../../../constants/Themes"
 import { ThemeContext } from "../../../constants/ThemeContext"
-import WalletsTabs from "../home/WalletTabs"
 
 interface ThemeProps {
   mode: {
@@ -46,24 +45,21 @@ interface ThemeProps {
   }
 }
 
-const boxShadowStyle = {
-  shadowColor: "#fff",
-  shadowOpacity: 0.5,
-  elevation: 10,
-}
-
 const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
   flex: 1;
   align-items: center;
   justify-content: center;
 `
 const OuterBox = styled(Box)<{ theme: ThemeProps }>`
-  border-right-width: 5px;
+  border-right-width: 7px;
   border-left-width: 0.5px;
   border-top-width: 1px;
-  border-right-color: #fff;
-  border-left-color: #fff;
-  border-top-color: #fff;
+  border-right-color: ${({ theme }: { theme: ThemeProps }) =>
+    theme.mode.backgroundColor};
+  border-left-color: ${({ theme }: { theme: ThemeProps }) =>
+    theme.mode.backgroundColor};
+  border-top-color: ${({ theme }: { theme: ThemeProps }) =>
+    theme.mode.backgroundColor};
   border-radius: 150px;
   width: 300px;
   height: 300px;
@@ -205,7 +201,7 @@ export default function Wallets() {
 
   return (
     <Container>
-      <OuterBox>
+      <OuterBox theme={{ mode: modeTheme[mode] }}>
         <TabView
           navigationState={{ index, routes }}
           renderScene={renderScene}
