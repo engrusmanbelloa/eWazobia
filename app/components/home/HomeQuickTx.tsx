@@ -73,33 +73,33 @@ export default function HomeQuickTx() {
   return (
     <TxStack>
       <Box justifyContent={"center"} alignItems={"center"} mr={"50px"}>
-        <TxBox>
+        <TxBox theme={{ mode: modeTheme[mode] }}>
           <Ionicons
             onPress={handlePay}
             name="download-outline"
-            size={40}
+            size={30}
             color={themes[theme].primaryColor}
           />
         </TxBox>
         <TxText theme={{ theme: themes[theme] }}>Deposit</TxText>
       </Box>
       <Box justifyContent={"center"} alignItems={"center"} mr={"50px"}>
-        <TxBox>
+        <TxBox theme={{ mode: modeTheme[mode] }}>
           <Ionicons
             onPress={handlePay}
             name="md-scan"
-            size={40}
+            size={30}
             color={themes[theme].primaryColor}
           />
         </TxBox>
         <TxText theme={{ theme: themes[theme] }}>Scan pay</TxText>
       </Box>
       <Box justifyContent={"center"} alignItems={"center"}>
-        <TxBox>
+        <TxBox theme={{ mode: modeTheme[mode] }}>
           <Ionicons
             onPress={handlePay}
             name="send-outline"
-            size={35}
+            size={30}
             color={themes[theme].primaryColor}
           />
         </TxBox>

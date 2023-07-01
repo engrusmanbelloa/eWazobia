@@ -40,15 +40,18 @@ export const themes: Themes = {
     primaryColor: "#0000FF",
     secondaryColor: "#0000AA",
     drawerColor: "#0047ab",
+    linkColor: "#ffffff",
   },
   red: {
     primaryColor: "#FF0000",
     secondaryColor: "#AA0000",
     drawerColor: "#dd3519",
+    linkColor: "#0e32b4",
   },
   orange: {
     primaryColor: "#FFA500",
     secondaryColor: "#FF8000",
     drawerColor: "#f89c13",
+    linkColor: "#0e32b4",
   },
 }

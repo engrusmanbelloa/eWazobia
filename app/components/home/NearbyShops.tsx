@@ -1,18 +1,42 @@
 import { useState, useContext, useEffect, ChangeEvent } from "react"
-import { KeyboardAvoidingView, TouchableOpacity, Animated } from "react-native"
-import { NativeBaseProvider, Text, Box, HStack } from "native-base"
+import {
+  Animated,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  StatusBar,
+} from "react-native"
+import {
+  TabView,
+  SceneMap,
+  NavigationState,
+  Route,
+  SceneRendererProps,
+} from "react-native-tab-view"
+import {
+  NativeBaseProvider,
+  VStack,
+  ScrollView,
+  Box,
+  HStack,
+  Text,
+} from "native-base"
 import styled from "styled-components/native"
-import { SafeAreaView } from "react-native-safe-area-context"
 import {
   Ionicons,
   FontAwesome,
   MaterialCommunityIcons,
   Feather,
 } from "@expo/vector-icons"
+import { SafeAreaView } from "react-native-safe-area-context"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { TabView, SceneMap } from "react-native-tab-view"
 import { modeTheme, themes } from "../../../constants/Themes"
 import { ThemeContext } from "../../../constants/ThemeContext"
+
+interface RouteProps {
+  key: string
+  title: string
+}
 
 interface ThemeProps {
   mode: {
@@ -26,45 +50,34 @@ interface ThemeProps {
 }
 
 const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
-  flex: 1;
-  align-items: center;
   justify-content: center;
-`
-const OuterBox = styled(Box)<{ theme: ThemeProps }>`
-  border-right-width: 7px;
-  border-left-width: 0.5px;
-  border-top-width: 1px;
-  border-right-color: ${({ theme }: { theme: ThemeProps }) =>
-    theme.mode.backgroundColor};
-  border-left-color: ${({ theme }: { theme: ThemeProps }) =>
-    theme.mode.backgroundColor};
-  border-top-color: ${({ theme }: { theme: ThemeProps }) =>
-    theme.mode.backgroundColor};
-  border-radius: 150px;
-  width: 300px;
-  height: 300px;
-  bottom: 40px;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 `
 
+const TabsBar = styled.View<{ theme: ThemeProps }>`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`
+
+const TabItem = styled.TouchableOpacity<{ active: boolean }>`
+  align-items: center;
+  justify-content: center;
+  width: 45%;
+  height: 30px;
+  border-radius: 5px;
+  margin: 2px;
+  top: 0px;
+  background-color: ${({ active }: any) => (active ? "#675438" : "#000")};
+`
 const InnerBox = styled(Box)<{ theme: ThemeProps }>`
   border-radius: 145px;
   align-items: center;
   width: 290px;
   height: 290px;
   top: -10px;
-`
-const TabsBar = styled.View<{ theme: ThemeProps }>`
-  flex-direction: row;
-  justify-content: center;
-  top: 75%;
-  z-index: 1;
-`
-const TabItem = styled.TouchableOpacity<{ theme: ThemeProps }>`
-  height: 14px;
-  width: 14px;
-  border-radius: 7px;
-  background-color: #fff;
-  margin: 0px 5px;
 `
 const BalHead = styled(Text)`
   color: #fff;
@@ -96,14 +109,17 @@ const WalletBtn = styled.TouchableOpacity`
   width: 60%;
 `
 
-export default function Wallets() {
+export default function NearByShops() {
   const { mode, setMode, theme, setTheme } = useContext(ThemeContext)
   const [index, setIndex] = useState(0)
-  const [routes] = useState([
+  const [routes] = useState<RouteProps[]>([
     { key: "first", title: "First" },
     { key: "second", title: "Second" },
-    { key: "third", title: "Third" },
   ])
+
+  const handleIndexChange = (currentIndex: number) => {
+    setIndex(currentIndex)
+  }
 
   const FirstRoute = () => (
     <InnerBox>
@@ -133,70 +149,54 @@ export default function Wallets() {
     </InnerBox>
   )
 
-  const ThirdRoute = () => (
-    <InnerBox>
-      <BalHead>eEsusu balance</BalHead>
-      <BalStack>
-        <MaterialCommunityIcons name="currency-ngn" size={20} color="#fff" />
-        <Balance>1,000,000,000.</Balance>
-        <BalDecimal>00</BalDecimal>
-      </BalStack>
-      <WalletBtn>
-        <BalHead>Your flexible esusu</BalHead>
-      </WalletBtn>
-    </InnerBox>
-  )
-
-  const handleIndexChange = (index: number) => setIndex(index)
-
-  const renderTabBar = (props: any) => {
+  const renderTabBar = (
+    props: SceneRendererProps & {
+      navigationState: NavigationState<RouteProps>
+    }
+  ) => {
     const inputRange = props.navigationState.routes.map(
       (x: any, i: number) => i
     )
 
     return (
       <TabsBar>
-        {props.navigationState.routes.map((route: any, i: number) => {
+        {props.navigationState.routes.map((route: RouteProps, i: number) => {
           const opacity = props.position.interpolate({
             inputRange,
             outputRange: inputRange.map((inputIndex: number) =>
               inputIndex === i ? 1 : 0.5
             ),
           })
+
           return (
             <TabItem
               key={route.key}
+              active={index === i}
               onPress={() => setIndex(i)}
-              style={[
-                {
-                  backgroundColor:
-                    index === i ? themes[theme].linkColor : "#fff",
-                },
-              ]}
             >
-              <Animated.View style={{ opacity }}></Animated.View>
+              <Animated.Text style={{ opacity, color: "#fff" }}>
+                {route.title}
+              </Animated.Text>
             </TabItem>
           )
         })}
       </TabsBar>
     )
   }
+
   const renderScene = SceneMap({
     first: FirstRoute,
     second: SecondRoute,
-    third: ThirdRoute,
   })
 
   return (
     <Container>
-      <OuterBox theme={{ mode: modeTheme[mode] }}>
-        <TabView
-          navigationState={{ index, routes }}
-          renderScene={renderScene}
-          renderTabBar={renderTabBar}
-          onIndexChange={handleIndexChange}
-        />
-      </OuterBox>
+      <TabView
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        renderTabBar={renderTabBar}
+        onIndexChange={handleIndexChange}
+      />
     </Container>
   )
 }

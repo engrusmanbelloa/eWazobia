@@ -22,6 +22,7 @@ import DrawerTopNav from "../components/home/DrawerTopNav"
 import DrawerQickNav from "../components/home/DrawerQuickNav"
 import Wallets from "../components/home/Wallets"
 import HomeQuickTx from "../components/home/HomeQuickTx"
+import NearByShops from "../components/home/NearbyShops"
 
 interface ThemeProps {
   mode: {
@@ -61,6 +62,11 @@ const DrawerNavContainer = styled(ScrollView)`
 `
 
 const MiddleContainer = styled(Box)<{ theme: ThemeProps }>`
+  background-color: ${({ theme }: { theme: ThemeProps }) =>
+    theme.mode.backgroundColor};
+  background-color: transparent;
+`
+const BottomContainer = styled(Box)<{ theme: ThemeProps }>`
   background-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.mode.backgroundColor};
 `
@@ -127,6 +133,9 @@ export default function MainScreen() {
           <MiddleContainer>
             <HomeQuickTx />
           </MiddleContainer>
+          <BottomContainer>
+            <NearByShops />
+          </BottomContainer>
         </Container>
       </DrawerLayoutAndroid>
     </NativeBaseProvider>
