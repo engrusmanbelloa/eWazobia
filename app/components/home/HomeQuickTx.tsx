@@ -50,14 +50,16 @@ const TxStack = styled(HStack)<{ theme: ThemeProps }>`
   background-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.mode.backgroundColor};
   top: -20px;
+  background-color: transparent;
 `
 const TxBox = styled(VStack)<{ theme: ThemeProps }>`
   align-items: center;
+  justify-content: center;
   width: 50px;
   height: 50px;
-  border: 1px solid black;
   border-radius: 25px;
-  margin-right: 30px;
+  background-color: ${({ theme }: { theme: ThemeProps }) =>
+    theme.mode.backgroundColor};
 `
 const TxText = styled(Text)<{ theme: ThemeProps }>`
   color: ${({ theme }: { theme: ThemeProps }) => theme.theme.drawerColor};
@@ -70,7 +72,7 @@ export default function HomeQuickTx() {
   const handlePay = () => {}
   return (
     <TxStack>
-      <Box>
+      <Box justifyContent={"center"} alignItems={"center"} mr={"50px"}>
         <TxBox>
           <Ionicons
             onPress={handlePay}
@@ -81,27 +83,27 @@ export default function HomeQuickTx() {
         </TxBox>
         <TxText theme={{ theme: themes[theme] }}>Deposit</TxText>
       </Box>
-      <Box>
+      <Box justifyContent={"center"} alignItems={"center"} mr={"50px"}>
         <TxBox>
           <Ionicons
             onPress={handlePay}
-            name="download-outline"
+            name="md-scan"
             size={40}
             color={themes[theme].primaryColor}
           />
         </TxBox>
-        <TxText theme={{ theme: themes[theme] }}>Deposit</TxText>
+        <TxText theme={{ theme: themes[theme] }}>Scan pay</TxText>
       </Box>
-      <Box>
+      <Box justifyContent={"center"} alignItems={"center"}>
         <TxBox>
           <Ionicons
             onPress={handlePay}
-            name="download-outline"
-            size={40}
+            name="send-outline"
+            size={35}
             color={themes[theme].primaryColor}
           />
         </TxBox>
-        <TxText theme={{ theme: themes[theme] }}>Deposit</TxText>
+        <TxText theme={{ theme: themes[theme] }}>Send</TxText>
       </Box>
     </TxStack>
   )

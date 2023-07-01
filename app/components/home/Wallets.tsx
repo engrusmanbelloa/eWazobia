@@ -1,26 +1,6 @@
 import { useState, useContext, useEffect, ChangeEvent } from "react"
-import {
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  StatusBar,
-  View,
-  StyleSheet,
-  Animated,
-} from "react-native"
-import {
-  NativeBaseProvider,
-  Text,
-  Box,
-  Pressable,
-  Input,
-  Stack,
-  VStack,
-  HStack,
-  Button,
-  Modal,
-  Avatar,
-  ZStack,
-} from "native-base"
+import { KeyboardAvoidingView, TouchableOpacity, Animated } from "react-native"
+import { NativeBaseProvider, Text, Box, HStack } from "native-base"
 import styled from "styled-components/native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import {
@@ -84,7 +64,7 @@ const TabItem = styled.TouchableOpacity<{ theme: ThemeProps }>`
   width: 14px;
   border-radius: 7px;
   background-color: #fff;
-  margin-right: 10px;
+  margin: 0px 5px;
 `
 const BalHead = styled(Text)`
   color: #fff;
