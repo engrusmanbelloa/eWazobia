@@ -20,6 +20,7 @@ import {
   Box,
   HStack,
   Text,
+  Avatar,
 } from "native-base"
 import styled from "styled-components/native"
 import {
@@ -32,6 +33,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { modeTheme, themes } from "../../../constants/Themes"
 import { ThemeContext } from "../../../constants/ThemeContext"
+import { transactions } from "../../../constants/data"
 
 interface RouteProps {
   key: string
@@ -53,7 +55,7 @@ interface ThemeProps {
 
 const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
   top: -30px;
-  height: 40%;
+  height: 100%;
   width: 100%;
 `
 
@@ -62,6 +64,8 @@ const TabsBar = styled.View<{ active: boolean; theme: ThemeProps }>`
   justify-content: space-between;
   align-items: center;
   border-radius: 50px;
+  width: 80%;
+  margin: 0 auto;
   background-color: ${({
     active,
     theme,
@@ -86,41 +90,40 @@ const TabItem = styled.TouchableOpacity<{ active: boolean; theme: ThemeProps }>`
     theme: ThemeProps
   }) => (active ? theme.theme.activeColor : theme.theme.primaryColor)};
 `
-const InnerBox = styled(Box)<{ theme: ThemeProps }>`
-  border-radius: 145px;
+const InnerBox = styled(ScrollView)<{ theme: ThemeProps }>`
+  border-radius: 15px;
+  top: 5px;
+  background-color: ${({ theme }: { theme: ThemeProps }) =>
+    theme.theme.primaryColor};
+`
+const TxContainer = styled(HStack)<{ theme: ThemeProps }>`
+  height: 50px;
   align-items: center;
-  width: 290px;
-  height: 290px;
-  top: -10px;
-`
-const BalHead = styled(Text)`
-  color: #fff;
-  top: 20%;
-  font-size: 18px;
-  font-weight: 400;
-`
-const BalStack = styled(HStack)`
-  top: 30%;
-`
-const Balance = styled(Text)`
-  color: #fff;
-  font-size: 25px;
-  font-weight: 600;
-  line-height: 25px;
-  margin-right: 5px;
-`
-const BalDecimal = styled(Text)`
-  color: #fff;
-  font-size: 10px;
-  font-weight: 500;
-`
-const WalletBtn = styled.TouchableOpacity`
-  top: 35%;
-  align-items: center;
+  justify-content: space-between;
   border: 1px solid #fff;
   border-radius: 50px;
-  height: 40px;
-  width: 60%;
+  margin: 5px;
+`
+const NameStack = styled(VStack)<{ theme: ThemeProps }>`
+  left: -15px;
+`
+const NameTxt = styled(Text)<{ theme: ThemeProps }>`
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+`
+const TimeStack = styled(VStack)<{ theme: ThemeProps }>`
+  right: 20px;
+`
+const TransactionTxt = styled(Text)<{ theme: ThemeProps }>`
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+`
+const Amount = styled(Text)<{ theme: ThemeProps }>`
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
 `
 
 export default function NearByShops() {
@@ -136,30 +139,38 @@ export default function NearByShops() {
   }
 
   const NearbyRoute = () => (
-    <InnerBox>
-      <BalHead>eNaira balance</BalHead>
-      <BalStack>
-        <MaterialCommunityIcons name="currency-ngn" size={20} color="#fff" />
-        <Balance>100,000,000,000.</Balance>
-        <BalDecimal>00</BalDecimal>
-      </BalStack>
-      <WalletBtn>
-        <BalHead>Your eNaira wallet</BalHead>
-      </WalletBtn>
-    </InnerBox>
+    <InnerBox theme={{ theme: themes[theme] }}></InnerBox>
   )
 
   const TxRoute = () => (
-    <InnerBox>
-      <BalHead>eEsusu balance</BalHead>
-      <BalStack>
-        <MaterialCommunityIcons name="currency-ngn" size={20} color="#fff" />
-        <Balance>1,000,000,000.</Balance>
-        <BalDecimal>00</BalDecimal>
-      </BalStack>
-      <WalletBtn>
-        <BalHead>Your fixed esusu</BalHead>
-      </WalletBtn>
+    <InnerBox theme={{ theme: themes[theme] }}>
+      {transactions.map((transaction) => (
+        <TxContainer key={transaction.id}>
+          <Avatar
+            size={12}
+            source={{
+              uri: transaction.image,
+            }}
+          >
+            AJ
+          </Avatar>
+          <NameStack>
+            <NameTxt>{transaction.name}</NameTxt>
+            <NameTxt>{transaction.type}</NameTxt>
+          </NameStack>
+          <TimeStack>
+            <HStack>
+              <MaterialCommunityIcons
+                name="currency-ngn"
+                size={15}
+                color="#fff"
+              />
+              <Amount>{transaction.amount}</Amount>
+            </HStack>
+            <TransactionTxt>{transaction.timeStamp}</TransactionTxt>
+          </TimeStack>
+        </TxContainer>
+      ))}
     </InnerBox>
   )
 
@@ -189,14 +200,7 @@ export default function NearByShops() {
               theme={{ theme: themes[theme] }}
               onPress={() => setIndex(i)}
             >
-              <Animated.Text
-                style={{
-                  opacity,
-                  color: "#fff",
-                  fontSize: 20,
-                  fontWeight: "600",
-                }}
-              >
+              <Animated.Text style={{ opacity, color: "#fff", fontSize: 16 }}>
                 {route.title}
               </Animated.Text>
             </TabItem>
