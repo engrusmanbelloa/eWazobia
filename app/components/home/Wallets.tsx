@@ -170,7 +170,7 @@ export default function Wallets() {
               style={[
                 {
                   backgroundColor:
-                    index === i ? themes[theme].linkColor : "#fff",
+                    index === i ? themes[theme].activeColor : "#fff",
                 },
               ]}
             >

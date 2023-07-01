@@ -32,6 +32,7 @@ interface ThemeProps {
     primaryColor: string
     secondaryColor: string
     drawerColor: string
+    activeColor: string
   }
 }
 
@@ -69,6 +70,7 @@ const MiddleContainer = styled(Box)<{ theme: ThemeProps }>`
 const BottomContainer = styled(Box)<{ theme: ThemeProps }>`
   background-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.mode.backgroundColor};
+  background-color: transparent;
 `
 
 export default function MainScreen() {

@@ -46,31 +46,45 @@ interface ThemeProps {
     primaryColor: string
     secondaryColor: string
     drawerColor: string
+    activeColor: string
   }
+  active: boolean
 }
 
 const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  top: -30px;
+  height: 40%;
   width: 100%;
 `
 
-const TabsBar = styled.View<{ theme: ThemeProps }>`
+const TabsBar = styled.View<{ active: boolean; theme: ThemeProps }>`
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  border-radius: 50px;
+  background-color: ${({
+    active,
+    theme,
+  }: {
+    active: boolean
+    theme: ThemeProps
+  }) => (active ? theme.theme.activeColor : theme.theme.primaryColor)};
 `
 
-const TabItem = styled.TouchableOpacity<{ active: boolean }>`
+const TabItem = styled.TouchableOpacity<{ active: boolean; theme: ThemeProps }>`
   align-items: center;
   justify-content: center;
-  width: 45%;
-  height: 30px;
-  border-radius: 5px;
-  margin: 2px;
+  height: 35px;
+  width: 49%;
+  border-radius: 50px;
   top: 0px;
-  background-color: ${({ active }: any) => (active ? "#675438" : "#000")};
+  background-color: ${({
+    active,
+    theme,
+  }: {
+    active: boolean
+    theme: ThemeProps
+  }) => (active ? theme.theme.activeColor : theme.theme.primaryColor)};
 `
 const InnerBox = styled(Box)<{ theme: ThemeProps }>`
   border-radius: 145px;
@@ -113,15 +127,15 @@ export default function NearByShops() {
   const { mode, setMode, theme, setTheme } = useContext(ThemeContext)
   const [index, setIndex] = useState(0)
   const [routes] = useState<RouteProps[]>([
-    { key: "first", title: "First" },
-    { key: "second", title: "Second" },
+    { key: "nearby", title: "Nearby Shops" },
+    { key: "tx", title: "Transactions" },
   ])
 
   const handleIndexChange = (currentIndex: number) => {
     setIndex(currentIndex)
   }
 
-  const FirstRoute = () => (
+  const NearbyRoute = () => (
     <InnerBox>
       <BalHead>eNaira balance</BalHead>
       <BalStack>
@@ -135,7 +149,7 @@ export default function NearByShops() {
     </InnerBox>
   )
 
-  const SecondRoute = () => (
+  const TxRoute = () => (
     <InnerBox>
       <BalHead>eEsusu balance</BalHead>
       <BalStack>
@@ -159,7 +173,7 @@ export default function NearByShops() {
     )
 
     return (
-      <TabsBar>
+      <TabsBar theme={{ theme: themes[theme] }}>
         {props.navigationState.routes.map((route: RouteProps, i: number) => {
           const opacity = props.position.interpolate({
             inputRange,
@@ -172,9 +186,17 @@ export default function NearByShops() {
             <TabItem
               key={route.key}
               active={index === i}
+              theme={{ theme: themes[theme] }}
               onPress={() => setIndex(i)}
             >
-              <Animated.Text style={{ opacity, color: "#fff" }}>
+              <Animated.Text
+                style={{
+                  opacity,
+                  color: "#fff",
+                  fontSize: 20,
+                  fontWeight: "600",
+                }}
+              >
                 {route.title}
               </Animated.Text>
             </TabItem>
@@ -185,8 +207,8 @@ export default function NearByShops() {
   }
 
   const renderScene = SceneMap({
-    first: FirstRoute,
-    second: SecondRoute,
+    nearby: NearbyRoute,
+    tx: TxRoute,
   })
 
   return (
