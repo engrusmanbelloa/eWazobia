@@ -15,8 +15,10 @@ interface Transactions {
 interface Shop {
   id: number
   name: string
+  location: string
   category: string
   image: string
+  away: any
   products: Product[]
 }
 
@@ -147,9 +149,11 @@ export const transactions: Transactions[] = [
 export const shops: Shop[] = [
   {
     id: 1,
+    away: "12min",
     name: "Food Paradise",
+    location: "pantami street gombe",
     category: "Restaurants",
-    image: "restaurant_a.jpg",
+    image: "../assets/images/ipsumLogo.png",
     products: [
       {
         id: 1,
@@ -238,8 +242,10 @@ export const shops: Shop[] = [
   {
     id: 2,
     name: "Caffeine Corner",
+    location: "pantami street bauchi",
+    away: "15min",
     category: "Coffee",
-    image: "coffee_shop_b.jpg",
+    image: "../assets/images/ipsumLogo.png",
     products: [
       {
         id: 1,
@@ -261,8 +267,10 @@ export const shops: Shop[] = [
   {
     id: 3,
     name: "Chic Boutique",
+    location: "pantami street Jos",
+    away: "12min",
     category: "Clothing and Fashion",
-    image: "restaurant_a.jpg",
+    image: "../assets/images/ipsumLogo.png",
     products: [
       {
         id: 1,
@@ -360,8 +368,10 @@ export const shops: Shop[] = [
   {
     id: 4,
     name: "Bookstore",
+    location: "pantami street Yobe",
+    away: "10min",
     category: "Books and Study Materials",
-    image: "restaurant_a.jpg",
+    image: "../assets/images/ipsumLogo.png",
     products: [
       {
         id: 1,
@@ -409,7 +419,6 @@ export const shops: Shop[] = [
         category: "Creative Services",
         price: 10,
         image: "burger.jpg",
-        inStock: 3,
         description:
           "Spiral Notebooks are available in the following categories",
       },
@@ -419,7 +428,6 @@ export const shops: Shop[] = [
         category: "Creative Services",
         price: 15,
         image: "pizza.jpg",
-        inStock: 3,
         description:
           "Spiral Notebooks are available in the following categories",
       },
@@ -429,7 +437,6 @@ export const shops: Shop[] = [
         category: "Creative Services",
         price: 10,
         image: "burger.jpg",
-        inStock: 3,
         description:
           "Spiral Notebooks are available in the following categories",
       },
@@ -439,7 +446,6 @@ export const shops: Shop[] = [
         category: "Creative Services",
         price: 15,
         image: "pizza.jpg",
-        inStock: 3,
         description:
           "Spiral Notebooks are available in the following categories",
       },
@@ -449,7 +455,6 @@ export const shops: Shop[] = [
         category: "Creative Services",
         price: 10,
         image: "burger.jpg",
-        inStock: 3,
         description:
           "Spiral Notebooks are available in the following categories",
       },
@@ -459,7 +464,6 @@ export const shops: Shop[] = [
         category: "Creative Services",
         price: 15,
         image: "pizza.jpg",
-        inStock: 3,
         description:
           "Spiral Notebooks are available in the following categories",
       },
@@ -469,8 +473,10 @@ export const shops: Shop[] = [
   {
     id: 5,
     name: "Mobile Phone Store",
+    location: "pantami street Borno",
+    away: "32min",
     category: "Electronics and gadgets",
-    image: "restaurant_a.jpg",
+    image: "../assets/images/ipsumLogo.png",
     products: [
       {
         id: 1,
@@ -538,12 +544,14 @@ export const shops: Shop[] = [
   {
     id: 6,
     name: "Gym and Fitness Centre",
+    location: "pantami street Yola",
+    away: "22min",
     category: "Sports and Recreation",
-    image: "restaurant_a.jpg",
+    image: "../assets/images/ipsumLogo.png",
     products: [
       {
         id: 1,
-        name: "Resistance Bands",
+        name: "Treadmills",
         category: "Fitness Equipment",
         price: 10,
         image: "burger.jpg",
@@ -553,11 +561,50 @@ export const shops: Shop[] = [
       },
       {
         id: 2,
-        name: "Pizza",
-        category: "Food",
+        name: "Exercise Bikes",
+        category: "Fitness Equipment",
         price: 15,
         image: "pizza.jpg",
         inStock: 5,
+        description:
+          "Fitness Equipment with a variety of products and services available",
+      },
+      {
+        id: 3,
+        name: "Sports Nutrition",
+        category: "Protein Powders",
+        price: 10,
+        image: "burger.jpg",
+        inStock: 7,
+        description:
+          "Fitness Equipment with a variety of products and services available",
+      },
+      {
+        id: 4,
+        name: "Soccer Balls",
+        category: "Sports Equipment",
+        price: 15,
+        image: "pizza.jpg",
+        inStock: 5,
+        description:
+          "Fitness Equipment with a variety of products and services available",
+      },
+      {
+        id: 5,
+        name: "Basketball Hoops",
+        category: "Sports Equipment",
+        price: 10,
+        image: "burger.jpg",
+        inStock: 7,
+        description:
+          "Fitness Equipment with a variety of products and services available",
+      },
+      {
+        id: 6,
+        name: "Heart Rate Monitors",
+        category: "Fitness Trackers",
+        price: 15,
+        image: "pizza.jpg",
         description:
           "Fitness Equipment with a variety of products and services available",
       },
@@ -567,20 +614,94 @@ export const shops: Shop[] = [
   {
     id: 7,
     name: "Pharmacy",
+    location: "pantami street Taraba",
+    away: "12min",
     category: "Health",
-    image: "restaurant_a.jpg",
+    image: "../assets/images/ipsumLogo.png",
     products: [
       {
         id: 1,
-        name: "Burger",
-        category: "Food",
+        name: "Lubricating Eye Drops",
+        category: "Eye Care",
         price: 10,
         image: "burger.jpg",
+        inStock: 10,
+        description: "This is the tablets for pain relief",
       },
       {
         id: 2,
-        name: "Pizza",
-        category: "Food",
+        name: "Ibuprofen Caplets",
+        category: "Pain Relief",
+        price: 15,
+        image: "pizza.jpg",
+        inStock: 5,
+        description: "This is the tablets for pain relief",
+      },
+      {
+        id: 3,
+        name: "Cold & Cough Syrup",
+        category: "Cold and Flu",
+        price: 10,
+        image: "burger.jpg",
+        inStock: 7,
+        description: "This is the tablets for pain relief",
+      },
+      {
+        id: 4,
+        name: "Laxative Tablets",
+        category: "Digestive Health",
+        price: 15,
+        image: "pizza.jpg",
+        inStock: 4,
+        description: "This is the tablets for pain relief",
+      },
+      {
+        id: 5,
+        name: "Laxative Tablets",
+        category: "Allergy Relief ",
+        price: 10,
+        image: "burger.jpg",
+        inStock: 10,
+        description: "This is the tablets for pain relief",
+      },
+      {
+        id: 6,
+        name: "Moisturizing Lotion",
+        category: "Skincare",
+        price: 15,
+        image: "pizza.jpg",
+        inStock: 9,
+        description: "This is the tablets for pain relief",
+      },
+      {
+        id: 7,
+        name: "Dental Floss",
+        category: "Oral Care",
+        price: 10,
+        image: "burger.jpg",
+        inStock: 10,
+        description: "This is the tablets for pain relief",
+      },
+      {
+        id: 8,
+        name: "Hydrogen Peroxide Solution",
+        category: "First Aid",
+        price: 15,
+        image: "pizza.jpg",
+      },
+      {
+        id: 9,
+        name: "Prenatal Vitamins",
+        category: "Women's Health",
+        price: 10,
+        image: "burger.jpg",
+        inStock: 10,
+        description: "This is the tablets for pain relief",
+      },
+      {
+        id: 10,
+        name: "Pregnancy Tests",
+        category: "Family Planning",
         price: 15,
         image: "pizza.jpg",
       },
@@ -589,69 +710,134 @@ export const shops: Shop[] = [
   },
   {
     id: 8,
-    name: "Laundry Services",
+    name: "Laundry Services and car wash",
+    location: "pantami street Kano",
+    away: "5min",
     category: "Cleaning Services",
-    image: "restaurant_a.jpg",
+    image: "../assets/images/ipsumLogo.png",
     products: [
       {
         id: 1,
-        name: "Burger",
-        category: "Food",
+        name: "Suit and Clothing",
+        category: "Dry Cleaning ",
         price: 10,
         image: "burger.jpg",
+        description: "clean and good",
       },
       {
         id: 2,
-        name: "Pizza",
-        category: "Food",
+        name: "Towel Laundry",
+        category: "Laundry ",
         price: 15,
         image: "pizza.jpg",
+        description: "clean and good",
+      },
+      {
+        id: 3,
+        name: "Exterior Car Wash",
+        category: "Car Wash",
+        price: 10,
+        image: "burger.jpg",
+        description: "clean and good",
+      },
+      {
+        id: 4,
+        name: "Regular House Cleaning",
+        category: "House Cleaning ",
+        price: 15,
+        image: "pizza.jpg",
+        description: "clean and good",
+      },
+      {
+        id: 5,
+        name: "Office Cleaning",
+        category: "Commercial Cleaning",
+        price: 10,
+        image: "burger.jpg",
+        description: "clean and good",
+      },
+      {
+        id: 6,
+        name: "Rug and Carpet Cleaning",
+        category: "Specialized Cleaning",
+        price: 15,
+        image: "pizza.jpg",
+        description: "clean and good",
       },
       // Add more products...
     ],
   },
   {
     id: 9,
-    name: "Design Studio",
-    category: "Restaurant",
-    image: "restaurant_a.jpg",
-    products: [
-      {
-        id: 1,
-        name: "Burger",
-        category: "Food",
-        price: 10,
-        image: "burger.jpg",
-      },
-      {
-        id: 2,
-        name: "Pizza",
-        category: "Food",
-        price: 15,
-        image: "pizza.jpg",
-      },
-      // Add more products...
-    ],
-  },
-  {
-    id: 10,
     name: "Hair Salon",
+    location: "pantami street Abuja",
+    away: "17min",
     category: "Beauty and Personal Care",
-    image: "restaurant_a.jpg",
+    image: "../assets/images/ipsumLogo.png",
     products: [
       {
         id: 1,
-        name: "Burger",
-        category: "Food",
+        name: "Men's Haircut",
+        category: "Haircut",
         price: 10,
         image: "burger.jpg",
+        description: "Men's haircut at the very affordable price",
       },
       {
         id: 2,
-        name: "Pizza",
-        category: "Food",
+        name: "Deep Conditioning",
+        category: "Hair Treatments",
         price: 15,
         image: "pizza.jpg",
+        description: "Men's haircut at the very affordable price",
+      },
+      {
+        id: 3,
+        name: "Anti-Aging",
+        category: "Skin Care",
+        price: 10,
+        image: "burger.jpg",
+        description: "Men's haircut at the very affordable price",
+      },
+      {
+        id: 4,
+        name: "Nail Art and Designs",
+        category: "Nail Services",
+        price: 15,
+        image: "pizza.jpg",
+        description: "Men's haircut at the very affordable price",
+      },
+      {
+        id: 5,
+        name: "Facial Waxing",
+        category: "Waxing and Hair Removal",
+        price: 10,
+        image: "burger.jpg",
+        description: "Men's haircut at the very affordable price",
+      },
+      {
+        id: 6,
+        name: "Bridal Makeup",
+        category: "Makeup Services",
+        price: 15,
+        image: "pizza.jpg",
+        description: "Men's haircut at the very affordable price",
+      },
+      {
+        id: 7,
+        name: "Cuticle Oils",
+        category: "Personal Care",
+        price: 10,
+        image: "burger.jpg",
+        description: "Men's haircut at the very affordable price",
+      },
+      {
+        id: 8,
+        name: "Shampoos",
+        category: "Personal Care",
+        price: 15,
+        image: "pizza.jpg",
+        description: "Men's haircut at the very affordable price",
       },
       // Add more products...
     ],
