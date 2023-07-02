@@ -16,11 +16,11 @@ import {
 import {
   NativeBaseProvider,
   VStack,
-  ScrollView,
   Box,
   HStack,
   Text,
   Avatar,
+  ScrollView,
 } from "native-base"
 import styled from "styled-components/native"
 import {
@@ -55,7 +55,7 @@ interface ThemeProps {
 
 const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
   top: -30px;
-  height: 100%;
+  height: 70%;
   width: 100%;
 `
 
