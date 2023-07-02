@@ -153,7 +153,7 @@ export const shops: Shop[] = [
     name: "Food Paradise",
     location: "pantami street gombe",
     category: "Restaurants",
-    image: "../assets/images/ipsumLogo.png",
+    image: "https://wallpaperaccess.com/full/317501.jpg",
     products: [
       {
         id: 1,
@@ -245,7 +245,7 @@ export const shops: Shop[] = [
     location: "pantami street bauchi",
     away: "15min",
     category: "Coffee",
-    image: "../assets/images/ipsumLogo.png",
+    image: "https://wallpaperaccess.com/full/317501.jpg",
     products: [
       {
         id: 1,
@@ -270,7 +270,7 @@ export const shops: Shop[] = [
     location: "pantami street Jos",
     away: "12min",
     category: "Clothing and Fashion",
-    image: "../assets/images/ipsumLogo.png",
+    image: "https://wallpaperaccess.com/full/317501.jpg",
     products: [
       {
         id: 1,
@@ -371,7 +371,7 @@ export const shops: Shop[] = [
     location: "pantami street Yobe",
     away: "10min",
     category: "Books and Study Materials",
-    image: "../assets/images/ipsumLogo.png",
+    image: "https://wallpaperaccess.com/full/317501.jpg",
     products: [
       {
         id: 1,
@@ -476,7 +476,7 @@ export const shops: Shop[] = [
     location: "pantami street Borno",
     away: "32min",
     category: "Electronics and gadgets",
-    image: "../assets/images/ipsumLogo.png",
+    image: "https://wallpaperaccess.com/full/317501.jpg",
     products: [
       {
         id: 1,
@@ -547,7 +547,7 @@ export const shops: Shop[] = [
     location: "pantami street Yola",
     away: "22min",
     category: "Sports and Recreation",
-    image: "../assets/images/ipsumLogo.png",
+    image: "https://wallpaperaccess.com/full/317501.jpg",
     products: [
       {
         id: 1,
@@ -617,7 +617,7 @@ export const shops: Shop[] = [
     location: "pantami street Taraba",
     away: "12min",
     category: "Health",
-    image: "../assets/images/ipsumLogo.png",
+    image: "https://wallpaperaccess.com/full/317501.jpg",
     products: [
       {
         id: 1,
@@ -714,7 +714,7 @@ export const shops: Shop[] = [
     location: "pantami street Kano",
     away: "5min",
     category: "Cleaning Services",
-    image: "../assets/images/ipsumLogo.png",
+    image: "https://wallpaperaccess.com/full/317501.jpg",
     products: [
       {
         id: 1,
@@ -773,7 +773,7 @@ export const shops: Shop[] = [
     location: "pantami street Abuja",
     away: "17min",
     category: "Beauty and Personal Care",
-    image: "../assets/images/ipsumLogo.png",
+    image: "https://wallpaperaccess.com/full/317501.jpg",
     products: [
       {
         id: 1,

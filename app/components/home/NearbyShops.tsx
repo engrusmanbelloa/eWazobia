@@ -21,6 +21,7 @@ import {
   Text,
   Avatar,
   ScrollView,
+  Image,
 } from "native-base"
 import styled from "styled-components/native"
 import {
@@ -33,7 +34,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { modeTheme, themes } from "../../../constants/Themes"
 import { ThemeContext } from "../../../constants/ThemeContext"
-import { transactions } from "../../../constants/data"
+import { transactions, shops } from "../../../constants/data"
 
 interface RouteProps {
   key: string
@@ -139,7 +140,28 @@ export default function NearByShops() {
   }
 
   const NearbyRoute = () => (
-    <InnerBox theme={{ theme: themes[theme] }}></InnerBox>
+    <InnerBox theme={{ theme: themes[theme] }}>
+      <ScrollView>
+        {shops.map((shop) => (
+          <View key={shop.id} style={{ margin: 10 }}>
+            <Image
+              source={{
+                uri: shop.image,
+              }}
+              alt="Alternate Text"
+              size="sm"
+              borderRadius={15}
+            />
+            {/* <Image
+              source={require(shop.image)}
+              style={{ width: 100, height: 100 }}
+            /> */}
+            <Text>{shop.name}</Text>
+            <Text>{shop.away} away</Text>
+          </View>
+        ))}
+      </ScrollView>
+    </InnerBox>
   )
 
   const TxRoute = () => (
