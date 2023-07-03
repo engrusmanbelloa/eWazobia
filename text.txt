@@ -49,3 +49,40 @@
 // const StyledText = styled(Text)`
 //   color: ${(props: any) => props.theme.themes[theme].secondaryColor};
 // `
+
+
+```jsx
+import React from 'react';
+import { View, ScrollView, Image, Text, FlatList } from 'react-native';
+
+const ShopComponent = ({ shop }) => {
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10 }}>
+      <Image source={{ uri: shop.image }} style={{ width: 50, height: 50, marginRight: 10 }} />
+      <View>
+        <Text>{shop.name}</Text>
+        <Text>{shop.away}</Text>
+      </View>
+    </View>
+  );
+};
+
+const ShopListScreen = () => {
+  const shops = [
+    // ... your shop data
+  ];
+
+  return (
+    <ScrollView>
+      <FlatList
+        data={shops}
+        numColumns={2}
+        renderItem={({ item }) => <ShopComponent shop={item} />}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    </ScrollView>
+  );
+};
+
+export default ShopListScreen;
+```

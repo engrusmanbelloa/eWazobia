@@ -18,6 +18,7 @@ interface Shop {
   location: string
   category: string
   image: string
+  alt?: string
   away: any
   products: Product[]
 }
@@ -154,6 +155,7 @@ export const shops: Shop[] = [
     location: "pantami street gombe",
     category: "Restaurants",
     image: "https://wallpaperaccess.com/full/317501.jpg",
+    alt: "Shop title",
     products: [
       {
         id: 1,
@@ -246,6 +248,7 @@ export const shops: Shop[] = [
     away: "15min",
     category: "Coffee",
     image: "https://wallpaperaccess.com/full/317501.jpg",
+    alt: "Shop title",
     products: [
       {
         id: 1,
@@ -270,6 +273,7 @@ export const shops: Shop[] = [
     location: "pantami street Jos",
     away: "12min",
     category: "Clothing and Fashion",
+    alt: "Shop title",
     image: "https://wallpaperaccess.com/full/317501.jpg",
     products: [
       {
@@ -372,6 +376,7 @@ export const shops: Shop[] = [
     away: "10min",
     category: "Books and Study Materials",
     image: "https://wallpaperaccess.com/full/317501.jpg",
+    alt: "Shop title",
     products: [
       {
         id: 1,
@@ -477,6 +482,7 @@ export const shops: Shop[] = [
     away: "32min",
     category: "Electronics and gadgets",
     image: "https://wallpaperaccess.com/full/317501.jpg",
+    alt: "Shop title",
     products: [
       {
         id: 1,
@@ -547,6 +553,7 @@ export const shops: Shop[] = [
     location: "pantami street Yola",
     away: "22min",
     category: "Sports and Recreation",
+    alt: "Shop title",
     image: "https://wallpaperaccess.com/full/317501.jpg",
     products: [
       {
@@ -618,6 +625,7 @@ export const shops: Shop[] = [
     away: "12min",
     category: "Health",
     image: "https://wallpaperaccess.com/full/317501.jpg",
+    alt: "Shop title",
     products: [
       {
         id: 1,
@@ -715,6 +723,7 @@ export const shops: Shop[] = [
     away: "5min",
     category: "Cleaning Services",
     image: "https://wallpaperaccess.com/full/317501.jpg",
+    alt: "Shop title",
     products: [
       {
         id: 1,
@@ -774,6 +783,7 @@ export const shops: Shop[] = [
     away: "17min",
     category: "Beauty and Personal Care",
     image: "https://wallpaperaccess.com/full/317501.jpg",
+    alt: "Shop title",
     products: [
       {
         id: 1,

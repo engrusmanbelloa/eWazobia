@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   StatusBar,
+  FlatList,
 } from "react-native"
 import {
   TabView,
@@ -91,8 +92,9 @@ const TabItem = styled.TouchableOpacity<{ active: boolean; theme: ThemeProps }>`
     theme: ThemeProps
   }) => (active ? theme.theme.activeColor : theme.theme.primaryColor)};
 `
-const InnerBox = styled(ScrollView)<{ theme: ThemeProps }>`
+const InnerBox = styled(Box)<{ theme: ThemeProps }>`
   border-radius: 15px;
+  align-items: center;
   top: 5px;
   background-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.theme.primaryColor};
@@ -100,6 +102,7 @@ const InnerBox = styled(ScrollView)<{ theme: ThemeProps }>`
 const TxContainer = styled(HStack)<{ theme: ThemeProps }>`
   height: 50px;
   align-items: center;
+  width: 98%;
   justify-content: space-between;
   border: 1px solid #fff;
   border-radius: 50px;
@@ -126,41 +129,64 @@ const Amount = styled(Text)<{ theme: ThemeProps }>`
   font-weight: 400;
   color: #fff;
 `
+const ShopStack = styled(HStack)<{ theme: ThemeProps }>`
+  align-items: center;
+  width: 47%;
+  border: 1px solid #fff;
+  margin: 6px;
+  border-radius: 15px;
+`
 
 export default function NearByShops() {
   const { mode, setMode, theme, setTheme } = useContext(ThemeContext)
   const [index, setIndex] = useState(0)
   const [routes] = useState<RouteProps[]>([
-    { key: "nearby", title: "Nearby Shops" },
+    { key: "shops", title: "Nearby Shops" },
     { key: "tx", title: "Transactions" },
   ])
 
   const handleIndexChange = (currentIndex: number) => {
     setIndex(currentIndex)
   }
+  // ShopList to be rendered
+  const renderItem = ({ item }: any) => (
+    <ShopStack>
+      <Image
+        source={{
+          uri: item.image,
+        }}
+        alt="Alternate Text"
+        size="sm"
+        borderRadius={15}
+      />
+      <VStack ml={2}>
+        <Text>
+          {item.name.length > 17 ? item.name.substring(0, 17) : item.name}
+        </Text>
+        <HStack
+          w={"100px"}
+          justifyContent={"space-around"}
+          alignItems={"center"}
+        >
+          <Text>{item.away}</Text>
+          <MaterialCommunityIcons name="bike-fast" size={24} color="black" />
+        </HStack>
+        <HStack w={"100px"} justifyContent={"space-around"}>
+          <Text>Order</Text>
+          <Text>Visit</Text>
+        </HStack>
+      </VStack>
+    </ShopStack>
+  )
 
-  const NearbyRoute = () => (
+  const ShopsRoute = () => (
     <InnerBox theme={{ theme: themes[theme] }}>
-      <ScrollView>
-        {shops.map((shop) => (
-          <View key={shop.id} style={{ margin: 10 }}>
-            <Image
-              source={{
-                uri: shop.image,
-              }}
-              alt="Alternate Text"
-              size="sm"
-              borderRadius={15}
-            />
-            {/* <Image
-              source={require(shop.image)}
-              style={{ width: 100, height: 100 }}
-            /> */}
-            <Text>{shop.name}</Text>
-            <Text>{shop.away} away</Text>
-          </View>
-        ))}
-      </ScrollView>
+      <FlatList
+        data={shops}
+        numColumns={2}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+      />
     </InnerBox>
   )
 
@@ -233,7 +259,7 @@ export default function NearByShops() {
   }
 
   const renderScene = SceneMap({
-    nearby: NearbyRoute,
+    shops: ShopsRoute,
     tx: TxRoute,
   })
 
