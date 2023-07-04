@@ -133,8 +133,19 @@ const ShopStack = styled(HStack)<{ theme: ThemeProps }>`
   align-items: center;
   width: 47%;
   border: 1px solid #fff;
-  margin: 6px;
+  margin: 5px;
   border-radius: 15px;
+`
+const ShopTitle = styled(Text)<{ theme: ThemeProps }>`
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+`
+const ShopDetail = styled(Text)<{ theme: ThemeProps }>`
+  font-size: 12px;
+  font-weight: 300;
+  color: #fff;
+  margin-right: 15px;
 `
 
 export default function NearByShops() {
@@ -159,21 +170,17 @@ export default function NearByShops() {
         size="sm"
         borderRadius={15}
       />
-      <VStack ml={2}>
-        <Text>
-          {item.name.length > 17 ? item.name.substring(0, 17) : item.name}
-        </Text>
-        <HStack
-          w={"100px"}
-          justifyContent={"space-around"}
-          alignItems={"center"}
-        >
-          <Text>{item.away}</Text>
-          <MaterialCommunityIcons name="bike-fast" size={24} color="black" />
+      <VStack ml={3}>
+        <ShopTitle>
+          {item.name.length > 15 ? item.name.substring(0, 15) : item.name}
+        </ShopTitle>
+        <HStack w={"100px"} alignItems={"center"}>
+          <ShopDetail>{item.away}</ShopDetail>
+          <MaterialCommunityIcons name="bike-fast" size={24} color="#fff" />
         </HStack>
-        <HStack w={"100px"} justifyContent={"space-around"}>
-          <Text>Order</Text>
-          <Text>Visit</Text>
+        <HStack w={"100px"}>
+          <ShopDetail>Order</ShopDetail>
+          <ShopDetail>Visit</ShopDetail>
         </HStack>
       </VStack>
     </ShopStack>
