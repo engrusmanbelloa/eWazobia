@@ -30,7 +30,9 @@ export default function MainTabLayout() {
         options={{
           title: "Home",
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="home-outline" color={color} />
+          ),
           // headerRight: () => (
           //   <Link href="/modal" asChild>
           //     <Pressable>
@@ -55,7 +57,9 @@ export default function MainTabLayout() {
         options={{
           title: "Favorites",
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon name="star" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="star-outline" color={color} />
+          ),
         }}
       />
       <Tabs.Screen
@@ -64,7 +68,7 @@ export default function MainTabLayout() {
           title: "Pay",
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="scan-circle" color={color} />
+            <TabBarIcon name="scan-circle-outline" color={color} />
           ),
         }}
       />
@@ -73,7 +77,9 @@ export default function MainTabLayout() {
         options={{
           title: "Wallets",
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon name="wallet" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="wallet-outline" color={color} />
+          ),
         }}
       />
       <Tabs.Screen

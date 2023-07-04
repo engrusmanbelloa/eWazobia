@@ -102,17 +102,23 @@ const InnerBox = styled(Box)<{ theme: ThemeProps }>`
 const TxContainer = styled(HStack)<{ theme: ThemeProps }>`
   height: 50px;
   align-items: center;
-  width: 98%;
   justify-content: space-between;
+  width: 95%;
   border: 1px solid #fff;
   border-radius: 50px;
   margin: 5px;
 `
 const NameStack = styled(VStack)<{ theme: ThemeProps }>`
-  left: -15px;
+  right: 20px;
+  width: 40%;
 `
 const NameTxt = styled(Text)<{ theme: ThemeProps }>`
   font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+`
+const RecipientTx = styled(Text)<{ theme: ThemeProps }>`
+  font-size: 14px;
   font-weight: 400;
   color: #fff;
 `
@@ -120,14 +126,15 @@ const TimeStack = styled(VStack)<{ theme: ThemeProps }>`
   right: 20px;
 `
 const TransactionTxt = styled(Text)<{ theme: ThemeProps }>`
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 10px;
+  font-weight: 600;
   color: #fff;
 `
-const Amount = styled(Text)<{ theme: ThemeProps }>`
+const Amount = styled(Text)<{ active: string; theme: ThemeProps }>`
   font-size: 16px;
-  font-weight: 400;
-  color: #fff;
+  font-weight: 600;
+  color: ${({ active }: { active: boolean; theme: ThemeProps }) =>
+    active ? "#C21807" : "#fff"};
 `
 const ShopStack = styled(HStack)<{ theme: ThemeProps }>`
   align-items: center;
@@ -159,8 +166,13 @@ export default function NearByShops() {
   const handleIndexChange = (currentIndex: number) => {
     setIndex(currentIndex)
   }
+
+  // Define the maximum number of items to render
+  const limit = 10
+  const limitedData = shops.slice(0, limit)
+
   // ShopList to be rendered
-  const renderItem = ({ item }: any) => (
+  const renderShopItem = ({ item }: any) => (
     <ShopStack>
       <Image
         source={{
@@ -186,12 +198,47 @@ export default function NearByShops() {
     </ShopStack>
   )
 
+  // Transaction List to be rendered
+  const renderTxItem = ({ item }: any) => (
+    <TxContainer>
+      <Avatar
+        size={12}
+        source={{
+          uri: item.image,
+        }}
+      >
+        AJ
+      </Avatar>
+      <NameStack>
+        <NameTxt>{item.senderName}</NameTxt>
+        {item.senderName === "Bello Usman A" ? (
+          <RecipientTx>Sent</RecipientTx>
+        ) : (
+          <RecipientTx>Recieved</RecipientTx>
+        )}
+      </NameStack>
+      <TimeStack>
+        <HStack>
+          <MaterialCommunityIcons
+            name="currency-ngn"
+            size={15}
+            color={item.senderName === "Bello Usman A" ? "#C21807" : "#ffffff"}
+          />
+          <Amount active={item.senderName === "Bello Usman A"}>
+            {item.amount}
+          </Amount>
+        </HStack>
+        <TransactionTxt>{item.timeStamp}</TransactionTxt>
+      </TimeStack>
+    </TxContainer>
+  )
+
   const ShopsRoute = () => (
     <InnerBox theme={{ theme: themes[theme] }}>
       <FlatList
-        data={shops}
+        data={limitedData}
         numColumns={2}
-        renderItem={renderItem}
+        renderItem={renderShopItem}
         keyExtractor={(item) => item.id.toString()}
       />
     </InnerBox>
@@ -199,33 +246,12 @@ export default function NearByShops() {
 
   const TxRoute = () => (
     <InnerBox theme={{ theme: themes[theme] }}>
-      {transactions.map((transaction) => (
-        <TxContainer key={transaction.id}>
-          <Avatar
-            size={12}
-            source={{
-              uri: transaction.image,
-            }}
-          >
-            AJ
-          </Avatar>
-          <NameStack>
-            <NameTxt>{transaction.name}</NameTxt>
-            <NameTxt>{transaction.type}</NameTxt>
-          </NameStack>
-          <TimeStack>
-            <HStack>
-              <MaterialCommunityIcons
-                name="currency-ngn"
-                size={15}
-                color="#fff"
-              />
-              <Amount>{transaction.amount}</Amount>
-            </HStack>
-            <TransactionTxt>{transaction.timeStamp}</TransactionTxt>
-          </TimeStack>
-        </TxContainer>
-      ))}
+      <FlatList
+        data={transactions}
+        numColumns={1}
+        renderItem={renderTxItem}
+        keyExtractor={(item) => item.id.toString()}
+      />
     </InnerBox>
   )
 
