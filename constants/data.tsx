@@ -71,6 +71,13 @@ interface Product {
   inStock?: number
   description?: string
 }
+// Define the promo slider template
+interface Slider {
+  id: number
+  title: string
+  image: string
+  description?: string
+}
 
 // Create the array of transactions
 export const transactions: Transactions[] = [
@@ -927,4 +934,40 @@ export const shops: Shop[] = [
     ],
   },
   // Add more shops...
+]
+
+// Promo slider
+export const slides: Slider[] = [
+  {
+    id: 1,
+    title: "promo one",
+    image: "https://wallpaperaccess.com/full/317501.jpg",
+    description: "Lorem ipsum dolor sit amet, consectetur",
+  },
+  {
+    id: 2,
+    title: "promo two",
+    image: "https://www.w3schools.com/css/img_lights.jpg",
+    description: "Lorem ipsum dolor sit amet, consectetur",
+  },
+  {
+    id: 3,
+    title: "promo three",
+    image: "https://www.w3schools.com/css/img_5terre.jpg",
+    description: "Lorem ipsum dolor sit amet, consectetur",
+  },
+  {
+    id: 4,
+    title: "promo four",
+    image: "https://www.w3schools.com/css/img_forest.jpg",
+    description: "Lorem ipsum dolor sit amet, consectetur",
+  },
+  {
+    id: 5,
+    title: "promo five",
+    image: "https://www.w3schools.com/css/img_mountains.jpg",
+    description: "Lorem ipsum dolor sit amet, consectetur",
+  },
+
+  // Add more slides here...
 ]

@@ -61,7 +61,6 @@ const DrawerViewContainer = styled(VStack)`
 const DrawerNavContainer = styled(ScrollView)`
   flex: 1;
 `
-
 const MiddleContainer = styled(Box)<{ theme: ThemeProps }>`
   background-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.mode.backgroundColor};
