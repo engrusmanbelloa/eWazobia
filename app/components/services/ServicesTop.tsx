@@ -49,16 +49,6 @@ const Container = styled(VStack)<{ theme: ThemeProps }>`
   width: 100%;
   position: absolute;
 `
-const Title = styled(Text)<{ theme: ThemeProps }>`
-  color: #fff;
-  position: absolute;
-  top: 50px;
-  left: 15px;
-  width: 45%;
-  font-size: 40px;
-  font-weight: 700;
-  line-height: 50px;
-`
 
 export default function ServicesTop() {
   const { mode, theme } = useContext(ThemeContext)
@@ -68,11 +58,5 @@ export default function ServicesTop() {
     { id: 3, imageUrl: "https://example.com/image3.jpg" },
     // Add more images here
   ]
-  return (
-    <Container theme={{ theme: themes[theme] }}>
-      <Title>Services</Title>
-      {/* <FlatSlider slides={slides} /> */}
-      <PromoSlider />
-    </Container>
-  )
+  return <Container theme={{ theme: themes[theme] }}></Container>
 }

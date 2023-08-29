@@ -60,7 +60,6 @@ const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
   height: 70%;
   width: 100%;
 `
-
 const TabsBar = styled.View<{ active: boolean; theme: ThemeProps }>`
   flex-direction: row;
   justify-content: space-between;
@@ -96,6 +95,7 @@ const InnerBox = styled(Box)<{ theme: ThemeProps }>`
   border-radius: 15px;
   align-items: center;
   top: 5px;
+  padding-bottom: 20px;
   background-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.theme.primaryColor};
 `

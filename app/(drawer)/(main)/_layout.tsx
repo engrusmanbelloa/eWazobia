@@ -1,9 +1,16 @@
 import { FontAwesome5, Ionicons } from "@expo/vector-icons"
 import { Link, Tabs } from "expo-router"
-import { Pressable, useColorScheme } from "react-native"
-import { ThemeContext } from "../../constants/ThemeContext"
-import { modeTheme, themes } from "../../constants/Themes"
+import { ThemeContext } from "../../../constants/ThemeContext"
+import { modeTheme, themes } from "../../../constants/Themes"
 import { useContext } from "react"
+import { TouchableOpacity, StatusBar, DrawerLayoutAndroid } from "react-native"
+import CustomDrawerContent from "../../components/NewDrawer"
+import { withLayoutContext } from "expo-router"
+import {
+  DrawerContentScrollView,
+  DrawerItemList,
+  createDrawerNavigator,
+} from "@react-navigation/drawer"
 
 interface icon {
   name: React.ComponentProps<typeof FontAwesome5>["name"]

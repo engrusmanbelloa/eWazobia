@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect, ChangeEvent } from "react"
-import { AuthStore } from "../../config/store"
+import { AuthStore } from "../../../config/store"
 import {
   KeyboardAvoidingView,
   TouchableOpacity,
@@ -8,7 +8,7 @@ import {
   StyleSheet,
   SafeAreaView,
 } from "react-native"
-import { ThemeContext } from "../../constants/ThemeContext"
+import { ThemeContext } from "../../../constants/ThemeContext"
 import {
   NativeBaseProvider,
   Text,
@@ -26,8 +26,8 @@ import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import * as LocalAuthentication from "expo-local-authentication"
-import AppBar from "../components/home/AppBar"
-import { modeTheme, themes } from "../../constants/Themes"
+import AppBar from "../../components/home/AppBar"
+import { modeTheme, themes } from "../../../constants/Themes"
 
 interface ThemeProps {
   mode: {

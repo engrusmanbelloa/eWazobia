@@ -39,7 +39,7 @@ const Index = () => {
           router.replace("/(kyc)")
         } else if (isLoggedIn && hasDoneKYC) {
           // If the user is signed in, go to the tabs root.
-          router.replace("/(main)")
+          router.replace("/(drawer)")
         }
       } catch (error) {
         console.log("Error: ", error)

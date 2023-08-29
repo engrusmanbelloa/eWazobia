@@ -79,6 +79,14 @@ interface Slider {
   description?: string
 }
 
+// Define the promo slider template
+interface Services {
+  id: number
+  title: string
+  icon: string
+  options: {}
+}
+
 // Create the array of transactions
 export const transactions: Transactions[] = [
   {

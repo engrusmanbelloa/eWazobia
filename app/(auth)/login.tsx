@@ -184,7 +184,7 @@ export default function LoginScreen() {
     // Login logic when password is entered
     if (password !== "") {
       if (hasDoneKYC) {
-        router.replace("/(main)")
+        router.replace("/(drawer)")
       } else {
         AuthStore.update((s) => {
           s.isLoggedIn = true

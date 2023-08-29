@@ -2,7 +2,6 @@ import { useState, useContext, useEffect, ChangeEvent } from "react"
 import { TouchableOpacity } from "react-native"
 import { NativeBaseProvider, Text, Stack, HStack, Avatar } from "native-base"
 import styled from "styled-components/native"
-import { SafeAreaView } from "react-native-safe-area-context"
 import { Ionicons } from "@expo/vector-icons"
 import { modeTheme, themes } from "../../../constants/Themes"
 import { ThemeContext } from "../../../constants/ThemeContext"
@@ -21,15 +20,12 @@ interface ThemeProps {
 const Container = styled(HStack)<{ theme: ThemeProps }>`
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  padding-top: 40px;
   padding-bottom: 10px;
   border-bottom-width: 1px;
   border-bottom-color: #fff;
 `
 const IdBox = styled(Stack)<{ theme: ThemeProps }>`
-  padding: 0 10px;
-  margin: 0px 10px;
+  padding: 0;
 `
 const IdText = styled(Text)<{ theme: ThemeProps }>`
   color: #fff;
@@ -49,7 +45,6 @@ const VerifyBox = styled(HStack)`
   border-radius: 5px;
   background-color: #cff4d2;
   width: 80px;
-  padding: 2px 5px;
 `
 const Verify = styled(Text)<{ theme: ThemeProps }>`
   color: #228b22;
