@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect, useRef } from "react"
+import { useNavigation, DrawerActions } from "@react-navigation/native"
 import { AuthStore } from "../../../config/store"
 import {
   KeyboardAvoidingView,
@@ -31,6 +32,8 @@ import { modeTheme, themes } from "../../../constants/Themes"
 import { ThemeContext } from "../../../constants/ThemeContext"
 import ServicesTop from "../../components/services/ServicesTop"
 import Wallets from "../../components/home/Wallets"
+import HomeQuickTx from "../../components/home/HomeQuickTx"
+import Utilities from "../../components/services/Utilities"
 
 interface ThemeProps {
   mode: {
@@ -56,14 +59,18 @@ const TopContainer = styled(Stack)<{ theme: ThemeProps }>`
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
 `
+const MiddleContainer = styled(Box)<{ theme: ThemeProps }>`
+  background-color: transparent;
+`
+const BottomContainer = styled(Stack)<{ theme: ThemeProps }>`
+  height: 50%;
+  width: 100%;
+`
 
-export default function MoreScreen() {
+export default function ServicesScreen() {
   const { mode, setMode, theme, setTheme } = useContext(ThemeContext)
-  const drawer = useRef<DrawerLayoutAndroid>(null)
+  const navigation = useNavigation()
 
-  const handleDrawer = () => {
-    drawer.current?.openDrawer()
-  }
   return (
     <NativeBaseProvider>
       <Container theme={{ mode: modeTheme[mode] }}>
@@ -74,9 +81,17 @@ export default function MoreScreen() {
           }
         />
         <TopContainer theme={{ theme: themes[theme] }}>
-          <AppBar handleDrawer={handleDrawer} />
+          <AppBar
+            handleDrawer={() => navigation.dispatch(DrawerActions.openDrawer())}
+          />
           <Wallets />
         </TopContainer>
+        <MiddleContainer>
+          <HomeQuickTx />
+        </MiddleContainer>
+        <BottomContainer>
+          <Utilities />
+        </BottomContainer>
       </Container>
     </NativeBaseProvider>
   )

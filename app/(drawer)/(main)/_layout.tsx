@@ -90,9 +90,9 @@ export default function MainTabLayout() {
         }}
       />
       <Tabs.Screen
-        name="more"
+        name="services"
         options={{
-          title: "More",
+          title: "Services",
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="menu-outline" color={color} />
