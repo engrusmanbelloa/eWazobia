@@ -15,7 +15,6 @@ import {
   SceneRendererProps,
 } from "react-native-tab-view"
 import {
-  NativeBaseProvider,
   VStack,
   Box,
   HStack,
@@ -25,12 +24,7 @@ import {
   Image,
 } from "native-base"
 import styled from "styled-components/native"
-import {
-  Ionicons,
-  FontAwesome,
-  MaterialCommunityIcons,
-  Feather,
-} from "@expo/vector-icons"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { SafeAreaView } from "react-native-safe-area-context"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { modeTheme, themes } from "../../../constants/Themes"

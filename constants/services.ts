@@ -119,7 +119,7 @@ const servicesData: Services[] = [
   },
   {
     id: 4,
-    title: "Remita",
+    title: "Pay Remita",
     icon: "data-icon",
     optionGroups: [
       {
@@ -169,7 +169,7 @@ const servicesData: Services[] = [
   },
   {
     id: 5,
-    title: "Cable TV",
+    title: "TV Subscriptions",
     icon: "data-icon",
     optionGroups: [
       {
@@ -230,7 +230,7 @@ const servicesData: Services[] = [
   },
   {
     id: 6,
-    title: "Flights",
+    title: "Book Flights",
     icon: "flight-icon",
     optionGroups: [
       {
@@ -262,7 +262,7 @@ const servicesData: Services[] = [
   },
   {
     id: 7,
-    title: "History - Flights",
+    title: "Transactions",
     icon: "history-icon",
     optionGroups: [
       {
@@ -276,7 +276,7 @@ const servicesData: Services[] = [
   },
   {
     id: 8,
-    title: "History - Flights",
+    title: "My Flights",
     icon: "history-icon",
     optionGroups: [
       {
@@ -288,20 +288,20 @@ const servicesData: Services[] = [
       },
     ],
   },
-  // {
-  //   id: 10,
-  //   title: "History - Recharge",
-  //   icon: "history-icon",
-  //   optionGroups: [
-  //     {
-  //       label: "Recharges",
-  //       options: [
-  //         { value: "recharge1", label: "Recharge 1" },
-  //         { value: "recharge2", label: "Recharges 2" },
-  //       ],
-  //     },
-  //   ],
-  // },
+  {
+    id: 9,
+    title: "My Recharges",
+    icon: "history-icon",
+    optionGroups: [
+      {
+        label: "Recharges",
+        options: [
+          { value: "recharge1", label: "Recharge 1" },
+          { value: "recharge2", label: "Recharges 2" },
+        ],
+      },
+    ],
+  },
 ]
 
 export default servicesData

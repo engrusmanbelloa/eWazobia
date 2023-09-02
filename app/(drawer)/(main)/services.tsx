@@ -63,6 +63,7 @@ const MiddleContainer = styled(Box)<{ theme: ThemeProps }>`
   background-color: transparent;
 `
 const BottomContainer = styled(Stack)<{ theme: ThemeProps }>`
+  top: -10px;
   height: 50%;
   width: 100%;
 `

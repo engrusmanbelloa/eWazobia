@@ -15,6 +15,7 @@ interface Themes {
     linkColor?: string
     drawerColor?: string
     activeColor?: string
+    textColor?: string
   }
 }
 
@@ -37,6 +38,7 @@ export const themes: Themes = {
     drawerColor: "#009000",
     linkColor: "#0e32b4",
     activeColor: "#AFE1AF",
+    textColor: "#FFFFFF",
   },
   blue: {
     primaryColor: "#0000FF",
