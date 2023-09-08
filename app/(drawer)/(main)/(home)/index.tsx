@@ -6,12 +6,12 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useNavigation, DrawerActions } from "@react-navigation/native"
-import { modeTheme, themes } from "../../../constants/Themes"
-import { ThemeContext } from "../../../constants/ThemeContext"
-import AppBar from "../../components/home/AppBar"
-import Wallets from "../../components/home/Wallets"
-import HomeQuickTx from "../../components/home/HomeQuickTx"
-import NearByShops from "../../components/home/NearbyShops"
+import { modeTheme, themes } from "../../../../constants/Themes"
+import { ThemeContext } from "../../../../constants/ThemeContext"
+import AppBar from "../../../components/home/AppBar"
+import Wallets from "../../../components/home/Wallets"
+import HomeQuickTx from "../../../components/home/HomeQuickTx"
+import NearByShops from "../../../components/home/NearbyShops"
 
 interface ThemeProps {
   mode: {

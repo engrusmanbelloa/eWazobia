@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect, useRef } from "react"
 import { useNavigation, DrawerActions } from "@react-navigation/native"
-import { AuthStore } from "../../../config/store"
+import { AuthStore } from "../../../../config/store"
 import {
   KeyboardAvoidingView,
   TouchableOpacity,
@@ -27,13 +27,13 @@ import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import * as LocalAuthentication from "expo-local-authentication"
-import AppBar from "../../components/home/AppBar"
-import { modeTheme, themes } from "../../../constants/Themes"
-import { ThemeContext } from "../../../constants/ThemeContext"
-import ServicesTop from "../../components/services/ServicesTop"
-import Wallets from "../../components/home/Wallets"
-import HomeQuickTx from "../../components/home/HomeQuickTx"
-import Utilities from "../../components/services/Utilities"
+import AppBar from "../../../components/home/AppBar"
+import { modeTheme, themes } from "../../../../constants/Themes"
+import { ThemeContext } from "../../../../constants/ThemeContext"
+import ServicesTop from "../../../components/services/ServicesTop"
+import Wallets from "../../../components/home/Wallets"
+import HomeQuickTx from "../../../components/home/HomeQuickTx"
+import Utilities from "../../../components/services/Utilities"
 
 interface ThemeProps {
   mode: {

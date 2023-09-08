@@ -13,6 +13,10 @@ function TabBarIcon(props: icon) {
   return <Ionicons size={28} style={{ marginBottom: -3 }} {...props} />
 }
 
+// export const unstable_settings = {
+//   initialRouteName: "(home)",
+// }
+
 export default function MainTabLayout() {
   const { mode, theme } = useContext(ThemeContext)
 
@@ -26,7 +30,7 @@ export default function MainTabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="(home)"
         options={{
           title: "Home",
           headerShown: false,
@@ -53,7 +57,7 @@ export default function MainTabLayout() {
         }}
       />
       <Tabs.Screen
-        name="favorites"
+        name="(loved)"
         options={{
           title: "Favorites",
           headerShown: false,
@@ -63,7 +67,7 @@ export default function MainTabLayout() {
         }}
       />
       <Tabs.Screen
-        name="pay"
+        name="(pay)"
         options={{
           title: "Pay",
           headerShown: false,
@@ -73,7 +77,7 @@ export default function MainTabLayout() {
         }}
       />
       <Tabs.Screen
-        name="wallets"
+        name="(wallets)"
         options={{
           title: "Wallets",
           headerShown: false,
@@ -83,7 +87,7 @@ export default function MainTabLayout() {
         }}
       />
       <Tabs.Screen
-        name="services"
+        name="(services)"
         options={{
           title: "Services",
           headerShown: false,

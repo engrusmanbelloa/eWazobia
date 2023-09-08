@@ -82,6 +82,21 @@ const ServicesContainer = styled(HStack)<{ theme: ThemeProps }>`
 export default function Utilities() {
   const { mode, theme } = useContext(ThemeContext)
   const [selectedId, setSelectedId] = useState<Number>()
+  const router = useRouter()
+  const handleItemPress = (item: ServiceData) => {
+    // Use a switch statement to navigate to different screens based on item title
+    switch (item.title) {
+      case "Airtime Recharge":
+        router.push("/recharge")
+        break
+      case "Data Purchase":
+        router.push("data")
+        break
+      default:
+        console.log("Default case")
+        break
+    }
+  }
   const titleToIcon: Record<string, IconName> = {
     "Airtime Recharge": "ios-call-outline",
     "Data Purchase": "ios-wifi-outline",
@@ -101,7 +116,12 @@ export default function Utilities() {
 
     return (
       <ServicesContainer>
-        <TouchableOpacity onPress={() => setSelectedId(item.id)}>
+        <TouchableOpacity
+          onPress={() => {
+            setSelectedId(item.id)
+            handleItemPress(item)
+          }}
+        >
           <Box justifyContent={"center"} alignItems={"center"}>
             <Ionicons name={iconName} size={24} color={color} />
             <Text style={{ color }}>{item.title}</Text>
