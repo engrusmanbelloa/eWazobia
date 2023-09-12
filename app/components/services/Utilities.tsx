@@ -1,23 +1,11 @@
 import { useState, useContext, useRef, useEffect } from "react"
-import { TouchableOpacity, StatusBar, FlatList } from "react-native"
-import {
-  NativeBaseProvider,
-  VStack,
-  ScrollView,
-  Box,
-  Text,
-  Stack,
-  HStack,
-} from "native-base"
-import { useRouter, Link } from "expo-router"
-import { SafeAreaView } from "react-native-safe-area-context"
+import { TouchableOpacity, StatusBar, FlatList, Pressable } from "react-native"
+import { Box, Text, Stack, HStack } from "native-base"
 import styled from "styled-components/native"
-import AsyncStorage from "@react-native-async-storage/async-storage"
-import { useNavigation, DrawerActions } from "@react-navigation/native"
+import { Link } from "expo-router"
 import { Ionicons } from "@expo/vector-icons"
 import { modeTheme, themes } from "../../../constants/Themes"
 import { ThemeContext } from "../../../constants/ThemeContext"
-import servicesData from "../../../constants/services"
 
 interface ThemeProps {
   mode: {
@@ -37,6 +25,11 @@ type ServiceData = {
   id: Number
   title: string
   icon: string
+}
+
+interface UtilitiesProps {
+  selectedId?: Number | undefined
+  servicesData: ServiceData[]
 }
 
 type IconName =
@@ -79,24 +72,9 @@ const ServicesContainer = styled(HStack)<{ theme: ThemeProps }>`
   padding: 5px 0;
 `
 
-export default function Utilities() {
+export default function Utilities({ servicesData }: UtilitiesProps) {
   const { mode, theme } = useContext(ThemeContext)
-  const [selectedId, setSelectedId] = useState<Number>()
-  const router = useRouter()
-  const handleItemPress = (item: ServiceData) => {
-    // Use a switch statement to navigate to different screens based on item title
-    switch (item.title) {
-      case "Airtime Recharge":
-        router.push("/recharge")
-        break
-      case "Data Purchase":
-        router.push("data")
-        break
-      default:
-        console.log("Default case")
-        break
-    }
-  }
+
   const titleToIcon: Record<string, IconName> = {
     "Airtime Recharge": "ios-call-outline",
     "Data Purchase": "ios-wifi-outline",
@@ -108,25 +86,26 @@ export default function Utilities() {
     "My Flights": "ios-book-outline",
     "My Recharges": "ios-book-outline",
   }
-
   const renderItem = ({ item }: { item: ServiceData }) => {
-    const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff"
     const color = themes[theme].textColor
     const iconName = titleToIcon[item.title]
 
     return (
       <ServicesContainer>
-        <TouchableOpacity
-          onPress={() => {
-            setSelectedId(item.id)
-            handleItemPress(item)
+        <Link
+          href={{
+            pathname: "service/[id]",
+            params: { id: item.id },
           }}
+          asChild
         >
-          <Box justifyContent={"center"} alignItems={"center"}>
-            <Ionicons name={iconName} size={24} color={color} />
-            <Text style={{ color }}>{item.title}</Text>
-          </Box>
-        </TouchableOpacity>
+          <TouchableOpacity>
+            <Box justifyContent={"center"} alignItems={"center"}>
+              <Ionicons name={iconName} size={24} color={color} />
+              <Text style={{ color }}>{item.title}</Text>
+            </Box>
+          </TouchableOpacity>
+        </Link>
       </ServicesContainer>
     )
   }

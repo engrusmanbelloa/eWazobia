@@ -1,14 +1,6 @@
 import { useState, useContext, useEffect, useRef } from "react"
 import { useNavigation, DrawerActions } from "@react-navigation/native"
-import { AuthStore } from "../../../../config/store"
-import {
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  StatusBar,
-  View,
-  StyleSheet,
-  DrawerLayoutAndroid,
-} from "react-native"
+import { TouchableOpacity, StatusBar } from "react-native"
 import {
   NativeBaseProvider,
   Text,
@@ -24,16 +16,19 @@ import {
 import { useRouter, Link } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
-import { Ionicons } from "@expo/vector-icons"
-import AsyncStorage from "@react-native-async-storage/async-storage"
-import * as LocalAuthentication from "expo-local-authentication"
 import AppBar from "../../../components/home/AppBar"
 import { modeTheme, themes } from "../../../../constants/Themes"
 import { ThemeContext } from "../../../../constants/ThemeContext"
-import ServicesTop from "../../../components/services/ServicesTop"
 import Wallets from "../../../components/home/Wallets"
 import HomeQuickTx from "../../../components/home/HomeQuickTx"
 import Utilities from "../../../components/services/Utilities"
+import servicesData from "../../../../constants/services"
+
+type ServiceData = {
+  id: Number
+  title: string
+  icon: string
+}
 
 interface ThemeProps {
   mode: {
@@ -67,10 +62,10 @@ const BottomContainer = styled(Stack)<{ theme: ThemeProps }>`
   height: 50%;
   width: 100%;
 `
-
 export default function ServicesScreen() {
   const { mode, setMode, theme, setTheme } = useContext(ThemeContext)
   const navigation = useNavigation()
+  const router = useRouter()
 
   return (
     <NativeBaseProvider>
@@ -91,7 +86,7 @@ export default function ServicesScreen() {
           <HomeQuickTx />
         </MiddleContainer>
         <BottomContainer>
-          <Utilities />
+          <Utilities servicesData={servicesData} />
         </BottomContainer>
       </Container>
     </NativeBaseProvider>

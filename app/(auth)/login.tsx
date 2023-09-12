@@ -1,6 +1,6 @@
-import { useState, useEffect, ChangeEvent } from "react"
+import { useState, useEffect, ChangeEvent, useContext } from "react"
 import { AuthStore } from "../../config/store"
-import { KeyboardAvoidingView } from "react-native"
+import { KeyboardAvoidingView, TouchableOpacity, StatusBar } from "react-native"
 import {
   NativeBaseProvider,
   Text,
@@ -16,11 +16,26 @@ import { Stack, useRouter, Link } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
+import { modeTheme, themes } from "../../constants/Themes"
+import { ThemeContext } from "../../constants/ThemeContext"
 import * as LocalAuthentication from "expo-local-authentication"
+
+interface ThemeProps {
+  mode: {
+    backgroundColor: string
+  }
+  theme: {
+    primaryColor: string
+    secondaryColor: string
+    drawerColor: string
+    activeColor: string
+    linkColor: string
+  }
+}
 
 const Container = styled(SafeAreaView)`
   flex: 1;
-  background: #228b22;
+  background: ${({ theme }: { theme: ThemeProps }) => theme.theme.primaryColor};
 `
 const Circle = styled(Pressable)`
   height: 45px;
@@ -60,7 +75,7 @@ const LoginStack = styled(VStack)`
 const LeftIcon = styled(Pressable)`
   left: 10px;
 `
-const Password = styled(Pressable)`
+const Password = styled(TouchableOpacity)`
   right: 10px;
 `
 const LoginInput = styled(Input)`
@@ -78,7 +93,7 @@ const ForgetPassword = styled(Text)`
   background: transparent;
 `
 const ForgetPwd = styled(Link)`
-  color: #0e32b4;
+  color: ${({ theme }: { theme: ThemeProps }) => theme.theme.linkColor};
   font-size: 16px;
   font-weight: 600;
   text-decoration: underline;
@@ -88,11 +103,14 @@ const Login = styled(Text)`
   font-size: 18px;
   font-weight: 500;
 `
-const LoginBtn = styled(Button)`
+const LoginBtn = styled(TouchableOpacity)`
   top: 5%;
   width: 100%;
-  background: #228b22;
+  height: 40px;
+  background: ${({ theme }: { theme: ThemeProps }) => theme.theme.primaryColor};
   border-radius: 50px;
+  justify-content: center;
+  align-items: center;
 `
 const ModalBox = styled(Modal)`
   background: red;
@@ -159,7 +177,7 @@ const SocialLogins = styled(HStack)`
   justify-content: space-around;
 `
 const SignUpBox = styled(Text)`
-  bottom: 8%;
+  bottom: 10%;
   color: #000;
   font-size: 14px;
   font-weight: 600;
@@ -180,6 +198,7 @@ export default function LoginScreen() {
   const [password, setPassword] = useState("")
   const [isModalVisible, setIsModalVisible] = useState(false)
   const { isLoggedIn, hasDoneKYC } = AuthStore.useState((s) => s)
+  const { mode, theme } = useContext(ThemeContext)
   const login = () => {
     // Login logic when password is entered
     if (password !== "") {
@@ -214,11 +233,21 @@ export default function LoginScreen() {
 
   return (
     <NativeBaseProvider>
-      <Container>
+      <Container theme={{ theme: themes[theme] }}>
+        <Stack.Screen options={{ title: "Login" }} />
+        <StatusBar
+          barStyle={mode === "light" ? "light-content" : "light-content"}
+          backgroundColor={
+            mode === "light" ? themes[theme].primaryColor : "#000"
+          }
+        />
         <Box>
-          {/* <Stack.Screen options={{ title: "Login" }} /> */}
           <Circle onPress={() => router.back()}>
-            <Ionicons name="chevron-back-sharp" size={34} color="#228b22" />
+            <Ionicons
+              name="chevron-back-sharp"
+              size={34}
+              color={themes[theme].primaryColor}
+            />
           </Circle>
           <Title>Welcome Back</Title>
           <Main>
@@ -232,7 +261,7 @@ export default function LoginScreen() {
                     <Ionicons
                       name="mail-open-outline"
                       size={25}
-                      color="#228b22"
+                      color={themes[theme].primaryColor}
                     />
                   </LeftIcon>
                 }
@@ -245,7 +274,11 @@ export default function LoginScreen() {
                 variant="rounded"
                 InputLeftElement={
                   <LeftIcon>
-                    <Ionicons name="lock-closed" size={25} color="#228b22" />
+                    <Ionicons
+                      name="lock-closed"
+                      size={25}
+                      color={themes[theme].primaryColor}
+                    />
                   </LeftIcon>
                 }
                 InputRightElement={
@@ -253,16 +286,18 @@ export default function LoginScreen() {
                     <Ionicons
                       name={show ? "eye" : "eye-off"}
                       size={25}
-                      color="#228b22"
+                      color={themes[theme].primaryColor}
                     />
                   </Password>
                 }
                 placeholder="password"
               />
               <ForgetPassword>
-                <ForgetPwd href="/forgortpwd">Forgot password?</ForgetPwd>
+                <ForgetPwd theme={{ theme: themes[theme] }} href="/forgortpwd">
+                  Forgot password?
+                </ForgetPwd>
               </ForgetPassword>
-              <LoginBtn onPress={login}>
+              <LoginBtn theme={{ theme: themes[theme] }} onPress={login}>
                 <Login>{loginMethod}</Login>
               </LoginBtn>
             </LoginStack>
@@ -273,7 +308,11 @@ export default function LoginScreen() {
               <ModalLogin>
                 <ModalTex>Login</ModalTex>
                 <ModalStack>
-                  <Ionicons name="ios-finger-print" size={50} color="#228b22" />
+                  <Ionicons
+                    name="ios-finger-print"
+                    size={50}
+                    color={themes[theme].primaryColor}
+                  />
                   <ModalInfo>Touch the fingerprint sensor</ModalInfo>
                   <ModalCancel onPress={() => setIsModalVisible(false)}>
                     Cancel
