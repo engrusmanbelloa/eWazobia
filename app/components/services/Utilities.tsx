@@ -86,6 +86,7 @@ export default function Utilities({ servicesData }: UtilitiesProps) {
     "My Flights": "ios-book-outline",
     "My Recharges": "ios-book-outline",
   }
+
   const renderItem = ({ item }: { item: ServiceData }) => {
     const color = themes[theme].textColor
     const iconName = titleToIcon[item.title]
@@ -93,13 +94,18 @@ export default function Utilities({ servicesData }: UtilitiesProps) {
     return (
       <ServicesContainer>
         <Link
-          href={{
-            pathname: "service/[id]",
-            params: { id: item.id },
-          }}
+          href={`/service/${item.id}`}
+          // href={{
+          //   pathname: "service/[id]",
+          //   params: { id: item.id },
+          // }}
           asChild
         >
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              console.log("Pressed item id", item.id)
+            }}
+          >
             <Box justifyContent={"center"} alignItems={"center"}>
               <Ionicons name={iconName} size={24} color={color} />
               <Text style={{ color }}>{item.title}</Text>

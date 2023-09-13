@@ -1,19 +1,10 @@
 import { useState, useContext, useEffect, useRef } from "react"
 import { useNavigation, DrawerActions } from "@react-navigation/native"
 import { TouchableOpacity, StatusBar } from "react-native"
-import {
-  NativeBaseProvider,
-  Text,
-  Box,
-  Pressable,
-  Input,
-  VStack,
-  Stack,
-  HStack,
-  Button,
-  Modal,
-} from "native-base"
-import { useRouter, Link } from "expo-router"
+import { NativeBaseProvider, Box, Stack } from "native-base"
+import { useRouter, useSearchParams, Link } from "expo-router"
+import { ActivityIndicator } from "react-native"
+import { useQuery } from "@tanstack/react-query"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import AppBar from "../../../components/home/AppBar"
@@ -23,12 +14,6 @@ import Wallets from "../../../components/home/Wallets"
 import HomeQuickTx from "../../../components/home/HomeQuickTx"
 import Utilities from "../../../components/services/Utilities"
 import servicesData from "../../../../constants/services"
-
-type ServiceData = {
-  id: Number
-  title: string
-  icon: string
-}
 
 interface ThemeProps {
   mode: {
@@ -67,6 +52,19 @@ export default function ServicesScreen() {
   const navigation = useNavigation()
   const router = useRouter()
 
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["servicesData"],
+    queryFn: () => Promise.resolve(servicesData),
+    // () =>
+    //   fetch('https://api.github.com/repos/TanStack/query').then(
+    //     (res) => res.json(),
+    //   ),
+  })
+
+  if (isLoading) return <ActivityIndicator />
+
+  if (error) return "An error has occurred: "
+
   return (
     <NativeBaseProvider>
       <Container theme={{ mode: modeTheme[mode] }}>
@@ -86,7 +84,7 @@ export default function ServicesScreen() {
           <HomeQuickTx />
         </MiddleContainer>
         <BottomContainer>
-          <Utilities servicesData={servicesData} />
+          {data && <Utilities servicesData={data} />}
         </BottomContainer>
       </Container>
     </NativeBaseProvider>
