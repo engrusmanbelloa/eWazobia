@@ -31,6 +31,8 @@ export default function RechargeScreen() {
   const { mode, theme } = useContext(ThemeContext)
   const { id } = useLocalSearchParams<{ id: string }>()
   const numId = id && parseInt(id, 10)
+
+  // Retrieve the corresponding service from the servicesData array based on the id
   const service = servicesData.find((s) => s.id === numId)
 
   // Define a component mapping object
@@ -38,8 +40,9 @@ export default function RechargeScreen() {
     "Airtime Recharge": <Recharge />,
     "Data Purchase": <Data />,
   }
-
+  // Retrieve the corresponding component from the mapping object
   const ComponentToRender = service ? componentMapping[service.title] : null
+
   return (
     <NativeBaseProvider>
       <Container theme={{ mode: modeTheme[mode] }}>

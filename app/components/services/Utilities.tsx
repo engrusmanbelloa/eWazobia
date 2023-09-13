@@ -102,9 +102,9 @@ export default function Utilities({ servicesData }: UtilitiesProps) {
           asChild
         >
           <TouchableOpacity
-            onPress={() => {
-              console.log("Pressed item id", item.id)
-            }}
+          // onPress={() => {
+          //   console.log("Pressed item id", item.id)
+          // }}
           >
             <Box justifyContent={"center"} alignItems={"center"}>
               <Ionicons name={iconName} size={24} color={color} />
