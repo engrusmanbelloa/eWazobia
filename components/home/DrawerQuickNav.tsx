@@ -17,8 +17,8 @@ import {
   Feather,
 } from "@expo/vector-icons"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { modeTheme, themes } from "../../../constants/Themes"
-import { ThemeContext } from "../../../constants/ThemeContext"
+import { modeTheme, themes } from "../../constants/Themes"
+import { ThemeContext } from "../../constants/ThemeContext"
 
 interface ThemeProps {
   mode: {

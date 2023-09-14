@@ -1,6 +1,6 @@
 import styled from "styled-components/native"
 import { useState, useRef, ChangeEvent } from "react"
-import { AuthStore } from "../../config/store"
+import { AuthStore } from "../config/store"
 import { Text, Box, Input } from "native-base"
 import { Stack, useRouter, Link } from "expo-router"
 

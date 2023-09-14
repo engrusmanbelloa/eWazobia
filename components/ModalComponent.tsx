@@ -1,6 +1,6 @@
 import React from "react"
 import { useState, ChangeEvent } from "react"
-import { AuthStore } from "../../config/store"
+import { AuthStore } from "../config/store"
 import { KeyboardAvoidingView } from "react-native"
 import { Text, Box, VStack, Modal } from "native-base"
 import { Stack, useRouter, Link } from "expo-router"
@@ -8,7 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
 import Submit from "./Submit"
-import OtpPage from "../components/Otp"
+import OtpPage from "./Otp"
 
 const ModalBox = styled(Modal)`
   background: red;

@@ -31,8 +31,8 @@ import {
 } from "@expo/vector-icons"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { TabView, SceneMap } from "react-native-tab-view"
-import { modeTheme, themes } from "../../../constants/Themes"
-import { ThemeContext } from "../../../constants/ThemeContext"
+import { modeTheme, themes } from "../../constants/Themes"
+import { ThemeContext } from "../../constants/ThemeContext"
 
 interface ThemeProps {
   mode: {
@@ -47,8 +47,7 @@ interface ThemeProps {
 const TxStack = styled(HStack)<{ theme: ThemeProps }>`
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }: { theme: ThemeProps }) =>
-    theme.mode.backgroundColor};
+
   top: -20px;
   background-color: transparent;
 `

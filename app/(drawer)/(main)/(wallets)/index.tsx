@@ -26,7 +26,7 @@ import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import * as LocalAuthentication from "expo-local-authentication"
-import AppBar from "../../../components/home/AppBar"
+import AppBar from "../../../../components/home/AppBar"
 import { modeTheme, themes } from "../../../../constants/Themes"
 
 interface ThemeProps {

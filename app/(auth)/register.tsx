@@ -14,7 +14,7 @@ import { Stack, useRouter, Link } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
-import ModalComponent from "../components/ModalComponent"
+import ModalComponent from "../../components/ModalComponent"
 
 const Container = styled(SafeAreaView)`
   flex: 1;

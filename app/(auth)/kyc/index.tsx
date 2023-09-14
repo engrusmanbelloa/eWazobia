@@ -21,8 +21,8 @@ import { AuthStore } from "../../../config/store"
 import InfoScreen from "./info"
 import BvnScreen from "./verifyId"
 import IdUploadScreen from "./idupload"
-import Submit from "../../components/Submit"
-import ModalComponent from "../../components/ModalComponent"
+import Submit from "../../../components/Submit"
+import ModalComponent from "../../../components/ModalComponent"
 // Define the styled components
 const Container = styled(SafeAreaView)`
   flex: 1;

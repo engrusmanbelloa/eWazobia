@@ -4,8 +4,8 @@ import { Box, Text, Stack, HStack } from "native-base"
 import styled from "styled-components/native"
 import { Link } from "expo-router"
 import { Ionicons } from "@expo/vector-icons"
-import { modeTheme, themes } from "../../../constants/Themes"
-import { ThemeContext } from "../../../constants/ThemeContext"
+import { modeTheme, themes } from "../../constants/Themes"
+import { ThemeContext } from "../../constants/ThemeContext"
 
 interface ThemeProps {
   mode: {

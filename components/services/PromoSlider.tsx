@@ -22,7 +22,7 @@ import {
   Modal,
 } from "native-base"
 import { LinearGradient } from "expo-linear-gradient"
-import { slides } from "../../../constants/data"
+import { slides } from "../../constants/data"
 import { Ionicons } from "@expo/vector-icons"
 import styled from "styled-components/native"
 

@@ -17,7 +17,7 @@ import {
   Select,
 } from "native-base"
 import styled from "styled-components/native"
-import Submit from "../../components/Submit"
+import Submit from "../../../components/Submit"
 
 // Define the styled components
 const InfoScreenContainer = styled(KeyboardAvoidingView)`

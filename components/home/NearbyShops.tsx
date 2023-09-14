@@ -27,9 +27,9 @@ import styled from "styled-components/native"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { SafeAreaView } from "react-native-safe-area-context"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { modeTheme, themes } from "../../../constants/Themes"
-import { ThemeContext } from "../../../constants/ThemeContext"
-import { transactions, shops } from "../../../constants/data"
+import { modeTheme, themes } from "../../constants/Themes"
+import { ThemeContext } from "../../constants/ThemeContext"
+import { transactions, shops } from "../../constants/data"
 
 interface RouteProps {
   key: string

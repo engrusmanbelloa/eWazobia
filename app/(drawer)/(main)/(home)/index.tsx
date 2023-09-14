@@ -8,10 +8,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useNavigation, DrawerActions } from "@react-navigation/native"
 import { modeTheme, themes } from "../../../../constants/Themes"
 import { ThemeContext } from "../../../../constants/ThemeContext"
-import AppBar from "../../../components/home/AppBar"
-import Wallets from "../../../components/home/Wallets"
-import HomeQuickTx from "../../../components/home/HomeQuickTx"
-import NearByShops from "../../../components/home/NearbyShops"
+import AppBar from "../../../../components/home/AppBar"
+import Wallets from "../../../../components/home/Wallets"
+import HomeQuickTx from "../../../../components/home/HomeQuickTx"
+import NearByShops from "../../../../components/home/NearbyShops"
 
 interface ThemeProps {
   mode: {
@@ -43,8 +43,6 @@ const MiddleContainer = styled(Box)<{ theme: ThemeProps }>`
   background-color: transparent;
 `
 const BottomContainer = styled(Box)<{ theme: ThemeProps }>`
-  background-color: ${({ theme }: { theme: ThemeProps }) =>
-    theme.mode.backgroundColor};
   background-color: transparent;
   padding-bottom: 50px;
 `

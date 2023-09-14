@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native"
-import { AuthStore } from "../../config/store"
+import { AuthStore } from "../config/store"
 import { NativeBaseProvider, Text, Box } from "native-base"
 import { Stack, useRouter } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"

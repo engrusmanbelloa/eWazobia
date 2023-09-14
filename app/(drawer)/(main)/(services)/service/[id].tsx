@@ -9,9 +9,9 @@ import { useNavigation, DrawerActions } from "@react-navigation/native"
 import { modeTheme, themes } from "../../../../../constants/Themes"
 import { ThemeContext } from "../../../../../constants/ThemeContext"
 import servicesData from "../../../../../constants/services"
-import Recharge from "../../../../components/services/Recharge"
-import ComingSoon from "../../../../components/services/ComingSoon"
-import Data from "../../../../components/services/Data"
+import Recharge from "../../../../../components/services/Recharge"
+import ComingSoon from "../../../../../components/services/ComingSoon"
+import Data from "../../../../../components/services/Data"
 interface ThemeProps {
   mode: {
     backgroundColor: string

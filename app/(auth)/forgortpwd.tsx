@@ -13,8 +13,8 @@ import { Stack, useRouter, Link } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
-import Submit from "../components/Submit"
-import ModalComponent from "../components/ModalComponent"
+import Submit from "../../components/Submit"
+import ModalComponent from "../../components/ModalComponent"
 
 const Container = styled(SafeAreaView)`
   flex: 1;

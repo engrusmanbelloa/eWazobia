@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import { NativeBaseProvider, Text, Box, Pressable, HStack } from "native-base"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { AuthStore } from "../../config/store"
-import Button from "../components/Button"
+import Button from "../../components/Button"
 
 const Container = styled(SafeAreaView)`
   flex: 1;

@@ -11,8 +11,8 @@ import { VStack, NativeBaseProvider } from "native-base"
 import { modeTheme, themes } from "../../constants/Themes"
 import { ThemeContext } from "../../constants/ThemeContext"
 import styled from "styled-components/native"
-import DrawerTopNav from "../components/home/DrawerTopNav"
-import DrawerQickNav from "../components/home/DrawerQuickNav"
+import DrawerTopNav from "../../components/home/DrawerTopNav"
+import DrawerQickNav from "../../components/home/DrawerQuickNav"
 
 interface ThemeProps {
   mode: {

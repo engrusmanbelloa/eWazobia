@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect, ChangeEvent } from "react"
-import { AuthStore } from "../../../config/store"
+import { AuthStore } from "../../config/store"
 import {
   KeyboardAvoidingView,
   TouchableOpacity,
@@ -10,7 +10,7 @@ import {
   Animated,
   Image,
 } from "react-native"
-import { ThemeContext } from "../../../constants/ThemeContext"
+import { ThemeContext } from "../../constants/ThemeContext"
 import {
   NativeBaseProvider,
   Text,
@@ -30,8 +30,8 @@ import { Ionicons } from "@expo/vector-icons"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import * as LocalAuthentication from "expo-local-authentication"
 import AppBar from "../home/AppBar"
-import { modeTheme, themes } from "../../../constants/Themes"
-import { slides } from "../../../constants/data"
+import { modeTheme, themes } from "../../constants/Themes"
+import { slides } from "../../constants/data"
 import PromoSlider from "./PromoSlider"
 import FlatSlider from "./FlatSlider"
 
