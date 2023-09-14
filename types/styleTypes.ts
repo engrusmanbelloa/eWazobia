@@ -11,4 +11,5 @@ export interface ThemeProps {
     textColor: string
     linkColor: string
   }
+  active: boolean
 }

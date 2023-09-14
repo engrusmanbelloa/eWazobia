@@ -1,52 +1,23 @@
 import { useState, useContext, useEffect, ChangeEvent } from "react"
-import {
-  Animated,
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  StatusBar,
-  FlatList,
-} from "react-native"
+import { Animated, TouchableOpacity, FlatList } from "react-native"
 import {
   TabView,
   SceneMap,
   NavigationState,
-  Route,
   SceneRendererProps,
 } from "react-native-tab-view"
-import {
-  VStack,
-  Box,
-  HStack,
-  Text,
-  Avatar,
-  ScrollView,
-  Image,
-} from "native-base"
+import { VStack, Box, HStack, Text, Avatar, Image } from "native-base"
 import styled from "styled-components/native"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { SafeAreaView } from "react-native-safe-area-context"
-import AsyncStorage from "@react-native-async-storage/async-storage"
 import { modeTheme, themes } from "../../constants/Themes"
 import { ThemeContext } from "../../constants/ThemeContext"
 import { transactions, shops } from "../../constants/data"
+import { ThemeProps } from "../../types/styleTypes"
 
 interface RouteProps {
   key: string
   title: string
-}
-
-interface ThemeProps {
-  mode: {
-    backgroundColor: string
-  }
-  theme: {
-    primaryColor: string
-    secondaryColor: string
-    drawerColor: string
-    activeColor: string
-  }
-  active: boolean
 }
 
 const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
