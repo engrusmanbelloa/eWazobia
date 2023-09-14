@@ -14,16 +14,7 @@ import Wallets from "../../../../components/home/Wallets"
 import HomeQuickTx from "../../../../components/home/HomeQuickTx"
 import Utilities from "../../../../components/services/Utilities"
 import servicesData from "../../../../constants/services"
-
-interface ThemeProps {
-  mode: {
-    backgroundColor: string
-  }
-  theme: {
-    primaryColor: string
-    secondaryColor: string
-  }
-}
+import { ThemeProps } from "../../../../types/styleTypes"
 
 const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
   flex: 1;

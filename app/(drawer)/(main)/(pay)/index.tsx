@@ -28,16 +28,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import * as LocalAuthentication from "expo-local-authentication"
 import AppBar from "../../../../components/home/AppBar"
 import { modeTheme, themes } from "../../../../constants/Themes"
-
-interface ThemeProps {
-  mode: {
-    backgroundColor: string
-  }
-  theme: {
-    primaryColor: string
-    secondaryColor: string
-  }
-}
+import { ThemeProps } from "../../../../types/styleTypes"
 
 const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
   flex: 1;

@@ -18,20 +18,7 @@ import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
 import { modeTheme, themes } from "../../constants/Themes"
 import { ThemeContext } from "../../constants/ThemeContext"
-import * as LocalAuthentication from "expo-local-authentication"
-
-interface ThemeProps {
-  mode: {
-    backgroundColor: string
-  }
-  theme: {
-    primaryColor: string
-    secondaryColor: string
-    drawerColor: string
-    activeColor: string
-    linkColor: string
-  }
-}
+import { ThemeProps } from "../../types/styleTypes"
 
 const Container = styled(SafeAreaView)`
   flex: 1;

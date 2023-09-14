@@ -12,18 +12,7 @@ import AppBar from "../../../../components/home/AppBar"
 import Wallets from "../../../../components/home/Wallets"
 import HomeQuickTx from "../../../../components/home/HomeQuickTx"
 import NearByShops from "../../../../components/home/NearbyShops"
-
-interface ThemeProps {
-  mode: {
-    backgroundColor: string
-  }
-  theme: {
-    primaryColor: string
-    secondaryColor: string
-    drawerColor: string
-    activeColor: string
-  }
-}
+import { ThemeProps } from "../../../../types/styleTypes"
 
 const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
   flex: 1;

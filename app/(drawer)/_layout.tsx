@@ -13,18 +13,7 @@ import { ThemeContext } from "../../constants/ThemeContext"
 import styled from "styled-components/native"
 import DrawerTopNav from "../../components/home/DrawerTopNav"
 import DrawerQickNav from "../../components/home/DrawerQuickNav"
-
-interface ThemeProps {
-  mode: {
-    backgroundColor: string
-  }
-  theme: {
-    primaryColor: string
-    secondaryColor: string
-    drawerColor: string
-    activeColor: string
-  }
-}
+import { ThemeProps } from "../../types/styleTypes"
 
 const DrawerViewContainer = styled(VStack)`
   flex: 1;

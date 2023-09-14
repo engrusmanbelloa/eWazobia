@@ -1,36 +1,4 @@
-interface Services {
-  id: number
-  title: string
-  icon: string
-  optionGroups: ServiceOptionGroup[]
-}
-
-interface ServiceOptionGroup {
-  label: string
-  options: ServiceOption[]
-  hasCustomValue?: boolean
-  meterNumber?: number
-  naration?: string
-}
-
-interface ServiceOption {
-  value: string | number
-  label: string
-  billers?: Biller[]
-}
-
-interface Biller {
-  value: string
-  label: string
-  products: Product[]
-}
-
-interface Product {
-  value: string
-  label: string
-  amount: number
-}
-
+import { Services } from "../types/servicesType"
 const servicesData: Services[] = [
   {
     id: 1,

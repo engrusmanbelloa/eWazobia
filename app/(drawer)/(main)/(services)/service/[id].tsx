@@ -1,5 +1,5 @@
 import { useState, useContext, useRef, useEffect, ComponentType } from "react"
-import { TouchableOpacity, StatusBar, DrawerLayoutAndroid } from "react-native"
+import { TouchableOpacity, StatusBar, ActivityIndicator } from "react-native"
 import { NativeBaseProvider, VStack, ScrollView, Box, Text } from "native-base"
 import { Stack, useRouter, Link, useLocalSearchParams } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
@@ -12,6 +12,7 @@ import servicesData from "../../../../../constants/services"
 import Recharge from "../../../../../components/services/Recharge"
 import ComingSoon from "../../../../../components/services/ComingSoon"
 import Data from "../../../../../components/services/Data"
+import { useQuery } from "@tanstack/react-query"
 interface ThemeProps {
   mode: {
     backgroundColor: string
@@ -33,25 +34,32 @@ export default function RechargeScreen() {
   const numId = id && parseInt(id, 10)
 
   // Retrieve the corresponding service from the servicesData array based on the id
-  const service = servicesData.find((s) => s.id === numId)
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["service", id],
+    queryFn: () => servicesData.find((s) => s.id === numId),
+  })
+
+  if (isLoading) return <ActivityIndicator />
+
+  if (error) return "An error has occurred: "
+
+  // const service = servicesData.find((s) => s.id === numId)
 
   // Define a component mapping object
   const componentMapping: { [key: string]: JSX.Element } = {
-    "Airtime Recharge": <Recharge />,
+    "Airtime Recharge": data ? (
+      <Recharge service={data} />
+    ) : (
+      <ActivityIndicator />
+    ),
     "Data Purchase": <Data />,
   }
   // Retrieve the corresponding component from the mapping object
-  const ComponentToRender = service ? componentMapping[service.title] : null
+  const ComponentToRender = data ? componentMapping[data.title] : null
 
   return (
     <NativeBaseProvider>
       <Container theme={{ mode: modeTheme[mode] }}>
-        <StatusBar
-          barStyle={mode === "light" ? "light-content" : "light-content"}
-          backgroundColor={
-            mode === "light" ? themes[theme].secondaryColor : "#000"
-          }
-        />
         {ComponentToRender ? ComponentToRender : <ComingSoon />}
       </Container>
     </NativeBaseProvider>

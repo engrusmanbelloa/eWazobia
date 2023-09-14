@@ -6,44 +6,8 @@ import { Link } from "expo-router"
 import { Ionicons } from "@expo/vector-icons"
 import { modeTheme, themes } from "../../constants/Themes"
 import { ThemeContext } from "../../constants/ThemeContext"
-
-interface ThemeProps {
-  mode: {
-    backgroundColor: string
-    textColor: string
-  }
-  theme: {
-    primaryColor: string
-    secondaryColor: string
-    drawerColor: string
-    activeColor: string
-    textColor: string
-  }
-}
-
-type ServiceData = {
-  id: Number
-  title: string
-  icon: string
-}
-
-interface UtilitiesProps {
-  selectedId?: Number | undefined
-  servicesData: ServiceData[]
-}
-
-type IconName =
-  | "key"
-  | "ios-call-outline"
-  | "ios-wifi-outline"
-  | "cog-outline"
-  | "ios-send-outline"
-  | "ios-tv-outline"
-  | "ios-airplane-outline"
-  | "ios-book-outline"
-  | "push"
-  | "map"
-  | "filter"
+import { UtilitiesProps, ServiceData, IconName } from "../../types/servicesType"
+import { ThemeProps } from "../../types/styleTypes"
 
 const Container = styled(Stack)<{ theme: ThemeProps }>`
   flex: 1;
@@ -71,7 +35,6 @@ const ServicesContainer = styled(HStack)<{ theme: ThemeProps }>`
   border-radius: 5px;
   padding: 5px 0;
 `
-
 export default function Utilities({ servicesData }: UtilitiesProps) {
   const { mode, theme } = useContext(ThemeContext)
 
