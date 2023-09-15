@@ -14,8 +14,10 @@ interface ServiceOptionGroup {
 }
 
 interface ServiceOption {
-  value: string | number
-  label: string
+  value: string
+  label?: string
+  amount?: number
+  RecentPhones?: RecentPhones[]
   billers?: Biller[]
 }
 
@@ -23,6 +25,11 @@ interface Biller {
   value: string
   label: string
   products: Product[]
+}
+
+interface RecentPhones {
+  PhoneNumber: string
+  Provider: string
 }
 
 interface Product {

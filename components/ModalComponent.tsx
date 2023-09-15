@@ -1,5 +1,5 @@
 import React from "react"
-import { useState, ChangeEvent } from "react"
+import { useState, ChangeEvent, ReactNode } from "react"
 import { AuthStore } from "../config/store"
 import { KeyboardAvoidingView } from "react-native"
 import { Text, Box, VStack, Modal } from "native-base"
@@ -13,8 +13,8 @@ import OtpPage from "./Otp"
 const ModalBox = styled(Modal)`
   background: red;
   width: 100%;
-  height: 80%;
-  top: 25%;
+  height: 65%;
+  top: 35%;
   border-radius: 15px;
 `
 const ModalContent = styled(VStack)`
@@ -59,7 +59,7 @@ const TermsLink = styled(Link)`
   font-weight: 600;
 `
 const ModalCancel = styled(Text)`
-  top: 40%;
+  top: 0;
   color: #0e32b4;
 `
 
@@ -80,11 +80,10 @@ interface ModalComponentProps {
   infoLinkText?: string
   modalX?: string
   submit?: string
-  children?: React.ReactNode
+  children?: ReactNode
 }
 
 export default function ModalComponent(props: ModalComponentProps) {
-  // const [isModalVisible, setIsModalVisible] = useState(false)
   const {
     isModalVisible,
     setIsModalVisible,

@@ -103,7 +103,7 @@ export default function Onboarding() {
         <Circle></Circle>
         <Circle></Circle>
         <Getstarted>
-          <Button title="Get started" />
+          <Button title="Get started" linkHref="register" />
         </Getstarted>
         <SignInBox>
           Already a member?&nbsp;
