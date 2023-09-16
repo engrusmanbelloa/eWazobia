@@ -94,28 +94,24 @@ export default function Recharge({ service }: { service: Services }) {
     setMobileNumber(value)
   }
 
-  // Handler for when the  input is changed input is changed
+  // Handler to open the modal dialog for approving transaction
   const handleRecharge = () => {
     setIsModalVisible(true)
     console.log(isModalVisible)
   }
 
-  const handleSucess = () => {
+  // Handler for successfull recharge
+  const handleSuccess = () => {
     setShowSuccess(false)
     router.push("/index")
   }
 
-  // Handler for pin recharge
+  // Handler for pin verification
   const handlePin = () => {
     setPinRecharge(true)
     setIsModalVisible(false)
     setShowSuccess(true)
   }
-
-  // const handlePin = () => {
-  //   router.push("/index")
-  //   setIsModalVisible(false)
-  // }
 
   return (
     <Container theme={{ theme: themes[theme] }}>
@@ -223,7 +219,7 @@ export default function Recharge({ service }: { service: Services }) {
         )}
       </ModalComponent>
       <ModalComponent
-        handlePress={handleSucess}
+        handlePress={handleSuccess}
         showBtn={showBtn}
         isModalVisible={showSuccess}
         setIsModalVisible={setShowSuccess}
