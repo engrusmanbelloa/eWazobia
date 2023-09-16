@@ -1,9 +1,9 @@
 import React from "react"
 import { useState, ChangeEvent, ReactNode } from "react"
 import { AuthStore } from "../config/store"
-import { KeyboardAvoidingView } from "react-native"
-import { Text, Box, VStack, Modal } from "native-base"
-import { Stack, useRouter, Link } from "expo-router"
+import { KeyboardAvoidingView, ScrollView, Platform } from "react-native"
+import { Text, Box, VStack, Modal, Stack } from "native-base"
+import { useRouter, Link } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
@@ -14,7 +14,7 @@ const ModalBox = styled(Modal)`
   background: red;
   width: 100%;
   height: 65%;
-  top: 35%;
+  top: 40%;
   border-radius: 15px;
 `
 const ModalContent = styled(VStack)`
@@ -23,16 +23,20 @@ const ModalContent = styled(VStack)`
   height: 100%;
   border-radius: 15px;
   bottom: 0%;
+  flex: 1;
 `
-const ModalStack = styled(VStack)`
+const ModalOuterStack = styled(Stack)`
+  top: 40px;
+  flex: 1;
+`
+const ModalInnerStack = styled(VStack)`
   justify-content: center;
   align-items: center;
-  top: 80px;
 `
 const ModalTex = styled(Text)`
   top: 25px;
   left: 25px;
-  margin-bottom: 20%;
+  margin-bottom: 10%;
   font-size: 25px;
   font-weight: 600;
   line-height: 25px;
@@ -59,7 +63,7 @@ const TermsLink = styled(Link)`
   font-weight: 600;
 `
 const ModalCancel = styled(Text)`
-  top: 0;
+  top: 5%;
   color: #0e32b4;
 `
 
@@ -80,6 +84,8 @@ interface ModalComponentProps {
   infoLinkText?: string
   modalX?: string
   submit?: string
+  inputNums?: number
+  otpMessage?: string
   children?: ReactNode
 }
 
@@ -102,6 +108,8 @@ export default function ModalComponent(props: ModalComponentProps) {
     modalX,
     submit,
     children,
+    inputNums,
+    otpMessage,
   } = props
   // const title = "Success"
   // const info = "Didn't recieve the code?"
@@ -112,14 +120,15 @@ export default function ModalComponent(props: ModalComponentProps) {
   // const iconName = "ios-finger-print"
 
   return (
-    <>
-      <ModalBox
-        isOpen={isModalVisible}
-        onClose={() => setIsModalVisible(false)}
-      >
-        <ModalContent>
-          <ModalTex>{title}</ModalTex>
-          <ModalStack>
+    <ModalBox
+      isOpen={isModalVisible}
+      avoidKeyboard
+      onClose={() => setIsModalVisible(false)}
+    >
+      <ModalContent>
+        <ModalTex>{title}</ModalTex>
+        <ModalOuterStack>
+          <ModalInnerStack>
             {children}
             {showIcon && (
               <Ionicons
@@ -129,9 +138,14 @@ export default function ModalComponent(props: ModalComponentProps) {
                 color="#228b22"
               />
             )}
-            {showOtpPage && <OtpPage />}
+            {showOtpPage && (
+              <OtpPage
+                otpMessage={otpMessage}
+                inputNums={inputNums ? inputNums : 0}
+              />
+            )}
             <ModalIntro>{intro}</ModalIntro>
-            <Box w={"75%"}>
+            <Box w={"75%"} top={"0%"}>
               <Submit handlePress={handlePress} submit={submit} />
             </Box>
             <ModalInfo>
@@ -141,9 +155,9 @@ export default function ModalComponent(props: ModalComponentProps) {
             <ModalCancel onPress={() => setIsModalVisible(false)}>
               {modalX}
             </ModalCancel>
-          </ModalStack>
-        </ModalContent>
-      </ModalBox>
-    </>
+          </ModalInnerStack>
+        </ModalOuterStack>
+      </ModalContent>
+    </ModalBox>
   )
 }

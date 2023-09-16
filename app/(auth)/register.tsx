@@ -199,6 +199,8 @@ export default function LoginScreen() {
               infoLink="/register"
               submit="Submit"
               showOtpPage={showOtpPage}
+              otpMessage="Enter your 6 digits sent to example@gmail.com"
+              inputNums={6}
               modalX="Back to Sign up"
             />
             <ContinueStack>

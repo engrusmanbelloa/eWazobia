@@ -1,11 +1,16 @@
 import styled from "styled-components/native"
 import { useState, useRef, ChangeEvent } from "react"
 import { AuthStore } from "../config/store"
-import { Text, Box, Input } from "native-base"
+import { Text, Box, Input, ScrollView } from "native-base"
 import { Stack, useRouter, Link } from "expo-router"
 
 const OtpContainer = styled(Box)`
   flex-direction: row;
+`
+const OtpMsg = styled(Text)`
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: 500;
 `
 const OtpInput = styled(Input)`
   top: 0;
@@ -13,11 +18,16 @@ const OtpInput = styled(Input)`
   height: 40px;
   border-radius: 5px;
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
 `
+interface PinProps {
+  inputNums: number
+  otpMessage?: string
+}
 
-const OtpPage = () => {
-  const [otp, setOtp] = useState<string[]>(Array(6).fill(""))
+const OtpPage = (props: PinProps) => {
+  const { inputNums, otpMessage } = props
+  const [otp, setOtp] = useState<string[]>(Array(inputNums).fill(""))
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
   const handleOtpChange = (index: number, value: string) => {
@@ -48,7 +58,7 @@ const OtpPage = () => {
 
   return (
     <>
-      <Text mt={1}>Enter the 6 digit sent to example@gmail.com</Text>
+      <OtpMsg>{otpMessage}</OtpMsg>
       <OtpContainer>
         {otp.map((value, index) => (
           <Box w={10} height={1} m={1} key={index}>
@@ -56,6 +66,7 @@ const OtpPage = () => {
               value={value}
               maxLength={1}
               keyboardType="numeric"
+              focusOutlineColor={"#228b22"}
               onChangeText={(text: string) => handleOtpChange(index, text)}
               onKeyPress={({ nativeEvent }: { nativeEvent: { key: string } }) =>
                 handleOtpKeyPress(index, nativeEvent.key)

@@ -1,5 +1,5 @@
 import { useState, useEffect, ChangeEvent, useContext } from "react"
-import { GestureResponderEvent, TouchableOpacity, FlatList } from "react-native"
+import { Platform, TouchableOpacity, KeyboardAvoidingView } from "react-native"
 import {
   NativeBaseProvider,
   Text,
@@ -24,6 +24,7 @@ import BackBtn from "../BackBtn"
 import Button from "../Button"
 import { Services } from "../../types/servicesType"
 import ModalComponent from "../ModalComponent"
+import PinVerify from "../PinVerify"
 
 const Container = styled(ScrollView)`
   flex: 1;
@@ -203,10 +204,15 @@ export default function Recharge({ service }: { service: Services }) {
         isModalVisible={isModalVisible}
         title="Recharge"
         infoLink=""
-        submit="Use PIN"
+        showOtpPage={pinRecharge}
+        otpMessage="Enter your 4 digit taransaction pin"
+        inputNums={4}
+        submit={pinRecharge ? "Confirm" : "Use PIN"}
         modalX="Cancel"
       >
-        <Ionicons name="ios-finger-print" size={60} color="#00AA00" />
+        {!pinRecharge && (
+          <Ionicons name="ios-finger-print" size={60} color="#00AA00" />
+        )}
       </ModalComponent>
     </Container>
   )
