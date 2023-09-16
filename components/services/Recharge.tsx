@@ -76,6 +76,7 @@ export default function Recharge({ service }: { service: Services }) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
   const [pinRecharge, setPinRecharge] = useState(false)
+  const showBtn = true
 
   // Handler for when the provider is changed
   const handleProviderChange = (value: string) => {
@@ -99,9 +100,16 @@ export default function Recharge({ service }: { service: Services }) {
     console.log(isModalVisible)
   }
 
+  const handleSucess = () => {
+    setShowSuccess(false)
+    router.push("/index")
+  }
+
   // Handler for pin recharge
   const handlePin = () => {
     setPinRecharge(true)
+    setIsModalVisible(false)
+    setShowSuccess(true)
   }
 
   // const handlePin = () => {
@@ -214,6 +222,16 @@ export default function Recharge({ service }: { service: Services }) {
           <Ionicons name="ios-finger-print" size={60} color="#00AA00" />
         )}
       </ModalComponent>
+      <ModalComponent
+        handlePress={handleSucess}
+        showBtn={showBtn}
+        isModalVisible={showSuccess}
+        setIsModalVisible={setShowSuccess}
+        title="Success"
+        intro="Recharge sucessfull"
+        infoLink=""
+        submit="Home"
+      />
     </Container>
   )
 }
