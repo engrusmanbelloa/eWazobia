@@ -1,20 +1,21 @@
-import { useState, useEffect, ChangeEvent, useContext } from "react"
-import { Platform, TouchableOpacity, KeyboardAvoidingView } from "react-native"
+import { useState, useEffect, useCallback, useContext } from "react"
 import {
-  NativeBaseProvider,
+  Platform,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  ScrollView,
+  RefreshControl,
+} from "react-native"
+import {
   Text,
   Box,
-  Pressable,
   Input,
   VStack,
   HStack,
-  Modal,
   Select,
-  ScrollView,
   CheckIcon,
 } from "native-base"
 import { Stack, useRouter, Link } from "expo-router"
-import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
 import { modeTheme, themes } from "../../constants/Themes"
@@ -24,7 +25,6 @@ import BackBtn from "../BackBtn"
 import Button from "../Button"
 import { Services } from "../../types/servicesType"
 import ModalComponent from "../ModalComponent"
-import PinVerify from "../PinVerify"
 
 const Container = styled(ScrollView)`
   flex: 1;
@@ -53,7 +53,7 @@ const ValuStack = styled(Box)`
   background-color: #fff;
   justify-content: center;
   align-items: center;
-  height: 60px;
+  height: 50px;
 `
 const ValueMap = styled(HStack)`
   width: 100%;
@@ -62,7 +62,18 @@ const ValueMap = styled(HStack)`
   align-items: center;
   justify-content: space-between;
 `
-
+const PhoneMap = styled(HStack)`
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`
+const PhoneStack = styled(Box)`
+  width: 25%;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+`
 export default function Recharge({ service }: { service: Services }) {
   const { mode, theme } = useContext(ThemeContext)
   const router = useRouter()
@@ -71,11 +82,14 @@ export default function Recharge({ service }: { service: Services }) {
   const [selectedProvider, setSelectedProvider] = useState("")
   const [selectedAmount, setSelectedAmount] = useState<number>()
   const [mobileNumber, setMobileNumber] = useState<number>()
+  const [selectedId, setSelectedId] = useState<string>()
   const [inputValue, setInputValue] = useState<string>()
   const [phoneNuber, setPhoneNuber] = useState<string>()
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
   const [pinRecharge, setPinRecharge] = useState(false)
+  const [pinConfirm, setPinConfirm] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
   const showBtn = true
 
   // Handler for when the provider is changed
@@ -88,44 +102,84 @@ export default function Recharge({ service }: { service: Services }) {
     const numberValue = typeof value === "string" ? parseInt(value, 10) : value
     setSelectedAmount(numberValue)
   }
-
   // Handler for when the phone number input is changed input is changed
   const handlePhoneNumberChange = (value: number) => {
     setMobileNumber(value)
   }
-
   // Handler to open the modal dialog for approving transaction
   const handleRecharge = () => {
     setIsModalVisible(true)
-    console.log(isModalVisible)
+    setPinRecharge(false)
   }
 
   // Handler for successfull recharge
   const handleSuccess = () => {
     setShowSuccess(false)
-    router.push("/index")
+    router.push("../../(services)")
   }
 
   // Handler for pin verification
   const handlePin = () => {
-    setPinRecharge(true)
-    setIsModalVisible(false)
-    setShowSuccess(true)
+    if (!pinRecharge && !pinConfirm) {
+      setPinRecharge(true)
+      setPinConfirm(true)
+    } else if (pinConfirm) {
+      setIsModalVisible(false)
+      setShowSuccess(true)
+    }
   }
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    setTimeout(() => {
+      setRefreshing(false)
+    }, 2000)
+  }, [])
+
   return (
-    <Container theme={{ theme: themes[theme] }}>
-      <Stack.Screen options={{ title: "Login" }} />
+    <Container
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+      theme={{ theme: themes[theme] }}
+    >
       <HStack h={20} alignItems={"center"}>
         <BackBtn />
         <Title>{service.title}</Title>
       </HStack>
-      {/* Provider dropdown */}
-      <VStack w={"90%"} m={"auto"} mt={2}>
+      <VStack w={"90%"} m={"auto"} mt={0}>
+        {/* Recent recharges map */}
+        <Text fontSize={20} color={"#fff"}>
+          Recent
+        </Text>
+        <PhoneMap>
+          {service.optionGroups &&
+            service.optionGroups[2].options &&
+            service.optionGroups[2].options.map(
+              (option) =>
+                option.recentPhones &&
+                option.recentPhones.map((phone) => (
+                  <PhoneStack key={phone.PhoneNumber}>
+                    <TouchableOpacity
+                      style={{}}
+                      onPress={() => {
+                        // handleAmountChange(option.value)
+                        // setInputValue(option.value.toString())
+                      }}
+                    >
+                      <Text color={"#fff"} fontSize={12}>
+                        {phone.PhoneNumber}
+                      </Text>
+                    </TouchableOpacity>
+                  </PhoneStack>
+                ))
+            )}
+        </PhoneMap>
+        {/* Provider dropdown */}
         <Provider
           accessibilityLabel="Select Provider"
           placeholder="Select Provider"
-          placeholderTextColor="#ffffff"
+          placeholderTextColor="#fff"
           borderRadius="10px"
           selectedValue={selectedProvider}
           _selectedItem={{
@@ -144,13 +198,14 @@ export default function Recharge({ service }: { service: Services }) {
         </Provider>
         {/* amount selection */}
         <AmountStack>
-          <Text mt={5} fontSize={20} w={"full"} color={"#fff"}>
+          <Text mt={2} fontSize={20} w={"full"} color={"#fff"}>
             Select amount
           </Text>
           <ValueMap>
             {service.optionGroups[1].options.map((option) => (
               <ValuStack key={option.value}>
                 <TouchableOpacity
+                  style={{}}
                   onPress={() => {
                     handleAmountChange(option.value)
                     setInputValue(option.value.toString())
@@ -167,6 +222,7 @@ export default function Recharge({ service }: { service: Services }) {
           <Input
             variant="underlined"
             placeholder="Amount"
+            placeholderTextColor={"#fff"}
             inputMode="numeric"
             color={"#fff"}
             fontSize={18}
@@ -174,7 +230,7 @@ export default function Recharge({ service }: { service: Services }) {
             isRequired
             focusOutlineColor={"#fff"}
             maxLength={4}
-            mb={5}
+            mb={3}
             onChangeText={(value) => {
               setInputValue(value)
               console.log(inputValue)
@@ -186,38 +242,51 @@ export default function Recharge({ service }: { service: Services }) {
           <Input
             variant="underlined"
             placeholder="Phone number"
+            placeholderTextColor={"#fff"}
             inputMode="numeric"
             color={"#fff"}
             fontSize={18}
             value={phoneNuber}
             isRequired
             focusOutlineColor={"#fff"}
-            maxLength={4}
-            mb={10}
+            maxLength={11}
+            mb={5}
             onChangeText={(value) => {
               setPhoneNuber(value)
               console.log(phoneNuber)
             }}
           />
         )}
-        <Button title="Recharge" handlePress={handleRecharge} />
+        <Box bottom={"1%"}>
+          <Button title="Recharge" handlePress={handleRecharge} />
+        </Box>
       </VStack>
-      <ModalComponent
-        handlePress={handlePin}
-        setIsModalVisible={setIsModalVisible}
-        isModalVisible={isModalVisible}
-        title="Recharge"
-        infoLink=""
-        showOtpPage={pinRecharge}
-        otpMessage="Enter your 4 digit taransaction pin"
-        inputNums={4}
-        submit={pinRecharge ? "Confirm" : "Use PIN"}
-        modalX="Cancel"
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
       >
-        {!pinRecharge && (
-          <Ionicons name="ios-finger-print" size={60} color="#00AA00" />
-        )}
-      </ModalComponent>
+        <ModalComponent
+          handlePress={handlePin}
+          setIsModalVisible={setIsModalVisible}
+          isModalVisible={isModalVisible}
+          title="Verify"
+          infoLink=""
+          showOtpPage={pinRecharge}
+          otpMessage="Enter your 4 digit taransaction pin"
+          inputNums={4}
+          submit={pinRecharge ? "Confirm" : "Use PIN"}
+          modalX="Cancel"
+        >
+          {!pinRecharge && (
+            <Ionicons
+              name="ios-finger-print"
+              size={60}
+              color={themes[theme].primaryColor}
+            />
+          )}
+        </ModalComponent>
+      </KeyboardAvoidingView>
       <ModalComponent
         handlePress={handleSuccess}
         showBtn={showBtn}
@@ -226,7 +295,7 @@ export default function Recharge({ service }: { service: Services }) {
         title="Success"
         intro="Recharge sucessfull"
         infoLink=""
-        submit="Home"
+        submit="Exit"
       />
     </Container>
   )

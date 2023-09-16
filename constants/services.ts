@@ -35,20 +35,14 @@ const servicesData: Services[] = [
           {
             label: "Phone Number",
             value: "Phone Number",
-            RecentPhones: [
+            recentPhones: [
               { PhoneNumber: "09098165428", Provider: "MTN" },
               { PhoneNumber: "08098265427", Provider: "Zain" },
-              { PhoneNumber: "07098365429", Provider: "MTN" },
               { PhoneNumber: "09098565424", Provider: "Glo" },
               { PhoneNumber: "09098765428", Provider: "9Mobile" },
             ],
           },
         ],
-        hasCustomValue: true,
-      },
-      {
-        label: "Recent",
-        options: [],
         hasCustomValue: true,
       },
     ],

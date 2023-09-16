@@ -6,7 +6,7 @@ import { Link } from "expo-router"
 import { Ionicons } from "@expo/vector-icons"
 import { modeTheme, themes } from "../../constants/Themes"
 import { ThemeContext } from "../../constants/ThemeContext"
-import { UtilitiesProps, ServiceData, IconName } from "../../types/servicesType"
+import { UtilitiesProps, Services, IconName } from "../../types/servicesType"
 import { ThemeProps } from "../../types/styleTypes"
 
 const Container = styled(Stack)<{ theme: ThemeProps }>`
@@ -50,25 +50,14 @@ export default function Utilities({ servicesData }: UtilitiesProps) {
     "My Recharges": "ios-book-outline",
   }
 
-  const renderItem = ({ item }: { item: ServiceData }) => {
+  const renderItem = ({ item }: { item: Services }) => {
     const color = themes[theme].textColor
     const iconName = titleToIcon[item.title]
 
     return (
       <ServicesContainer>
-        <Link
-          href={`/service/${item.id}`}
-          // href={{
-          //   pathname: "service/[id]",
-          //   params: { id: item.id },
-          // }}
-          asChild
-        >
-          <TouchableOpacity
-          // onPress={() => {
-          //   console.log("Pressed item id", item.id)
-          // }}
-          >
+        <Link href={`/service/${item.id}`} asChild>
+          <TouchableOpacity>
             <Box justifyContent={"center"} alignItems={"center"}>
               <Ionicons name={iconName} size={24} color={color} />
               <Text style={{ color }}>{item.title}</Text>

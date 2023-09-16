@@ -13,6 +13,7 @@ import Recharge from "../../../../../components/services/Recharge"
 import ComingSoon from "../../../../../components/services/ComingSoon"
 import Data from "../../../../../components/services/Data"
 import { useQuery } from "@tanstack/react-query"
+
 interface ThemeProps {
   mode: {
     backgroundColor: string
@@ -42,6 +43,16 @@ export default function RechargeScreen() {
   if (isLoading) return <ActivityIndicator />
 
   if (error) return "An error has occurred: "
+
+  if (data) {
+    // console.log("The full data object:", data)
+    data.optionGroups.forEach((optionGroup, index) => {
+      console.log(`Options for option group #${index + 1}:`)
+      optionGroup.options.forEach((option, optionIndex) => {
+        console.log(`  Option #${optionIndex + 1}:`, option)
+      })
+    })
+  }
 
   // const service = servicesData.find((s) => s.id === numId)
 

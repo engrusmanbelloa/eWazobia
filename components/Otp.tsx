@@ -1,8 +1,10 @@
 import styled from "styled-components/native"
-import { useState, useRef, ChangeEvent } from "react"
+import { useState, useRef, useContext } from "react"
 import { AuthStore } from "../config/store"
 import { Text, Box, Input, ScrollView } from "native-base"
 import { Stack, useRouter, Link } from "expo-router"
+import { modeTheme, themes } from "../constants/Themes"
+import { ThemeContext } from "../constants/ThemeContext"
 
 const OtpContainer = styled(Box)`
   flex-direction: row;
@@ -29,6 +31,7 @@ const OtpPage = (props: PinProps) => {
   const { inputNums, otpMessage } = props
   const [otp, setOtp] = useState<string[]>(Array(inputNums).fill(""))
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
+  const { mode, theme } = useContext(ThemeContext)
 
   const handleOtpChange = (index: number, value: string) => {
     if (value.length <= 1) {
@@ -66,7 +69,7 @@ const OtpPage = (props: PinProps) => {
               value={value}
               maxLength={1}
               keyboardType="numeric"
-              focusOutlineColor={"#228b22"}
+              focusOutlineColor={themes[theme].primaryColor}
               onChangeText={(text: string) => handleOtpChange(index, text)}
               onKeyPress={({ nativeEvent }: { nativeEvent: { key: string } }) =>
                 handleOtpKeyPress(index, nativeEvent.key)

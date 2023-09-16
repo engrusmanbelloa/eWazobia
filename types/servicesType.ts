@@ -17,7 +17,7 @@ interface ServiceOption {
   value: string
   label?: string
   amount?: number
-  RecentPhones?: RecentPhones[]
+  recentPhones?: RecentPhones[]
   billers?: Biller[]
 }
 
@@ -38,15 +38,9 @@ interface Product {
   amount: number
 }
 
-export type ServiceData = {
-  id: Number
-  title: string
-  icon: string
-}
-
 export interface UtilitiesProps {
   selectedId?: Number | undefined
-  servicesData: ServiceData[]
+  servicesData: Services[]
 }
 
 export type IconName =

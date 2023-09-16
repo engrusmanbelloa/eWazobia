@@ -9,6 +9,28 @@ interface icon {
   color: string
 }
 function TabBarIcon(props: icon) {
+  const { name, color } = props
+  const { mode, theme } = useContext(ThemeContext)
+
+  const iconSize = name === "ios-scan-outline" ? 45 : 28
+  const iconMarginBottom = name === "ios-scan-outline" ? -15 : -3
+  const iconPadding = name === "ios-scan-outline" ? 5 : 0
+  const iconBorderRadius = name === "ios-scan-outline" ? 10 : 0
+  const iconBacground =
+    name === "ios-scan-outline" ? themes[theme].linkColor : "#fff"
+  const iconPosition = name === "ios-scan-outline" ? "absolute" : "relative"
+
+  const iconStyle = {
+    marginBottom: iconMarginBottom,
+    padding: iconPadding,
+    borderRadius: iconBorderRadius,
+    backgroundColor: iconBacground,
+    position: iconPosition,
+    // color: name === "ios-scan-outline" ? "#fff" : themes[theme].primaryColor,
+  }
+  // return (
+  // <Ionicons size={iconSize} style={iconStyle} name={name} color={color} />
+  // )
   return <Ionicons size={28} style={{ marginBottom: -3 }} {...props} />
 }
 
@@ -25,6 +47,7 @@ export default function MainTabLayout() {
         tabBarActiveTintColor: themes[theme].primaryColor,
         tabBarStyle: {
           backgroundColor: modeTheme[mode].backgroundColor,
+          justifyContent: "center",
         },
       }}
     >
@@ -71,7 +94,7 @@ export default function MainTabLayout() {
           title: "Pay",
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="scan-circle-outline" color={color} />
+            <TabBarIcon name="ios-scan-outline" color={color} />
           ),
         }}
       />

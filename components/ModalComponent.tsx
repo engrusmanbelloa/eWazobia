@@ -1,5 +1,5 @@
 import React from "react"
-import { useState, ChangeEvent, ReactNode } from "react"
+import { useState, useContext, ReactNode } from "react"
 import { AuthStore } from "../config/store"
 import { KeyboardAvoidingView, ScrollView, Platform } from "react-native"
 import { Text, Box, VStack, Modal, Stack } from "native-base"
@@ -7,6 +7,8 @@ import { useRouter, Link } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components/native"
 import { Ionicons } from "@expo/vector-icons"
+import { modeTheme, themes } from "../constants/Themes"
+import { ThemeContext } from "../constants/ThemeContext"
 import Submit from "./Submit"
 import OtpPage from "./Otp"
 
@@ -90,6 +92,7 @@ interface ModalComponentProps {
 }
 
 export default function ModalComponent(props: ModalComponentProps) {
+  const { mode, theme } = useContext(ThemeContext)
   const {
     isModalVisible,
     setIsModalVisible,
@@ -111,13 +114,6 @@ export default function ModalComponent(props: ModalComponentProps) {
     inputNums,
     otpMessage,
   } = props
-  // const title = "Success"
-  // const info = "Didn't recieve the code?"
-  // const infoLinkText = "Resend"
-  // const modalX = "Back to Sign up"
-  // const infoLink = "/register"
-  // const intro = " Congratulations You have successfully signed up!"
-  // const iconName = "ios-finger-print"
 
   return (
     <ModalBox
@@ -135,7 +131,7 @@ export default function ModalComponent(props: ModalComponentProps) {
                 onPress={handleIcon}
                 name={iconName}
                 size={iconSize}
-                color="#228b22"
+                color={themes[theme].primaryColor}
               />
             )}
             {showOtpPage && (
@@ -145,7 +141,7 @@ export default function ModalComponent(props: ModalComponentProps) {
               />
             )}
             <ModalIntro>{intro}</ModalIntro>
-            <Box w={"75%"} top={"0%"}>
+            <Box w={"75%"} top={"0"}>
               <Submit handlePress={handlePress} submit={submit} />
             </Box>
             <ModalInfo>
