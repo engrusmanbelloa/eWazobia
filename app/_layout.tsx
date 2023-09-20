@@ -16,9 +16,12 @@ export {
 const queryClient = new QueryClient()
 
 export default function RootLayout() {
-  const { mode, setMode, theme, setTheme } = useContext(ThemeContext)
+  const { mode, theme } = useContext(ThemeContext)
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    SpaceMonoBoldItalic: require("../assets/fonts/SpaceMono-BoldItalic.ttf"),
+    SpaceMonoItalic: require("../assets/fonts/SpaceMono-Italic.ttf"),
+    InclusiveSans: require("../assets/fonts/InclusiveSans-Regular.ttf"),
     ...FontAwesome.font,
   })
 
