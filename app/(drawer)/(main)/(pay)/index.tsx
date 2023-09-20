@@ -53,26 +53,28 @@ const Title = styled(Text)`
   font-size: 25px;
   font-weight: 500;
   line-height: 25px;
-  top: 5%;
+  top: 0%;
 `
 const SubHeading = styled(Text)`
   color: #fff;
   font-size: 15px;
   font-weight: 300;
-  top: 30%;
+  top: 20%;
 `
 const Amount = styled(Text)`
   color: #fff;
-  font-size: 25px;
-  font-weight: 600;
-  line-height: 25px;
+  font-size: 35px;
+  font-weight: 500;
+  line-height: 35px;
   margin-right: 5px;
-  top: 35%;
+  top: 25%;
 `
 const PaymentStack = styled(VStack)`
   position: absolute;
-  top: 7%;
+  top: 0%;
   height: 30%;
+  justify-content: center;
+  align-items: center;
 `
 export default function PayScreen() {
   const { mode, theme } = useContext(ThemeContext)
