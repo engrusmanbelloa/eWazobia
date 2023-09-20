@@ -44,15 +44,15 @@ export default function RechargeScreen() {
 
   if (error) return "An error has occurred: "
 
-  if (data) {
-    // console.log("The full data object:", data)
-    data.optionGroups.forEach((optionGroup, index) => {
-      console.log(`Options for option group #${index + 1}:`)
-      optionGroup.options.forEach((option, optionIndex) => {
-        console.log(`  Option #${optionIndex + 1}:`, option)
-      })
-    })
-  }
+  // if (data) {
+  //   // console.log("The full data object:", data)
+  //   data.optionGroups.forEach((optionGroup, index) => {
+  //     console.log(`Options for option group #${index + 1}:`)
+  //     optionGroup.options.forEach((option, optionIndex) => {
+  //       console.log(`  Option #${optionIndex + 1}:`, option)
+  //     })
+  //   })
+  // }
 
   // const service = servicesData.find((s) => s.id === numId)
 
