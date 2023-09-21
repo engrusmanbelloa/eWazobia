@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect, ChangeEvent } from "react"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
 import {
   KeyboardAvoidingView,
   TouchableOpacity,
@@ -26,6 +27,7 @@ import { LinearGradient } from "expo-linear-gradient"
 import { ThemeContext } from "../../../../constants/ThemeContext"
 import { modeTheme, themes } from "../../../../constants/Themes"
 import { ThemeProps } from "../../../../types/styleTypes"
+import QRScan from "../../../../components/QRScan"
 
 const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
   flex: 1;
@@ -33,11 +35,6 @@ const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
   align-items: center;
   background-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.mode.backgroundColor};
-`
-const Circle = styled(LinearGradient)`
-  position: absolute;
-  border-radius: 500px;
-  margin: auto;
 `
 const InnerCircle = styled(LinearGradient)`
   position: absolute;
@@ -50,24 +47,28 @@ const InnerCircle = styled(LinearGradient)`
 `
 const Title = styled(Text)`
   color: #fff;
-  font-size: 25px;
+  font-size: 35px;
   font-weight: 500;
-  line-height: 25px;
+  line-height: 35px;
   top: 0%;
 `
 const SubHeading = styled(Text)`
   color: #fff;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 300;
-  top: 20%;
+  top: 15%;
+`
+const AmountStack = styled(HStack)`
+  align-items: center;
+  justify-content: center;
+  top: 25%;
 `
 const Amount = styled(Text)`
   color: #fff;
   font-size: 35px;
   font-weight: 500;
   line-height: 35px;
-  margin-right: 5px;
-  top: 25%;
+  letter-spacing: -2px;
 `
 const PaymentStack = styled(VStack)`
   position: absolute;
@@ -96,8 +97,16 @@ export default function PayScreen() {
         <PaymentStack>
           <Title>Payment</Title>
           <SubHeading>Making payment</SubHeading>
-          <Amount>25,000.00</Amount>
+          <AmountStack>
+            <MaterialCommunityIcons
+              name="currency-ngn"
+              size={20}
+              color="#fff"
+            />
+            <Amount>25,000.00</Amount>
+          </AmountStack>
         </PaymentStack>
+        <QRScan />
       </Container>
     </NativeBaseProvider>
   )
