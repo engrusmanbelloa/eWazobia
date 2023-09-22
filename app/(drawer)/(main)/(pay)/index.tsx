@@ -29,7 +29,7 @@ import { modeTheme, themes } from "../../../../constants/Themes"
 import { ThemeProps } from "../../../../types/styleTypes"
 import QRScan from "../../../../components/QRScan"
 
-const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
+const Container = styled(VStack)<{ theme: ThemeProps }>`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -38,10 +38,10 @@ const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
 `
 const InnerCircle = styled(LinearGradient)`
   position: absolute;
-  width: 500px;
-  height: 500px;
-  bottom: 67%;
-  border-radius: 500px;
+  width: 700px;
+  height: 700px;
+  bottom: 65%;
+  border-radius: 700px;
   justify-content: center;
   align-items: center;
 `
@@ -56,12 +56,12 @@ const SubHeading = styled(Text)`
   color: #fff;
   font-size: 16px;
   font-weight: 300;
-  top: 15%;
+  top: 17%;
 `
 const AmountStack = styled(HStack)`
   align-items: center;
   justify-content: center;
-  top: 25%;
+  top: 30%;
 `
 const Amount = styled(Text)`
   color: #fff;
@@ -77,6 +77,16 @@ const PaymentStack = styled(VStack)`
   justify-content: center;
   align-items: center;
 `
+const MiddleContainer = styled(SafeAreaView)<{ theme: ThemeProps }>`
+  width: 100%;
+  height: 70%;
+  justify-content: center;
+  align-items: center;
+  top: 20%;
+  background-color: ${({ theme }: { theme: ThemeProps }) =>
+    theme.mode.textColor};
+`
+
 export default function PayScreen() {
   const { mode, theme } = useContext(ThemeContext)
   const firstColor = themes[theme].primaryColor
@@ -91,12 +101,12 @@ export default function PayScreen() {
       <Container theme={{ mode: modeTheme[mode] }}>
         <InnerCircle
           colors={[firstColor, secondColor]}
-          start={{ x: 0.6, y: 0.8 }}
-          end={{ x: 1, y: 0.3 }}
+          start={{ x: 0.5, y: 0.8 }}
+          end={{ x: 1, y: 0.5 }}
         />
         <PaymentStack>
           <Title>Payment</Title>
-          <SubHeading>Making payment</SubHeading>
+          <SubHeading>Wallet balance</SubHeading>
           <AmountStack>
             <MaterialCommunityIcons
               name="currency-ngn"
@@ -106,7 +116,9 @@ export default function PayScreen() {
             <Amount>25,000.00</Amount>
           </AmountStack>
         </PaymentStack>
-        <QRScan />
+        <MiddleContainer theme={{ mode: modeTheme[mode] }}>
+          <QRScan />
+        </MiddleContainer>
       </Container>
     </NativeBaseProvider>
   )

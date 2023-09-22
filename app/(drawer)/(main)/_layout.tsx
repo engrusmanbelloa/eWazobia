@@ -26,12 +26,17 @@ function TabBarIcon(props: icon) {
     borderRadius: iconBorderRadius,
     backgroundColor: iconBacground,
     position: iconPosition,
-    // color: name === "ios-scan-outline" ? "#fff" : themes[theme].primaryColor,
   }
   // return (
   // <Ionicons size={iconSize} style={iconStyle} name={name} color={color} />
   // )
-  return <Ionicons size={28} style={{ marginBottom: -3 }} {...props} />
+  return (
+    <Ionicons
+      size={28}
+      style={{ marginBottom: -3, color: "#fff" }}
+      {...props}
+    />
+  )
 }
 
 // export const unstable_settings = {
@@ -45,9 +50,22 @@ export default function MainTabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: themes[theme].primaryColor,
+        tabBarActiveBackgroundColor: themes[theme].linkColor,
+        tabBarAllowFontScaling: true,
+        tabBarItemStyle: {
+          borderRadius: 50,
+        },
+        tabBarLabelStyle: {
+          color: "#fff",
+          fontSize: 10,
+        },
+        tabBarIconStyle: {
+          color: "#fff",
+        },
         tabBarStyle: {
-          backgroundColor: modeTheme[mode].backgroundColor,
+          backgroundColor: themes[theme].primaryColor,
           justifyContent: "center",
+          alignItems: "center",
         },
       }}
     >
