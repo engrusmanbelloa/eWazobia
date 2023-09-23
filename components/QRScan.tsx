@@ -1,48 +1,33 @@
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Platform,
-  Button,
-} from "react-native"
+import { TouchableOpacity, Platform } from "react-native"
 import { BarCodeScanner } from "expo-barcode-scanner"
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import * as ImagePicker from "expo-image-picker"
 import { Ionicons } from "@expo/vector-icons"
-import {
-  KeyboardAvoidingView,
-  Text,
-  Input,
-  Stack,
-  FormControl,
-  HStack,
-  Box,
-  VStack,
-  Select,
-  Pressable,
-  Modal,
-  Divider,
-  Image,
-  Avatar,
-} from "native-base"
+import { Text, Stack, HStack, Box, VStack, Modal, Avatar } from "native-base"
 import styled from "styled-components/native"
+import { ThemeContext } from "../constants/ThemeContext"
+import { modeTheme, themes } from "../constants/Themes"
+import { ThemeProps } from "../types/styleTypes"
 
 const Container = styled(VStack)`
   width: 100%;
   height: 100%;
   alignitems: center;
   justifycontent: center;
-  background-color: #fff;
+  background-color: ${({ theme }: { theme: ThemeProps }) =>
+    theme.theme.primaryColor};
 `
 const Cam = styled(Stack)`
-  flex: 1;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
-  background: blue;
 `
 const Scanner = styled(BarCodeScanner)`
   width: 100%;
-  height: 100%;
+  height: 99%;
+  align-items: center;
+  justify-content: center;
 `
 const CaputreStack = styled(VStack)`
   position: absolute;
@@ -53,11 +38,10 @@ const CaputreStack = styled(VStack)`
   margin-bottom: 10px;
 `
 const ScanStack = styled(VStack)`
-  top: 0%;
+  bottom: 2%;
   width: 100%;
   height: 100%;
   align-items: center;
-  background-color: #4556;
 `
 const CamGuide = styled(Text)`
   font-size: 16px;
@@ -66,61 +50,63 @@ const CamGuide = styled(Text)`
   color: #fff;
   margin-bottom: 20px;
   text-align: center;
+  width: 70%;
 `
 const UserBox = styled(VStack)`
   width: 25%;
   height: 35%;
-  top: 20px;
+  top: 5%;
   align-items: center;
   border-radius: 15px;
   background-color: #876;
+  background-color: ${({ theme }: { theme: ThemeProps }) =>
+    theme.theme.activeColor};
 `
 const UserName = styled(Text)`
   top: 20%;
-  color: #fff;
+  color: ${({ theme }: { theme: ThemeProps }) => theme.theme.primaryColor};
   font-size: 16px;
   width: 100%;
   text-align: center;
 `
-const Circle = styled(TouchableOpacity)`
+const Circle = styled(Box)`
   height: 45px;
   width: 45px;
-  background: #228b22
-  border: 3px solid #FFF;
+  background: ${({ theme }: { theme: ThemeProps }) => theme.theme.primaryColor};
+  border: 3px solid #fff;
   border-radius: 50px;
+  justify-content: center;
+  align-items: center;
 `
 const GetScanned = styled(TouchableOpacity)`
-  top: 15%;
-  background-color: blue;
-  padding-horizontal: 20px;
-  padding-vertical: 10px;
+  top: 10%;
   border-radius: 5px;
-  width: 50%;
   align-items: center;
   justify-content: center;
 `
 const GetScannedTxt = styled(Text)`
-  color: white;
-  top: 50%;
-  font-size: 16px;
-  font-weight: bold;
+  color: #fff;
+  top: 15%;
+  font-size: 20px;
+  font-weight: 600;
   text-align: center;
+  width: 50%;
 `
 const ScanCircle = styled(Box)`
-  width: 110px;
-  height: 110px;
-  bottom: 25%;
-  border-radius: 120px;
+  width: 90px;
+  height: 90px;
+  border-radius: 80px;
   justify-content: center;
   align-items: center;
-  border-width: 10px;
+  border-width: 7px;
+  border-bottom-color: #fff;
   border-right-color: #fff;
-
-  border-top-left-color: #543;
-  border-left-color: #fff;
+  border-top-color: #234;
+  text-align: center;
 `
 
 export default function QRScan() {
+  const { mode, theme } = useContext(ThemeContext)
   const [hasPermission, setHasPermission] = useState<boolean | null>(null)
   const [scanned, setScanned] = useState(false)
   const [data, setData] = useState<string | null>(null)
@@ -198,30 +184,42 @@ export default function QRScan() {
     return (
       <Cam>
         <Scanner
-          //   style={{ width: "50%", height: "100%" }}
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         />
       </Cam>
     )
   }
   return (
-    <Container>
+    <Container theme={{ theme: themes[theme] }}>
       {isCameraActive ? (
-        <Modal isOpen={showModal} onClose={setCamClose}>
-          <Modal.Content top={"10%"} h={"60%"} w={"100%"}>
+        <Modal
+          isOpen={showModal}
+          onClose={setCamClose}
+          bg={themes[theme].activeColor}
+          opacity={0.8}
+        >
+          <Modal.Content top={"10%"} h={"70%"} width={"95%"}>
             <Modal.CloseButton bg={"#880808"} />
             {renderCamera()}
             <CaputreStack>
               <CamGuide>
                 Align the QR code to the center of the scanner area
               </CamGuide>
-              <Circle onPress={pickImage} />
+              <Circle theme={{ theme: themes[theme] }}>
+                <TouchableOpacity onPress={pickImage}>
+                  <Ionicons
+                    size={25}
+                    name="ios-images"
+                    color={themes[theme].textColor}
+                  />
+                </TouchableOpacity>
+              </Circle>
             </CaputreStack>
           </Modal.Content>
         </Modal>
-      ) : (
+      ) : !data ? (
         <ScanStack>
-          <UserBox>
+          <UserBox theme={{ theme: themes[theme] }}>
             <TouchableOpacity>
               <Avatar
                 size={70}
@@ -233,15 +231,38 @@ export default function QRScan() {
                 AJ
               </Avatar>
             </TouchableOpacity>
-            <UserName>Bello Abdullahi</UserName>
+            <UserName theme={{ theme: themes[theme] }}>
+              Bello Abdullahi
+            </UserName>
           </UserBox>
           <GetScanned onPress={setCamModel} disabled={scanned}>
-            <ScanCircle></ScanCircle>
+            <ScanCircle>
+              <Ionicons
+                size={60}
+                name="ios-scan-outline"
+                color={themes[theme].textColor}
+              />
+            </ScanCircle>
           </GetScanned>
-          <GetScannedTxt>Scan QR to pay</GetScannedTxt>
-          <Button title="Pick QR from gallary" onPress={pickImage} />
-          {data && <Text>QR Code Data: {data}</Text>}
+          <GetScannedTxt>Touch the QR scanner to get started</GetScannedTxt>
+          <Text color={themes[theme].textColor} top={"17%"}>
+            Or
+          </Text>
+          <HStack top={"20%"}>
+            <Text color={themes[theme].textColor} right={2}>
+              Click here to pick from gallery
+            </Text>
+            <TouchableOpacity onPress={pickImage}>
+              <Ionicons
+                size={20}
+                name="ios-images"
+                color={themes[theme].textColor}
+              />
+            </TouchableOpacity>
+          </HStack>
         </ScanStack>
+      ) : (
+        <Box>{data && <Text>QR Code Data: {data}</Text>}</Box>
       )}
     </Container>
   )

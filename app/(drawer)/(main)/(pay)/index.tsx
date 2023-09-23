@@ -34,7 +34,7 @@ const Container = styled(VStack)<{ theme: ThemeProps }>`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }: { theme: ThemeProps }) =>
-    theme.mode.backgroundColor};
+    theme.theme.primaryColor};
 `
 const InnerCircle = styled(LinearGradient)`
   position: absolute;
@@ -98,11 +98,11 @@ export default function PayScreen() {
       <StatusBar
         barStyle={mode === "light" ? "light-content" : "light-content"}
       />
-      <Container theme={{ mode: modeTheme[mode] }}>
+      <Container theme={{ theme: themes[theme] }}>
         <InnerCircle
           colors={[firstColor, secondColor]}
-          start={{ x: 0.5, y: 0.8 }}
-          end={{ x: 1, y: 0.5 }}
+          start={{ x: 1, y: 0.8 }}
+          end={{ x: 1, y: 1 }}
         />
         <PaymentStack>
           <Title>Payment</Title>
