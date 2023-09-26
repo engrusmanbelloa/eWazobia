@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react"
+import { useState, useContext, useEffect, ChangeEvent } from "react"
 import { Ionicons } from "@expo/vector-icons"
-import { useRootNavigationState } from "expo-router"
+import { StatusBar, ScrollView, TouchableOpacity } from "react-native"
 import { useRouter, useSegments } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
 import {
@@ -17,6 +17,9 @@ import {
   Stack,
 } from "native-base"
 import styled from "styled-components/native"
+import { ThemeContext } from "../../../constants/ThemeContext"
+import { modeTheme, themes } from "../../../constants/Themes"
+import { ThemeProps } from ".../../../types/styleTypes"
 import { AuthStore } from "../../../config/store"
 import InfoScreen from "./info"
 import BvnScreen from "./verifyId"
@@ -24,39 +27,45 @@ import IdUploadScreen from "./idupload"
 import Submit from "../../../components/Submit"
 import ModalComponent from "../../../components/ModalComponent"
 // Define the styled components
-const Container = styled(SafeAreaView)`
-  flex: 1;
-  background: #00aa00;
+const SafeArea = styled(SafeAreaView)`
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+`
+const Container = styled(VStack)`
+  width: 100%;
+  height: 100%;
+  background: ${({ theme }: { theme: ThemeProps }) => theme.theme.primaryColor};
 `
 const Head = styled(Box)`
   width: 100%;
   margin-bottom: 10px;
-  height: 50px;
-  top: 5px;
+  height: 10%;
+  top: 2%;
   flex-direction: row;
   align-items: center;
 `
-const Circle = styled(Pressable)`
+const Circle = styled(TouchableOpacity)`
   height: 45px;
   width: 45px;
   top: 0px;
   left: 15px;
   justify-content: center;
   align-items: center;
-  background: #228b22
-  border: 1px solid #FFF;
+  background: ${({ theme }: { theme: ThemeProps }) => theme.theme.textColor};
   border-radius: 50px;
 `
-const Main = styled(KeyboardAvoidingView)`
-  background: #fff;
-  justify-content: center;
-  align-items: center;
+const Main = styled(ScrollView)`
   width: 100%;
   height: 100%;
   top: 1%;
+  background: ${({ theme }: { theme: ThemeProps }) => theme.theme.textColor};
+  border-radius: 15px;
+  padding: 15px;
 `
 // Define the KYCProcess component
 export default function KYCProcess() {
+  const { mode, theme } = useContext(ThemeContext)
   const [step, setStep] = useState(1)
   const [showSuccess, setShowSuccess] = useState(false)
   const [basicInfo, setBasicInfo] = useState({
@@ -119,17 +128,27 @@ export default function KYCProcess() {
 
   return (
     <NativeBaseProvider>
-      <Container>
-        <VStack>
+      <StatusBar
+        barStyle={mode === "light" ? "light-content" : "light-content"}
+      />
+      <SafeArea>
+        <Container theme={{ theme: themes[theme] }}>
           <Head>
-            <Circle onPress={handlePreviousStep}>
-              <Ionicons name="chevron-back-sharp" size={34} color="#fff" />
+            <Circle
+              theme={{ theme: themes[theme] }}
+              onPress={handlePreviousStep}
+            >
+              <Ionicons
+                name="chevron-back-sharp"
+                size={34}
+                color={themes[theme].primaryColor}
+              />
             </Circle>
-            <Heading color={"#fff"} ml={"34%"}>
+            <Heading color={themes[theme].textColor} ml={"34%"}>
               KYC
             </Heading>
           </Head>
-          <Main>{renderStepContent()}</Main>
+          <Main theme={{ theme: themes[theme] }}>{renderStepContent()}</Main>
           <ModalComponent
             handlePress={login}
             showBtn={showBtn}
@@ -140,10 +159,14 @@ export default function KYCProcess() {
             infoLink=""
             submit="Login"
           >
-            <Ionicons name="ios-finger-print" size={50} color="#00AA00" />
+            <Ionicons
+              name="ios-finger-print"
+              size={60}
+              color={themes[theme].primaryColor}
+            />
           </ModalComponent>
-        </VStack>
-      </Container>
+        </Container>
+      </SafeArea>
     </NativeBaseProvider>
   )
 }

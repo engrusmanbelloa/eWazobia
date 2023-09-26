@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { Ionicons } from "@expo/vector-icons"
 import DatePicker from "react-native-datepicker"
 import DateTimePicker from "@react-native-community/datetimepicker"
@@ -17,26 +17,23 @@ import {
   Select,
 } from "native-base"
 import styled from "styled-components/native"
+import { ThemeContext } from "../../../constants/ThemeContext"
+import { modeTheme, themes } from "../../../constants/Themes"
+import { ThemeProps } from ".../../../types/styleTypes"
 import Submit from "../../../components/Submit"
 
 // Define the styled components
-const InfoScreenContainer = styled(KeyboardAvoidingView)`
-  flex: 1;
-  width: 100%;
-  top: 5px;
-  padding: 10px;
+const InfoScreenContainer = styled(VStack)`
+  margin-bottom: 20%;
 `
 const InfoText = styled(Text)`
   font-size: 25px;
   font-weight: 600;
   line-height: 25px;
-  top: 30px;
-  margin-bottom: 40px;
+  top: 5%;
+  margin-bottom: 10%;
 `
-const NamesInput = styled(Input)`
-  width: 95px;
-  left: 5px;
-`
+const NamesInput = styled(Input)``
 const Dob = styled(Button)`
   background: #fff;
   border: 0.5px solid #808080;
@@ -49,6 +46,7 @@ interface InfoProps {
 }
 
 export default function InfoScreen(props: InfoProps) {
+  const { mode, theme } = useContext(ThemeContext)
   const [step, setStep] = useState(1)
   const [dob, setDOB] = useState<Date | undefined>(undefined)
   const [showDatePicker, setShowDatePicker] = useState(false)
@@ -139,7 +137,7 @@ export default function InfoScreen(props: InfoProps) {
       <FormControl>
         {/* // Names Input Fields */}
         <HStack justifyContent={"center"}>
-          <Stack m={1} mt={5} w={"45%"}>
+          <Stack m={1} mt={"10%"} w={"45%"}>
             <NamesInput
               placeholder="First name"
               value={basicInfo.firstName}
@@ -148,7 +146,7 @@ export default function InfoScreen(props: InfoProps) {
               }
             />
           </Stack>
-          <Stack m={1} mt={5} w={"45%"}>
+          <Stack m={1} mt={"10%"} w={"45%"}>
             <NamesInput
               placeholder="Last name"
               value={basicInfo.lastName}
@@ -160,7 +158,7 @@ export default function InfoScreen(props: InfoProps) {
         </HStack>
         {/* // gender selection and dob */}
         <HStack justifyContent={"center"}>
-          <Stack m={1} mt={5} w={"45%"}>
+          <Stack m={1} mt={"10%"} w={"45%"}>
             <Gender
               selectedValue={basicInfo.gender}
               accessibilityLabel="Gender"
@@ -174,7 +172,7 @@ export default function InfoScreen(props: InfoProps) {
               <Gender.Item label="Other" value="other" />
             </Gender>
           </Stack>
-          <Stack m={1} mt={5} w={"45%"}>
+          <Stack m={1} mt={"10%"} w={"45%"}>
             <Dob onPress={() => setShowDatePicker(true)}>
               <Text>{dob ? dob.toDateString() : "Date of Birth"}</Text>
             </Dob>
@@ -192,7 +190,7 @@ export default function InfoScreen(props: InfoProps) {
         </HStack>
         {/* // addresses of customer */}
         <VStack justifyContent={"center"}>
-          <Stack m={"auto"} mt={5} w={"92%"}>
+          <Stack m={"auto"} mt={"10%"} w={"92%"}>
             <NamesInput
               variant="underlined"
               placeholder="Residential address"
@@ -202,7 +200,7 @@ export default function InfoScreen(props: InfoProps) {
               }
             />
           </Stack>
-          <Stack m={"auto"} mt={5} w={"92%"}>
+          <Stack m={"auto"} mt={"10%"} w={"92%"}>
             <NamesInput
               variant="underlined"
               placeholder="Home address"
@@ -215,7 +213,7 @@ export default function InfoScreen(props: InfoProps) {
         </VStack>
         {/* // nationality stack */}
         <HStack top={5} justifyContent={"center"}>
-          <Stack m={1} mt={5} w={"45%"}>
+          <Stack mt={"10%"} w={"45%"}>
             <RNPickerSelect
               placeholder={{ label: "Nationality", value: null }}
               items={nationalities}
@@ -223,7 +221,7 @@ export default function InfoScreen(props: InfoProps) {
               value={nationality}
             />
           </Stack>
-          <Stack m={1} mt={5} w={"45%"}>
+          <Stack mt={"10%"} w={"45%"}>
             <RNPickerSelect
               placeholder={{ label: "State", value: null }}
               items={states}
@@ -234,7 +232,7 @@ export default function InfoScreen(props: InfoProps) {
           </Stack>
         </HStack>
         {/* // zip code stack */}
-        <HStack top={5} justifyContent={"center"}>
+        <HStack mt={"10%"} justifyContent={"center"}>
           <Stack m={1} mt={5} w={"45%"}>
             <RNPickerSelect
               placeholder={{ label: "City", value: null }}
@@ -255,10 +253,8 @@ export default function InfoScreen(props: InfoProps) {
           </Stack>
         </HStack>
         {/* // next step */}
-        <HStack top={50} justifyContent={"center"}>
-          <Stack w={"95%"}>
-            <Submit handlePress={props.handleInfoSubmit} submit="Next" />
-          </Stack>
+        <HStack mt={"5%"} justifyContent={"center"}>
+          <Submit handlePress={props.handleInfoSubmit} submit="Next" />
         </HStack>
       </FormControl>
     </InfoScreenContainer>

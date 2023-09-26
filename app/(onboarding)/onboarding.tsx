@@ -1,14 +1,26 @@
 import { Link, Stack, useRouter } from "expo-router"
 import styled from "styled-components/native"
+import { useState, useContext, useEffect } from "react"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { NativeBaseProvider, Text, Box, Pressable, HStack } from "native-base"
+import { StatusBar } from "react-native"
+import {
+  NativeBaseProvider,
+  Text,
+  Box,
+  Pressable,
+  HStack,
+  VStack,
+} from "native-base"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { AuthStore } from "../../config/store"
 import Button from "../../components/Button"
+import { ThemeContext } from "../../constants/ThemeContext"
+import { modeTheme, themes } from "../../constants/Themes"
+import { ThemeProps } from "../../types/styleTypes"
 
 const Container = styled(SafeAreaView)`
   flex: 1;
-  background: #228b22;
+  background: ${({ theme }: { theme: ThemeProps }) => theme.theme.primaryColor};
 `
 const Title = styled(Text)`
   color: #fff;
@@ -39,25 +51,22 @@ const Li = styled(Text)`
   font-size: 16px;
   font-weight: 300;
   line-height: 25px;
-  margin-top: 15px;
+  margin-top: 20px;
   margin-left: 10px;
 `
 const Circle = styled(Box)`
   height: 45px;
   width: 45px;
-  top: 70px;
   left: 25px;
   border: 1px solid #fff;
   border-radius: 50px;
 `
-
 const Getstarted = styled(Box)`
-  bottom: 15px;
+  bottom: 5%;
+  width: 100%;
 `
-
 const SignInBox = styled(Text)`
-  bottom: 0px;
-  left: 25%;
+  bottom: 0%;
   color: #fff;
   font-size: 16px;
   line-height: 16px;
@@ -66,22 +75,32 @@ const SignInBox = styled(Text)`
 `
 
 const SignIn = styled(Link)`
-  color: #0e32b4;
+  color: ${({ theme }: { theme: ThemeProps }) => theme.theme.linkColor};
   font-size: 16px;
   font-weight: 600;
   text-decoration: underline;
 `
 
 export default function Onboarding() {
+  const router = useRouter()
+  const { mode, theme } = useContext(ThemeContext)
   const list = [
     "Explore hundreds of shops around you for all your needs and make seamless payments with eNaira.",
     "Get recomendations based on your search and preferences.",
     "Are you a business owner? Go digital with your business by creating your own shop on eWazobia.",
+    "Get recomendations based on your search and location.",
   ]
+
+  const handlePress = () => {
+    router.push("/register")
+  }
 
   return (
     <NativeBaseProvider>
-      <Container>
+      <StatusBar
+        barStyle={mode === "light" ? "light-content" : "light-content"}
+      />
+      <Container theme={{ theme: themes[theme] }}>
         <Stack.Screen options={{ title: "Welcome" }} />
         <Title>eWazobia app:</Title>
         <SubHeading>
@@ -100,15 +119,23 @@ export default function Onboarding() {
             </HStack>
           ))}
         </List>
-        <Circle></Circle>
-        <Circle></Circle>
-        <Getstarted>
-          <Button title="Get started" linkHref="register" />
-        </Getstarted>
-        <SignInBox>
-          Already a member?&nbsp;
-          <SignIn href="/login">Sign in</SignIn>
-        </SignInBox>
+        <HStack bottom={"0%"} flex={1} alignItems={"center"}>
+          <VStack>
+            <Circle></Circle>
+            <Circle></Circle>
+          </VStack>
+          <VStack alignItems={"center"} w={"80%"}>
+            <Getstarted>
+              <Button title="Get started" handlePress={handlePress} />
+            </Getstarted>
+            <SignInBox>
+              Already a member?&nbsp;
+              <SignIn theme={{ theme: themes[theme] }} href="/login">
+                Sign in
+              </SignIn>
+            </SignInBox>
+          </VStack>
+        </HStack>
       </Container>
     </NativeBaseProvider>
   )

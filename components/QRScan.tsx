@@ -195,7 +195,7 @@ export default function QRScan() {
         <Modal
           isOpen={showModal}
           onClose={setCamClose}
-          bg={themes[theme].activeColor}
+          bg={themes[theme].textColor}
           opacity={0.8}
         >
           <Modal.Content top={"10%"} h={"70%"} width={"95%"}>

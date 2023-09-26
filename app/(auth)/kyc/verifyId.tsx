@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect, useContext } from "react"
 import { Ionicons } from "@expo/vector-icons"
 import DatePicker from "react-native-datepicker"
 import DateTimePicker from "@react-native-community/datetimepicker"
@@ -28,13 +28,13 @@ import {
   Image,
 } from "native-base"
 import styled from "styled-components/native"
+import { ThemeContext } from "../../../constants/ThemeContext"
+import { modeTheme, themes } from "../../../constants/Themes"
+import { ThemeProps } from ".../../../types/styleTypes"
 import Submit from "../../../components/Submit"
 
-const BVNScreenContainer = styled(KeyboardAvoidingView)`
-  flex: 1;
-  width: 100%;
-  top: 5px;
-  padding: 10px;
+const BVNScreenContainer = styled(VStack)`
+  margin-bottom: 80%;
 `
 const NamesInput = styled(Input)`
   width: 95px;
@@ -45,21 +45,22 @@ const InfoText = styled(Text)`
   font-size: 25px;
   font-weight: 600;
   line-height: 25px;
-  top: 30px;
-  margin-bottom: 10px;
+  top: 6%;
+  margin-bottom: 10%;
 `
 const BvnStack = styled(VStack)`
-  top: 40px;
+  top: 10%;
   justify-content: center;
-  align-items: center;
-  height: 130px;
-  background: #228b22;
-  border-radius: 5px;
+  padding: 10px;
+  height: 30%;
+  width: 100%
+  background: ${({ theme }: { theme: ThemeProps }) => theme.theme.drawerColor};
+  border-radius: 15px;
   elevation: 20;
-  margin-bottom: 20px;
+  margin-bottom: 5%;
 `
 const CardText = styled(Text)`
-  bottom: 5px;
+  bottom: 15%;
   font-size: 20px;
   font-weight: 600;
   line-height: 20px;
@@ -79,7 +80,7 @@ const CaputreStack = styled(VStack)`
   margin-bottom: 10px;
 `
 const CamText = styled(Text)`
-  bottom: 30px;
+  bottom: 30%;
   font-size: 20px;
   font-weight: 600;
   line-height: 20px;
@@ -103,8 +104,8 @@ const Circle = styled(TouchableOpacity)`
 `
 const Img = styled(Image)`
   position: relative;
-  top: -15px;
-  left: -20px;
+  top: -15%;
+  right: 20%;
   height: 100px;
   width: 100px;
   border-radius: 50px;
@@ -115,6 +116,7 @@ interface BvnProps {
 }
 
 export default function BvnScreen(props: BvnProps) {
+  const { mode, theme } = useContext(ThemeContext)
   const [bvn, setBVN] = useState("")
   const [wallet, setWalle] = useState("")
   const [nameMatched, setNameMatched] = useState(false)
@@ -215,98 +217,94 @@ export default function BvnScreen(props: BvnProps) {
   return (
     <BVNScreenContainer>
       <InfoText>Step 2: Identity verification</InfoText>
-      <FormControl>
+      <FormControl justifyContent={"center"} alignItems={"center"}>
         {/* BVN Input Card */}
-        <BvnStack>
-          <Stack w={"95%"}>
-            <CardText>BVN Verification</CardText>
-            <NamesInput
-              InputRightElement={
-                !nameMatched && (
-                  <Ionicons name="checkmark-circle" size={25} color="#fff" />
-                )
-              }
-              value={bvn}
-              placeholder="BVN"
-              onChangeText={setBVN}
-              _focus={{
-                borderColor: "#fff",
-                fontSize: 16,
-                color: "#fff",
-              }}
-            />
-          </Stack>
+        <BvnStack theme={{ theme: themes[theme] }}>
+          <CardText>BVN Verification</CardText>
+          <NamesInput
+            InputRightElement={
+              !nameMatched && (
+                <Ionicons name="checkmark-circle" size={25} color="#fff" />
+              )
+            }
+            value={bvn}
+            placeholder="BVN"
+            onChangeText={setBVN}
+            _focus={{
+              borderColor: "#fff",
+              fontSize: 16,
+              color: "#fff",
+            }}
+          />
         </BvnStack>
         {/* Face Verification Card */}
-        <BvnStack>
-          <Stack w={"95%"}>
-            <CamText>Face Verification</CamText>
-            <TouchableOpacity onPress={setCamModel} disabled={nameMatched}>
-              {isCameraActive ? (
-                <Modal isOpen={showModal} onClose={setCamClose}>
-                  <Modal.Content top={"3%"} h={"60%"} w={"95%"}>
-                    <Modal.CloseButton bg={"#880808"} />
-                    <Cam ref={cameraRef} type={type} />
-                    <CaputreStack>
-                      <CamGuide>
-                        Align your face and shoulder to the cernter of the
-                        selfie area and then take a photo
-                      </CamGuide>
-                      <Circle onPress={handleCameraCapture} />
-                    </CaputreStack>
-                  </Modal.Content>
-                </Modal>
-              ) : (
-                <Stack position={"absolute"} left={"40%"} top={-40}>
-                  {capturedImage ? (
-                    <Img
-                      source={{
-                        uri: capturedImage,
-                      }}
-                      alt="Alternate Text"
-                      size="xl"
-                    />
-                  ) : (
-                    <Ionicons name="camera" size={60} color={"#fff"} />
-                  )}
-                </Stack>
-              )}
-              {faceMatched && (
-                <Ionicons name="checkmark-circle" size={24} color="#fff" />
-              )}
-            </TouchableOpacity>
-          </Stack>
+        <BvnStack theme={{ theme: themes[theme] }}>
+          <CamText>Face Verification</CamText>
+          <TouchableOpacity onPress={setCamModel} disabled={nameMatched}>
+            {isCameraActive ? (
+              <Modal
+                isOpen={showModal}
+                onClose={setCamClose}
+                bg={themes[theme].primaryColor}
+              >
+                <Modal.Content top={"3%"} h={"60%"} w={"95%"}>
+                  <Modal.CloseButton bg={"#880808"} />
+                  <Cam ref={cameraRef} type={type} />
+                  <CaputreStack>
+                    <CamGuide>
+                      Align your face and shoulder to the cernter of the selfie
+                      area and then take a photo
+                    </CamGuide>
+                    <Circle onPress={handleCameraCapture} />
+                  </CaputreStack>
+                </Modal.Content>
+              </Modal>
+            ) : (
+              <Stack position={"absolute"} left={"40%"} top={-40}>
+                {capturedImage ? (
+                  <Img
+                    source={{
+                      uri: capturedImage,
+                    }}
+                    alt="Alternate Text"
+                    size="xl"
+                  />
+                ) : (
+                  <Ionicons name="camera" size={60} color={"#fff"} />
+                )}
+              </Stack>
+            )}
+            {faceMatched && (
+              <Ionicons name="checkmark-circle" size={24} color="#fff" />
+            )}
+          </TouchableOpacity>
         </BvnStack>
         {/* Connect eNaira wallet */}
-        <BvnStack>
-          <Stack w={"95%"}>
-            <CardText>eNaira wallet connect </CardText>
-            <NamesInput
-              InputRightElement={
-                !faceMatched && (
-                  <Ionicons name="checkmark-circle" size={25} color="#fff" />
-                )
-              }
-              value={wallet}
-              placeholder="Enter your eNaira alias"
-              onChangeText={setWalle}
-              isReadOnly={!faceMatched}
-              _focus={{
-                borderColor: "#fff",
-                fontSize: 16,
-                color: "#fff",
-              }}
-            />
-          </Stack>
+        <BvnStack theme={{ theme: themes[theme] }}>
+          <CardText>eNaira wallet connect </CardText>
+          <NamesInput
+            InputRightElement={
+              !faceMatched && (
+                <Ionicons name="checkmark-circle" size={25} color="#fff" />
+              )
+            }
+            value={wallet}
+            placeholder="Enter your eNaira alias"
+            onChangeText={setWalle}
+            isReadOnly={!faceMatched}
+            _focus={{
+              borderColor: "#fff",
+              fontSize: 16,
+              color: "#fff",
+            }}
+          />
         </BvnStack>
-        <HStack top={"18%"} justifyContent={"center"}>
-          <Stack w={"100%"}>
-            <Submit
-              disabled={faceMatched}
-              handlePress={props.handleBVNSubmit}
-              submit="Finished"
-            />
-          </Stack>
+        <HStack top={"15%"} justifyContent={"center"}>
+          <Submit
+            disabled={faceMatched}
+            handlePress={props.handleBVNSubmit}
+            submit="Finished"
+          />
         </HStack>
       </FormControl>
     </BVNScreenContainer>
