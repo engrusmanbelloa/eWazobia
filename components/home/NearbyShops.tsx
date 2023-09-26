@@ -20,12 +20,12 @@ interface RouteProps {
   title: string
 }
 
-const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
-  top: -30px;
-  height: 70%;
+const Container = styled(SafeAreaView)`
+  top: -8%;
+  height: 71%;
   width: 100%;
 `
-const TabsBar = styled.View<{ active: boolean; theme: ThemeProps }>`
+const TabsBar = styled.View<{ active: boolean }>`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -41,7 +41,7 @@ const TabsBar = styled.View<{ active: boolean; theme: ThemeProps }>`
   }) => (active ? theme.theme.activeColor : theme.theme.primaryColor)};
 `
 
-const TabItem = styled.TouchableOpacity<{ active: boolean; theme: ThemeProps }>`
+const TabItem = styled.TouchableOpacity<{ active: boolean }>`
   align-items: center;
   justify-content: center;
   height: 35px;
@@ -56,7 +56,7 @@ const TabItem = styled.TouchableOpacity<{ active: boolean; theme: ThemeProps }>`
     theme: ThemeProps
   }) => (active ? theme.theme.activeColor : theme.theme.primaryColor)};
 `
-const InnerBox = styled(Box)<{ theme: ThemeProps }>`
+const InnerBox = styled(Box)`
   border-radius: 15px;
   align-items: center;
   top: 5px;
@@ -64,7 +64,7 @@ const InnerBox = styled(Box)<{ theme: ThemeProps }>`
   background-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.theme.primaryColor};
 `
-const TxContainer = styled(HStack)<{ theme: ThemeProps }>`
+const TxContainer = styled(HStack)`
   height: 50px;
   align-items: center;
   justify-content: space-between;
@@ -73,47 +73,47 @@ const TxContainer = styled(HStack)<{ theme: ThemeProps }>`
   border-radius: 50px;
   margin: 5px;
 `
-const NameStack = styled(VStack)<{ theme: ThemeProps }>`
+const NameStack = styled(VStack)`
   right: 20px;
   width: 40%;
 `
-const NameTxt = styled(Text)<{ theme: ThemeProps }>`
+const NameTxt = styled(Text)`
   font-size: 16px;
   font-weight: 600;
   color: #fff;
 `
-const RecipientTx = styled(Text)<{ theme: ThemeProps }>`
+const RecipientTx = styled(Text)`
   font-size: 14px;
   font-weight: 400;
   color: #fff;
 `
-const TimeStack = styled(VStack)<{ theme: ThemeProps }>`
+const TimeStack = styled(VStack)`
   right: 20px;
 `
-const TransactionTxt = styled(Text)<{ theme: ThemeProps }>`
+const TransactionTxt = styled(Text)`
   font-size: 10px;
   font-weight: 600;
   color: #fff;
 `
-const Amount = styled(Text)<{ active: string; theme: ThemeProps }>`
+const Amount = styled(Text)<{ active: string }>`
   font-size: 16px;
   font-weight: 600;
   color: ${({ active }: { active: boolean; theme: ThemeProps }) =>
     active ? "#C21807" : "#fff"};
 `
-const ShopStack = styled(HStack)<{ theme: ThemeProps }>`
+const ShopStack = styled(HStack)`
   align-items: center;
   width: 47%;
   border: 1px solid #fff;
   margin: 5px;
   border-radius: 15px;
 `
-const ShopTitle = styled(Text)<{ theme: ThemeProps }>`
+const ShopTitle = styled(Text)`
   font-size: 12px;
   font-weight: 600;
   color: #fff;
 `
-const ShopDetail = styled(Text)<{ theme: ThemeProps }>`
+const ShopDetail = styled(Text)`
   font-size: 12px;
   font-weight: 300;
   color: #fff;

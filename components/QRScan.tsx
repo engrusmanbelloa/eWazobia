@@ -248,7 +248,7 @@ export default function QRScan() {
           <Text color={themes[theme].textColor} top={"17%"}>
             Or
           </Text>
-          <HStack top={"20%"}>
+          <HStack top={"25%"}>
             <Text color={themes[theme].textColor} right={2}>
               Click here to pick from gallery
             </Text>

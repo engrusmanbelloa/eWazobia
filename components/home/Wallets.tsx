@@ -13,53 +13,43 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import { TabView, SceneMap } from "react-native-tab-view"
 import { modeTheme, themes } from "../../constants/Themes"
 import { ThemeContext } from "../../constants/ThemeContext"
+import { ThemeProps } from "../../types/styleTypes"
 
-interface ThemeProps {
-  mode: {
-    backgroundColor: string
-  }
-  theme: {
-    primaryColor: string
-    secondaryColor: string
-    drawerColor: string
-  }
-}
-
-const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
+const Container = styled(SafeAreaView)`
   flex: 1;
   align-items: center;
   justify-content: center;
 `
-const OuterBox = styled(Box)<{ theme: ThemeProps }>`
-  border-right-width: 7px;
+const OuterBox = styled(Box)`
+  border-right-width: 8px;
   border-left-width: 0.5px;
-  border-top-width: 1px;
+  border-top-width: 2px;
   border-right-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.mode.backgroundColor};
   border-left-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.mode.backgroundColor};
   border-top-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.mode.backgroundColor};
-  border-radius: 150px;
-  width: 300px;
-  height: 300px;
-  bottom: 40px;
+  border-radius: 400px;
+  width: 90%;
+  height: 200%;
+  bottom: 30%;
 `
 
-const InnerBox = styled(Box)<{ theme: ThemeProps }>`
-  border-radius: 145px;
+const InnerBox = styled(Box)`
+  border-radius: 345px;
   align-items: center;
-  width: 290px;
-  height: 290px;
+  width: 100%;
+  height: 100%;
   top: -10px;
 `
-const TabsBar = styled.View<{ theme: ThemeProps }>`
+const TabsBar = styled.View`
   flex-direction: row;
   justify-content: center;
   top: 75%;
   z-index: 1;
 `
-const TabItem = styled.TouchableOpacity<{ theme: ThemeProps }>`
+const TabItem = styled.TouchableOpacity`
   height: 14px;
   width: 14px;
   border-radius: 7px;
@@ -88,7 +78,7 @@ const BalDecimal = styled(Text)`
   font-weight: 500;
 `
 const WalletBtn = styled.TouchableOpacity`
-  top: 35%;
+  top: 45%;
   align-items: center;
   border: 1px solid #fff;
   border-radius: 50px;
@@ -97,7 +87,7 @@ const WalletBtn = styled.TouchableOpacity`
 `
 
 export default function Wallets() {
-  const { mode, setMode, theme, setTheme } = useContext(ThemeContext)
+  const { mode, theme } = useContext(ThemeContext)
   const [index, setIndex] = useState(0)
   const [routes] = useState([
     { key: "first", title: "First" },

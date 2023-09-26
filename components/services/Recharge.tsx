@@ -32,7 +32,7 @@ const Container = styled(ScrollView)`
 `
 const Title = styled(Text)`
   color: #fff;
-  top: 10px;
+  top: 3%;
   right: 25%;
   font-size: 20px;
   font-weight: 600;
@@ -54,6 +54,7 @@ const ValuStack = styled(Box)`
   justify-content: center;
   align-items: center;
   height: 50px;
+  border-radius: 15px;
 `
 const ValueMap = styled(HStack)`
   width: 100%;
@@ -147,9 +148,9 @@ export default function Recharge({ service }: { service: Services }) {
         <BackBtn />
         <Title>{service.title}</Title>
       </HStack>
-      <VStack w={"90%"} m={"auto"} mt={0}>
+      <VStack w={"90%"} m={"auto"} h={"100%"} top={"30%"} mb={"20%"}>
         {/* Recent recharges map */}
-        <Text fontSize={20} color={"#fff"}>
+        <Text fontSize={18} color={"#fff"} fontWeight={500}>
           Recent
         </Text>
         <PhoneMap>
@@ -257,7 +258,7 @@ export default function Recharge({ service }: { service: Services }) {
             }}
           />
         )}
-        <Box bottom={"1%"}>
+        <Box top={"1%"}>
           <Button title="Recharge" handlePress={handleRecharge} />
         </Box>
       </VStack>
