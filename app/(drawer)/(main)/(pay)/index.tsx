@@ -27,7 +27,8 @@ import { LinearGradient } from "expo-linear-gradient"
 import { ThemeContext } from "../../../../constants/ThemeContext"
 import { modeTheme, themes } from "../../../../constants/Themes"
 import { ThemeProps } from "../../../../types/styleTypes"
-import QRScan from "../../../../components/QRScan"
+import TxHeaders from "../../../../components/payments/TxHeaders"
+import QRScan from "../../../../components/payments/QRScan"
 
 const Container = styled(VStack)<{ theme: ThemeProps }>`
   flex: 1;
@@ -56,12 +57,12 @@ const SubHeading = styled(Text)`
   color: #fff;
   font-size: 16px;
   font-weight: 300;
-  top: 17%;
+  top: 20%;
 `
 const AmountStack = styled(HStack)`
   align-items: center;
   justify-content: center;
-  top: 30%;
+  top: 40%;
 `
 const Amount = styled(Text)`
   color: #fff;
@@ -82,9 +83,7 @@ const MiddleContainer = styled(SafeAreaView)<{ theme: ThemeProps }>`
   height: 70%;
   justify-content: center;
   align-items: center;
-  top: 20%;
-  background-color: ${({ theme }: { theme: ThemeProps }) =>
-    theme.mode.textColor};
+  top: 5%;
 `
 
 export default function PayScreen() {
@@ -92,6 +91,7 @@ export default function PayScreen() {
   const firstColor = themes[theme].primaryColor
   const secondColor = themes[theme].activeColor
   const innerFirstColor = modeTheme[mode].backgroundColor
+  const backBtn = false
 
   return (
     <NativeBaseProvider>
@@ -99,23 +99,7 @@ export default function PayScreen() {
         barStyle={mode === "light" ? "light-content" : "light-content"}
       />
       <Container theme={{ theme: themes[theme] }}>
-        <InnerCircle
-          colors={[firstColor, secondColor]}
-          start={{ x: 1, y: 0.8 }}
-          end={{ x: 1, y: 1 }}
-        />
-        <PaymentStack>
-          <Title>Payment</Title>
-          <SubHeading>Wallet balance</SubHeading>
-          <AmountStack>
-            <MaterialCommunityIcons
-              name="currency-ngn"
-              size={20}
-              color="#fff"
-            />
-            <Amount>25,000.00</Amount>
-          </AmountStack>
-        </PaymentStack>
+        <TxHeaders title="Payment" backBtn={backBtn} />
         <MiddleContainer theme={{ mode: modeTheme[mode] }}>
           <QRScan />
         </MiddleContainer>

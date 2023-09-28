@@ -14,12 +14,12 @@ import HomeQuickTx from "../../../../components/home/HomeQuickTx"
 import NearByShops from "../../../../components/home/NearbyShops"
 import { ThemeProps } from "../../../../types/styleTypes"
 
-const Container = styled(SafeAreaView)<{ theme: ThemeProps }>`
+const Container = styled(SafeAreaView)`
   flex: 1;
   background-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.mode.backgroundColor};
 `
-const TopContainer = styled(VStack)<{ theme: ThemeProps }>`
+const TopContainer = styled(VStack)`
   background-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.theme.primaryColor};
   height: 50%;
@@ -28,10 +28,10 @@ const TopContainer = styled(VStack)<{ theme: ThemeProps }>`
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
 `
-const MiddleContainer = styled(Box)<{ theme: ThemeProps }>`
+const MiddleContainer = styled(Box)`
   background-color: transparent;
 `
-const BottomContainer = styled(Box)<{ theme: ThemeProps }>`
+const BottomContainer = styled(Box)`
   background-color: transparent;
   padding-bottom: 50px;
 `

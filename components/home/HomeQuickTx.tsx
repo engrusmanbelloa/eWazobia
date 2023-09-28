@@ -1,35 +1,10 @@
 import { useState, useContext, useEffect, ChangeEvent } from "react"
-import {
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  StatusBar,
-  View,
-  StyleSheet,
-  Animated,
-} from "react-native"
-import {
-  NativeBaseProvider,
-  Text,
-  Box,
-  Pressable,
-  Input,
-  Stack,
-  VStack,
-  HStack,
-  Button,
-  Modal,
-  Avatar,
-  ZStack,
-} from "native-base"
+import { Animated, TouchableOpacity } from "react-native"
+import { Text, Box, VStack, HStack } from "native-base"
 import styled from "styled-components/native"
 import { SafeAreaView } from "react-native-safe-area-context"
-import {
-  Ionicons,
-  FontAwesome,
-  MaterialCommunityIcons,
-  Feather,
-} from "@expo/vector-icons"
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import { Ionicons } from "@expo/vector-icons"
+import { Stack, useRouter, Link } from "expo-router"
 import { TabView, SceneMap } from "react-native-tab-view"
 import { modeTheme, themes } from "../../constants/Themes"
 import { ThemeContext } from "../../constants/ThemeContext"
@@ -44,14 +19,14 @@ interface ThemeProps {
     drawerColor: string
   }
 }
-const TxStack = styled(HStack)<{ theme: ThemeProps }>`
+const TxStack = styled(HStack)`
   align-items: center;
   justify-content: center;
 
   top: -20px;
   background-color: transparent;
 `
-const TxBox = styled(VStack)<{ theme: ThemeProps }>`
+const TxBox = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   width: 50px;
@@ -60,15 +35,20 @@ const TxBox = styled(VStack)<{ theme: ThemeProps }>`
   background-color: ${({ theme }: { theme: ThemeProps }) =>
     theme.mode.backgroundColor};
 `
-const TxText = styled(Text)<{ theme: ThemeProps }>`
+const TxText = styled(Text)`
   color: ${({ theme }: { theme: ThemeProps }) => theme.theme.drawerColor};
   font-size: 14px;
   font-weight: 400;
 `
 
 export default function HomeQuickTx() {
-  const { mode, setMode, theme, setTheme } = useContext(ThemeContext)
+  const { mode, theme } = useContext(ThemeContext)
+  const router = useRouter()
   const handlePay = () => {}
+  const handleScanPay = () => {
+    router.push("/(services)")
+    console.log("Scan Pay has been clicked")
+  }
   return (
     <TxStack>
       <Box justifyContent={"center"} alignItems={"center"} mr={"50px"}>
@@ -85,7 +65,7 @@ export default function HomeQuickTx() {
       <Box justifyContent={"center"} alignItems={"center"} mr={"50px"}>
         <TxBox theme={{ mode: modeTheme[mode] }}>
           <Ionicons
-            onPress={handlePay}
+            onPress={handleScanPay}
             name="md-scan"
             size={30}
             color={themes[theme].primaryColor}

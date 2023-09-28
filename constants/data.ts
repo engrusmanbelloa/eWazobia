@@ -1,94 +1,8 @@
-// Define the wallet template
-interface Wallet {
-  walletAddress: string
-  accountType: "savings" | "current"
-  accessLevel: "user" | "admin" | "cs" | "master"
-  image: string
-  bvn: string
-  balance: number
-  walletHolder: string
-  email: string
-  phone: string
-  genders: string
-  dateOfBirth: string
-  nationality: string
-  state: string
-  city: string
-  zipCode: number
-  homeAddress: string
-  ResidentialAddress: string
-  createdAt: string
-  isActive: boolean
-}
-
-// Define the loans template
-interface Loan {
-  loanId: number
-  accountNumber: string
-  amount: number
-  interestRate: number
-  startDate: string
-  endDate: string
-  status: "approved" | "pending" | "rejected"
-}
-
-// Define the transactions template
-interface Transactions {
-  id: number
-  type: "topUp" | "data" | "transfer" | "esusu" | "subscription"
-  senderName: string
-  senderAccount: number
-  recieverName: string
-  recieverAccount: number
-  status: "pending" | "completed"
-  amount: number
-  timeStamp: string
-  image: string
-  sessionId: number
-}
-
-// Define the shop template
-interface Shop {
-  id: number
-  name: string
-  location: string
-  category: string
-  image: string
-  description: string
-  slogan: string
-  alt?: string
-  away: any
-  products: Product[]
-}
-
-// Define the product template
-interface Product {
-  id: number
-  name: string
-  category: string
-  price: number
-  image: string
-  inStock?: number
-  description?: string
-}
-// Define the promo slider template
-interface Slider {
-  id: number
-  title: string
-  image: string
-  description?: string
-}
-
-// Define the promo slider template
-interface Services {
-  id: number
-  title: string
-  icon: string
-  options: {}
-}
+import { Transaction, Shop } from "../types/userType"
+import { users } from "../constants/userData"
 
 // Create the array of transactions
-export const transactions: Transactions[] = [
+export const transactionsData: Transaction[] = [
   {
     id: 1,
     senderName: "Bello Usman A",
@@ -313,6 +227,7 @@ export const shops: Shop[] = [
       },
       // Add more products...
     ],
+    transactions: transactionsData,
   },
   {
     id: 2,
@@ -341,6 +256,7 @@ export const shops: Shop[] = [
       },
       // Add more products...
     ],
+    transactions: transactionsData,
   },
   {
     id: 3,
@@ -445,6 +361,7 @@ export const shops: Shop[] = [
       },
       // Add more products...
     ],
+    transactions: transactionsData,
   },
   {
     id: 4,
@@ -553,6 +470,7 @@ export const shops: Shop[] = [
       },
       // Add more products...
     ],
+    transactions: transactionsData,
   },
   {
     id: 5,
@@ -627,6 +545,7 @@ export const shops: Shop[] = [
       },
       // Add more products...
     ],
+    transactions: transactionsData,
   },
   {
     id: 6,
@@ -700,6 +619,7 @@ export const shops: Shop[] = [
       },
       // Add more products...
     ],
+    transactions: transactionsData,
   },
   {
     id: 7,
@@ -800,6 +720,7 @@ export const shops: Shop[] = [
       },
       // Add more products...
     ],
+    transactions: transactionsData,
   },
   {
     id: 8,
@@ -862,6 +783,7 @@ export const shops: Shop[] = [
       },
       // Add more products...
     ],
+    transactions: transactionsData,
   },
   {
     id: 9,
@@ -940,10 +862,18 @@ export const shops: Shop[] = [
       },
       // Add more products...
     ],
+    transactions: transactionsData,
   },
   // Add more shops...
 ]
 
+// Define the promo slider template
+interface Slider {
+  id: number
+  title: string
+  image: string
+  description?: string
+}
 // Promo slider
 export const slides: Slider[] = [
   {

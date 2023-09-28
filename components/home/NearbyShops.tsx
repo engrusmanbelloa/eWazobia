@@ -12,7 +12,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { modeTheme, themes } from "../../constants/Themes"
 import { ThemeContext } from "../../constants/ThemeContext"
-import { transactions, shops } from "../../constants/data"
+import { transactionsData, shops } from "../../constants/data"
 import { ThemeProps } from "../../types/styleTypes"
 
 interface RouteProps {
@@ -212,7 +212,7 @@ export default function NearByShops() {
   const TxRoute = () => (
     <InnerBox theme={{ theme: themes[theme] }}>
       <FlatList
-        data={transactions}
+        data={transactionsData}
         numColumns={1}
         renderItem={renderTxItem}
         keyExtractor={(item) => item.id.toString()}

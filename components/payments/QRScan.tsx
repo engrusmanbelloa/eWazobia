@@ -5,9 +5,12 @@ import * as ImagePicker from "expo-image-picker"
 import { Ionicons } from "@expo/vector-icons"
 import { Text, Stack, HStack, Box, VStack, Modal, Avatar } from "native-base"
 import styled from "styled-components/native"
-import { ThemeContext } from "../constants/ThemeContext"
-import { modeTheme, themes } from "../constants/Themes"
-import { ThemeProps } from "../types/styleTypes"
+import { useLocalSearchParams } from "expo-router"
+import axios from "axios"
+import { ThemeContext } from "../../constants/ThemeContext"
+import { modeTheme, themes } from "../../constants/Themes"
+import { ThemeProps } from "../../types/styleTypes"
+import { User } from "../../types/userType"
 
 const Container = styled(VStack)`
   width: 100%;
@@ -107,9 +110,10 @@ const ScanCircle = styled(Box)`
 
 export default function QRScan() {
   const { mode, theme } = useContext(ThemeContext)
+  const { checkoutData } = useLocalSearchParams()
   const [hasPermission, setHasPermission] = useState<boolean | null>(null)
   const [scanned, setScanned] = useState(false)
-  const [data, setData] = useState<string | null>(null)
+  const [data, setData] = useState<User | string | null>(null)
   const [image, setImage] = useState<string | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [isCameraActive, setIsCameraActive] = useState(false)
@@ -127,6 +131,31 @@ export default function QRScan() {
     setShowModal(false)
     setIsCameraActive(false)
   }
+
+  async function fetchUserData(url: string) {
+    try {
+      const response = await axios.get(url)
+      // process the response data as needed
+      const userData = response.data
+      setData(userData)
+    } catch (error) {
+      console.error("Failed to fetch user data:", error)
+    }
+  }
+
+  const handleBarCodeScanned = ({ type, data }: any) => {
+    setScanned(true)
+    // if (data.startsWith("http://") || data.startsWith("https://")) {
+    //   fetchUserData(data)
+    // } else {
+    //   // setData(data)
+    //   return
+    // }
+    setData(data)
+    setCamClose()
+    alert(`Bar code with type ${type} and data ${data} has been scanned!`)
+  }
+
   // pick image from gallery
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -144,8 +173,15 @@ export default function QRScan() {
       )
       if (barcodes.length > 0) {
         const { type, data } = barcodes[0]
+        // if (data.startsWith("http://") || data.startsWith("https://")) {
+        //   fetchUserData(data)
+        // } else {
+        //   // setData(data)
+        //   return
+        // }
         console.log("QR Code: ", data)
         setData(data)
+        setCamClose()
       } else {
         console.log("No QR code detected in the image.")
       }
@@ -153,17 +189,12 @@ export default function QRScan() {
   }
 
   useEffect(() => {
-    if (!hasPermission) {
-      const getBarCodeScannerPermissions = async () => {
+    const getPermissions = async () => {
+      if (!hasPermission) {
         const { status } = await BarCodeScanner.requestPermissionsAsync()
         setHasPermission(status === "granted")
       }
-      getBarCodeScannerPermissions()
-    }
-  }, [])
 
-  useEffect(() => {
-    ;(async () => {
       if (Platform.OS !== "web") {
         const { status } =
           await ImagePicker.requestMediaLibraryPermissionsAsync()
@@ -171,14 +202,17 @@ export default function QRScan() {
           alert("Sorry, we need camera roll permissions to make this work!")
         }
       }
-    })()
+    }
+
+    getPermissions()
   }, [])
 
-  const handleBarCodeScanned = ({ type, data }: any) => {
-    setScanned(true)
-    setData(data)
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`)
-  }
+  // the data comming from the user cart array
+  // useEffect(() => {
+  //   if (checkoutData) {
+  //     setData(checkoutData)
+  //   }
+  // }, [checkoutData])
 
   const renderCamera = () => {
     return (
@@ -262,7 +296,17 @@ export default function QRScan() {
           </HStack>
         </ScanStack>
       ) : (
-        <Box>{data && <Text>QR Code Data: {data}</Text>}</Box>
+        <Box>
+          {typeof data === "string" ? (
+            <Text>QR Code Data: {data}</Text>
+          ) : (
+            <VStack>
+              {/* <Text>Wallet Address: {data.walletAddress}</Text>
+            <Text>Account Type: {data.accountType}</Text> */}
+              {/* Include other user properties as needed */}
+            </VStack>
+          )}
+        </Box>
       )}
     </Container>
   )

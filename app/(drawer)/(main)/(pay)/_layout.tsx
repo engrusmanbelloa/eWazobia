@@ -13,13 +13,11 @@ export const unstable_settings = {
 
 export default function PayLayout() {
   return (
-    <>
-      <Stack>
-        <Stack.Screen
-          name="index"
-          options={{ title: "Pay", headerShown: false }}
-        />
-      </Stack>
-    </>
+    <Stack>
+      <Stack.Screen
+        name="index"
+        options={{ title: "Pay", headerShown: false }}
+      />
+    </Stack>
   )
 }
