@@ -1,10 +1,10 @@
 import { useState, useContext, useEffect, useRef } from "react"
 import { useRouter, Link, Stack } from "expo-router"
 
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from "expo-router"
+// export {
+//   // Catch any errors thrown by the Layout component.
+//   ErrorBoundary,
+// } from "expo-router"
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
@@ -16,6 +16,10 @@ export default function PayLayout() {
     <Stack>
       <Stack.Screen
         name="index"
+        options={{ title: "Pay", headerShown: false }}
+      />
+      <Stack.Screen
+        name="withdrawlScreen"
         options={{ title: "Pay", headerShown: false }}
       />
     </Stack>
